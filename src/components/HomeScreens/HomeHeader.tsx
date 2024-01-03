@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        marginHorizontal: 20
+        marginBottom: 10
     },
     hiText: {
  color: COLORS.orange,

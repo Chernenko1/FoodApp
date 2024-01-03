@@ -28,7 +28,8 @@ const tabOption: BottomTabNavigationOptions = {
     height: 60,
     position: 'absolute',
   },
-  tabBarShowLabel: false
+  tabBarShowLabel: false,
+  tabBarHideOnKeyboard: true
 }
 export const BottomNavigation = () => {
 
