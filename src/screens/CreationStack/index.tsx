@@ -4,7 +4,7 @@ import {
     createNativeStackNavigator,
     NativeStackNavigationOptions,
   } from '@react-navigation/native-stack';
-import { Home } from "../../components/HomeScreens/Home";
+import { Creation } from "../../components/CreationScreens/Creation";
 
   const nativeStackOption: NativeStackNavigationOptions = {
     headerShown: false,
@@ -19,7 +19,7 @@ import { Home } from "../../components/HomeScreens/Home";
   export const CreationStack = () => {
     return (
         <Stack.Navigator screenOptions={nativeStackOption}>
-            <Stack.Screen name="StackCreation" component={Home}/>
+            <Stack.Screen name="StackCreation" component={Creation}/>
         </Stack.Navigator>
     )
   }
