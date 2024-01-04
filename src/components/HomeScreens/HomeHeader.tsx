@@ -8,10 +8,10 @@ export const HomeHeader = () => {
         <View style={styles.container}>
             <View>
                 <Text style={styles.hiText}>Hi, User</Text>
-                <Text>What do you want to eat today?</Text>
+                <Text style={{fontSize: 18}}>What do you want to eat today?</Text>
             </View>
             <TouchableOpacity activeOpacity={0.7}>
-                <Icon name='notifications-outline' size={24} />
+                <Icon name='notifications-outline' size={30} />
             </TouchableOpacity>
         </View>
     )
@@ -26,6 +26,6 @@ const styles = StyleSheet.create({
     },
     hiText: {
  color: COLORS.orange,
- fontSize: 24
+ fontSize: 30
     }
 })

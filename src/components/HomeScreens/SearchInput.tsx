@@ -20,6 +20,7 @@ const styles = StyleSheet.create({
     input: {
         borderColor: 'lightgray',
         borderWidth: 1,
-        paddingVertical: 5
+        paddingVertical: 8,
+       
     }
 })
