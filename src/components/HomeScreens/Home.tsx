@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text, StyleSheet, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard } from "react-native";
 import { HomeHeader } from "./HomeHeader";
 import { SearchInput } from "./SearchInput";
+import { FoodCategories } from "./FoodCategories";
 
 export const Home = () => {
     return (
@@ -11,6 +12,7 @@ export const Home = () => {
                 <HomeHeader />
                 <SearchInput />
             </View>
+            <FoodCategories />
         </View>
     </TouchableWithoutFeedback>
     )
