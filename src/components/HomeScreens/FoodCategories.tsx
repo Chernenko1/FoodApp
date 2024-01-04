@@ -11,11 +11,12 @@ export const FoodCategories = () => {
             keyExtractor={(itm, ind) => itm.name + ind} 
             renderItem={({item}) => (
                 <View style={styles.catContainer}>
-                    <Image source={{uri: item.image}} width={100} height={100} style={styles.image}/>
-                    <Text style={{position: 'absolute', color: 'white'}}>{item.name}</Text>
+                    <Image source={{uri: item.image}} style={styles.image} blurRadius={10}/>
+                    <Text style={styles.text}>{item.name}</Text>
                 </View>
             )} 
             horizontal={true}
+            contentContainerStyle={{gap: 10}}
             />
         </View>
     )
@@ -23,14 +24,19 @@ export const FoodCategories = () => {
 
 const styles = StyleSheet.create({
     catContainer: {
-        width: 100, 
-        height: 100,
-        marginLeft: 10,
         marginVertical: 20,
         justifyContent: 'center',
         alignItems: 'center',
+        columnGap: 10
     },
     image: {
-        borderRadius: 50
+        borderRadius: 50,
+        height: 80,
+        width: 80,
+    },
+    text: {
+        position: 'absolute',
+        color: 'white',
+        fontSize: 15
     }
 })
