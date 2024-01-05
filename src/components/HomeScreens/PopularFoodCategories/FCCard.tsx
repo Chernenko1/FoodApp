@@ -6,25 +6,32 @@ export const FCCard = () => {
     const {width, height} = useWindowDimensions()
 
     return (
-        <View style={styles.container}>
-            <View style={styles.firstCard}>
-                <View style={[styles.textContCol, {width: width * 0.45, height: height * 0.1}]}>
+        <View style={[styles.container]}>
+            <View style={styles.leftCard}>
+                <View>
                     <Text style={styles.nameText}>Noodles aaaasssssssss</Text>
                     <Text style={styles.descText}>60 Dishes</Text>
                 </View>
-                    <Image source={require('../../../../assets/images/noodles.png')} style={styles.imageCol}/>
+                <View>
+                    <Image source={require('../../../../assets/images/noodles.png')} style={{width: width * 0.21, height: height * 0.15}}/>
+                </View>
             </View>
-            <View style={{flexDirection: 'column', justifyContent:'space-between'}}>
-                <View style={[styles.rowCard, {width: width * 0.4 ,height: height * 0.12}]}>
-                    <View style={styles.textCont}>
+            <View style={styles.rightCardsCont}>
+                <View style={styles.rightCards}>
+                    <View>
                         <Text style={styles.nameText}>Non-veg</Text>
                         <Text style={styles.descText}>50 Dishes</Text>
                     </View>
-                    <Image source={require('../../../../assets/images/noodles.png')} style={styles.imageSecond}/>
+
+                    <View>
+                        <Image source={require('../../../../assets/images/noodles.png')} style={{width: width * 0.15, height: height * 0.10}}/>
+                    </View>
                 </View>
-                <View style={[styles.rowCard, {width: width * 0.4 ,height: height * 0.12}]}>
-                    <Image source={require('../../../../assets/images/noodles.png')} style={styles.imageThird}/>
-                    <View style={styles.textCont}>
+                <View style={styles.rightCards}>
+                    <View>
+                        <Image source={require('../../../../assets/images/noodles.png')} style={{width: width * 0.15, height: height * 0.10}}/>
+                    </View>
+                    <View>
                         <Text style={styles.nameText}>Soup</Text>
                         <Text style={styles.descText}>40 Dishes</Text>
                     </View>
@@ -37,53 +44,35 @@ export const FCCard = () => {
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
-        justifyContent: 'space-between',
-        // alignItems: 'center'
-        marginTop: 20
+        marginTop: 10,
+        justifyContent: 'space-between'
     },
-    firstCard: {
+    leftCard: {
         backgroundColor: COLORS.teal,
         borderRadius: 15,
+        padding: 5,
+        width: '50%'
     },
-    rowCard: {
+    rightCards: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
         backgroundColor: COLORS.purple,
         borderRadius: 15,
-        flexDirection: 'row',
-        alignItems: 'center'
+        padding: 5,
     },
-    imageCol: {
-        width: 150,
-        height: 150,
-        left: -17,
-        top: 11
-    },
-    imageSecond: {
-        width: 70,
-        height: 70,
-        left: -2
-    },
-    imageThird: {
-        width: 70,
-        height: 70,
-        left: -8,
-
+    rightCardsCont :{
+        flexDirection: 'column', 
+        justifyContent:'space-between',
+        width: '45%'
     },
     nameText: {
-        fontSize: 20,
+        fontSize: 18,
         fontFamily: 'Rubik-Medium',
-        color:'black'
+        color:COLORS.black
     },
     descText: {
-        fontSize: 15,
+        fontSize: 13,
         fontFamily: 'Rubik-Regular'
     },
-    textCont: {
-        marginHorizontal: 10,
-        marginTop: 10,
-        justifyContent: 'center'
-    },
-    textContCol: {
-        top: 10,
-        left: 10
-    }
 })

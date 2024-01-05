@@ -8,18 +8,22 @@ import { PopularFC } from "./PopularFoodCategories/PopularFC";
 
 export const Home = () => {
     return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View style={{flex: 1, marginTop: 20}}>
+    // <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View style={{flex: 1, marginTop: 20, paddingBottom: 60}}>
             <View style ={{marginHorizontal: 20}}>
                 <HomeHeader />
                 <SearchInput />
             </View>
+
+            <View >
                 <FoodCategories />
+            </View>
+
             <View style ={{marginHorizontal: 20}}>
                 <PopularFC />
             </View>
         </View>
-    </TouchableWithoutFeedback>
+    // </TouchableWithoutFeedback>
     )
 }
 

@@ -24,15 +24,15 @@ export const FoodCategories = () => {
 
 const styles = StyleSheet.create({
     catContainer: {
-        marginVertical: 20,
+        marginVertical: 10,
         justifyContent: 'center',
         alignItems: 'center',
         columnGap: 10
     },
     image: {
         borderRadius: 50,
-        height: 80,
-        width: 80,
+        height: 70,
+        width: 70,
     },
     text: {
         position: 'absolute',
