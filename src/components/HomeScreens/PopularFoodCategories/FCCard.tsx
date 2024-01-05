@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dimensions, Image, StyleSheet, Text, View, useWindowDimensions } from 'react-native';
+import {Image, StyleSheet, Text, View, useWindowDimensions } from 'react-native';
 import { COLORS } from '../../../themes/COLORS';
 
 export const FCCard = () => {
@@ -13,7 +13,7 @@ export const FCCard = () => {
                     <Text style={styles.descText}>60 Dishes</Text>
                 </View>
                 <View>
-                    <Image source={require('../../../../assets/images/noodles.png')} style={{width: width * 0.21, height: height * 0.15}}/>
+                    <Image source={require('../../../../assets/images/noodles.png')} style={{width: width * 0.23, height: height * 0.15}}/>
                 </View>
             </View>
             <View style={styles.rightCardsCont}>
@@ -44,14 +44,14 @@ export const FCCard = () => {
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
-        marginTop: 10,
-        justifyContent: 'space-between'
+        marginTop: 35,
+        justifyContent: 'space-between',
     },
     leftCard: {
         backgroundColor: COLORS.teal,
         borderRadius: 15,
         padding: 5,
-        width: '50%'
+        width: '50%',
     },
     rightCards: {
         flexDirection: 'row',

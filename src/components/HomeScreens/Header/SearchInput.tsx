@@ -16,7 +16,7 @@ export const SearchInput = () => {
 const styles = StyleSheet.create({
     container :{
         marginTop: 10,
-        marginBottom: 10
+        marginBottom: 10,
     },
     input: {
         borderColor: 'lightgray',

@@ -5,7 +5,7 @@ import { FCCard } from "./FCCard";
 
 export const PopularFC = () => {
     return (
-        <View>
+        <View style= {{flex: 5}}>
             <PRHeader />
             <FCCard />
         </View>
