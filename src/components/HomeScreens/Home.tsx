@@ -5,6 +5,7 @@ import { SearchInput } from "./SearchInput";
 import { FoodCategories } from "./FoodCategories";
 import { PRHeader } from "./PopularFoodCategories/PRHeader";
 import { PopularFC } from "./PopularFoodCategories/PopularFC";
+import { TopDishes } from "./TopDishes/TopDishes";
 
 export const Home = () => {
     return (
@@ -21,6 +22,7 @@ export const Home = () => {
 
             <View style ={{marginHorizontal: 20}}>
                 <PopularFC />
+                <TopDishes />
             </View>
         </View>
     // </TouchableWithoutFeedback>
