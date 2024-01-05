@@ -5,7 +5,7 @@ import { COLORS } from "../../../themes/COLORS";
 export const PRHeader = () => {
     return (
         <View style = {styles.container}>
-            <Text style={styles.textLeft}>Popula Food Categories</Text>
+            <Text style={styles.textLeft}>Popular Food Categories</Text>
             <TouchableOpacity activeOpacity={0.7}>
                 <Text style={styles.textRight}>See all</Text>
             </TouchableOpacity>
