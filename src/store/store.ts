@@ -4,6 +4,7 @@ import {persistReducer, persistStore} from 'redux-persist';
 import userReducer from './slices/userSlice'
 import productReducer from './slices/productSlice'
 import recipesReducer from './slices/recipesSlice';
+import favouriteReducer from './slices/favouriteSlice'
 
 const userPersistConfig = {
   key: 'user',
@@ -21,14 +22,21 @@ const recipesPersistConfig = {
   storage: AsyncStorage
 }
 
+const favouritePersistConfig = {
+  key: 'favourite',
+  storage: AsyncStorage
+}
+
 const userPersistReducer = persistReducer (userPersistConfig, userReducer)
 const productPersistReducer = persistReducer(productPersistConfig, productReducer)
 const recipesPersistReducer = persistReducer(recipesPersistConfig, recipesReducer)
+const favouritePersistReducer = persistReducer(recipesPersistConfig, favouriteReducer)
 
 const reducers = combineReducers({
   user: userPersistReducer,
   product: productPersistReducer,
-  recipes: recipesPersistReducer
+  recipes: recipesPersistReducer,
+  favourite: favouritePersistReducer
 });
 
 export const store = configureStore({

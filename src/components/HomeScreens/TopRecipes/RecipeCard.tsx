@@ -3,6 +3,8 @@ import { Image, StyleSheet, Text, TouchableOpacity, View, useWindowDimensions } 
 import Icon from 'react-native-vector-icons/Ionicons'
 
 import { COLORS } from "../../../themes/COLORS";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import { addFavourite, removeFavourite } from "../../../store/slices/favouriteSlice";
 
 interface Props {
     recipes: Recipe
@@ -11,6 +13,13 @@ interface Props {
 export const RecipeCard = ({recipes}: Props) => {
 
     const {width, height} = useWindowDimensions();
+
+    const dispatch = useAppDispatch()
+    const isFavourite = useAppSelector(state => state.favourite.id).includes(recipes._id)
+
+    const hadleLikeClick = () => {
+        isFavourite ? dispatch(removeFavourite(recipes._id)) : dispatch(addFavourite(recipes._id))
+    }
 
     return (
         <View style ={[styles.container]}>
@@ -41,7 +50,7 @@ export const RecipeCard = ({recipes}: Props) => {
                     </View>
                 </View>
             </View>
-                <Icon name={'heart-outline'} size={20} color={COLORS.red}/>
+                <Icon name={isFavourite ?'heart':'heart-outline'} size={20} color={COLORS.red} onPress={() => dispatch(hadleLikeClick)}/>
         </View>
     )
 }
