@@ -7,6 +7,8 @@ import {
 import { Home } from "../../components/HomeScreens/Home";
 import {  RecipeCards } from "../../components/HomeScreens/TopRecipes/RecipeCards";
 import { Recipe } from "../../components/HomeScreens/TopRecipes/Recipe";
+import Icon from 'react-native-vector-icons/Ionicons'
+import { COLORS } from "../../themes/COLORS";
 
   const nativeStackOption: NativeStackNavigationOptions = {
     headerShown: true,
@@ -27,7 +29,9 @@ import { Recipe } from "../../components/HomeScreens/TopRecipes/Recipe";
         <Stack.Navigator screenOptions={nativeStackOption}>
             <Stack.Screen name="StackHome" component={Home} options={{headerShown: false}}/>
             <Stack.Screen name='Recipes' component={RecipeCards}/>
-            <Stack.Screen name="Recipe" component={Recipe}/>
+            <Stack.Screen name="Recipe" component={Recipe} 
+            
+          />
         </Stack.Navigator>
     )
   }

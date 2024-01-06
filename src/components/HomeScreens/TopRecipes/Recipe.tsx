@@ -8,15 +8,23 @@ import { COLORS } from "../../../themes/COLORS";
 
 //------------Временное------------
 
-import { useAppSelector } from "../../../store/hooks";
-import { MyTabs } from "../../../navigation/TopNavigation";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import { addFavourite, removeFavourite } from "../../../store/slices/favouriteSlice";
 
 //----------------------------------
 
 type NavProps = NativeStackScreenProps<HomeParamList, 'Recipe'>
 
-export const Recipe = ({route}:NavProps) => {
+export const Recipe = ({route, navigation}:NavProps) => {
     const {recipe}: any = route.params as Recipe
+
+    
+    const dispatch = useAppDispatch()
+    const isFavourite = useAppSelector(state => state.favourite.id).includes(recipe._id)
+
+    const hadleLikeClick = () => {
+        isFavourite ? dispatch(removeFavourite(recipe._id)) : dispatch(addFavourite(recipe._id))
+    }
 
     //------Временный счетчик КБЖУ-------------
     const [PFC, setPFC] = useState({carb: 0, fat: 0, prot: 0})
@@ -39,6 +47,14 @@ export const Recipe = ({route}:NavProps) => {
         PFCCounter();
     }, [])
     //-----------------------------------------
+
+    useEffect(() => {
+        navigation.setOptions({
+            headerRight: () => (
+                <Icon name={isFavourite ? 'heart' : 'heart-outline'} size={22} color={COLORS.red} onPress={() => hadleLikeClick()}/>
+            )
+        })
+    }, [hadleLikeClick])
 
     return (
         <View style = {styles.container}>
