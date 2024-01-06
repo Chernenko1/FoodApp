@@ -44,7 +44,7 @@ export const FCCard = () => {
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
-        marginTop: 35,
+        marginTop: 15,
         justifyContent: 'space-between',
     },
     leftCard: {

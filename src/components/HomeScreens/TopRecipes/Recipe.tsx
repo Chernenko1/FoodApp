@@ -1,6 +1,6 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React, { useEffect, useState } from "react";
-import { Image, StyleSheet, Text, View } from "react-native";
+import { FlatList, Image, StyleSheet, Text, View } from "react-native";
 import { HomeParamList } from "../../../screens/HomeStack";
 import Icon from 'react-native-vector-icons/Ionicons'
 
@@ -9,6 +9,9 @@ import { COLORS } from "../../../themes/COLORS";
 //------------Временное------------
 
 import { useAppSelector } from "../../../store/hooks";
+import { MyTabs } from "../../../navigation/TopNavigation";
+
+//----------------------------------
 
 type NavProps = NativeStackScreenProps<HomeParamList, 'Recipe'>
 
@@ -39,7 +42,7 @@ export const Recipe = ({route}:NavProps) => {
 
     return (
         <View style = {styles.container}>
-            <View>
+            <View style={{flex: 1}}>
                 <Text style={styles.nameText}>{recipe.name}</Text>
                 <View style={{marginVertical: 10}}>
                         <View style={styles.servesContainer}>
@@ -71,10 +74,10 @@ export const Recipe = ({route}:NavProps) => {
 
 const styles = StyleSheet.create({
     container: {
+        flex: 1,
         paddingHorizontal: 20
     },
     servesContainer: {
-        alignItems: 'center',
         justifyContent: 'space-between',
         flexDirection: 'row',
         width: '50%'
@@ -109,5 +112,5 @@ const styles = StyleSheet.create({
     KPFCText: {
         fontFamily: 'Rubik-Regular',
         fontSize: 16
-    }
+    },
 })

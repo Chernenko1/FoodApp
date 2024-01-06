@@ -4,7 +4,7 @@ import { HomeHeader } from "./Header/HomeHeader";
 import { SearchInput } from "./Header/SearchInput";
 import { FoodCategories } from "./Header/FoodCategories";
 import { PopularFC } from "./PopularFoodCategories/PopularFC";
-import { TopDishes } from "./TopRecipes/TopRecipes";
+import { TopRecipes } from "./TopRecipes/TopRecipes";
 
 export const Home = () => {
     return (
@@ -21,7 +21,7 @@ export const Home = () => {
 
 
                 <PopularFC />
-                <TopDishes />
+                <TopRecipes />
 
         </View>
     // </TouchableWithoutFeedback>
