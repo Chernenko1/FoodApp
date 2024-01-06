@@ -3,7 +3,8 @@ declare interface Recipe {
   name: string, 
   description: string, 
   products:
-  {productId: string, 
+  {
+    productId: string, 
     quantity: number
   }[],
   image: string,
