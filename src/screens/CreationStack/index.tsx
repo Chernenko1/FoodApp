@@ -8,6 +8,8 @@ import { Creation } from "../../components/CreationScreens/Creation";
 
   const nativeStackOption: NativeStackNavigationOptions = {
     headerShown: false,
+    headerStyle: {backgroundColor: 'rgb(242,242,242)'},
+    headerShadowVisible: false
   };
 
   export type CreationParamList ={

@@ -10,6 +10,8 @@ import { Recipe } from "../../components/HomeScreens/TopRecipes/Recipe";
 
   const nativeStackOption: NativeStackNavigationOptions = {
     headerShown: true,
+    headerStyle: {backgroundColor: 'rgb(242,242,242)'},
+    headerShadowVisible: false
   };
 
   export type HomeParamList ={
@@ -23,9 +25,9 @@ import { Recipe } from "../../components/HomeScreens/TopRecipes/Recipe";
   export const HomeStack = () => {
     return (
         <Stack.Navigator screenOptions={nativeStackOption}>
-            <Stack.Screen name="StackHome" component={Home}/>
-            <Stack.Screen name='Recipes' component={RecipeCards} />
-            <Stack.Screen name="Recipe" component={Recipe} />
+            <Stack.Screen name="StackHome" component={Home} options={{headerShown: false}}/>
+            <Stack.Screen name='Recipes' component={RecipeCards}/>
+            <Stack.Screen name="Recipe" component={Recipe}/>
         </Stack.Navigator>
     )
   }
