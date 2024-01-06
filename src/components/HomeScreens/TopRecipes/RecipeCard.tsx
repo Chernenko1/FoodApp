@@ -1,44 +1,47 @@
 import React from "react";
-import { Image, StyleSheet, Text, View, useWindowDimensions } from "react-native";
+import { Image, StyleSheet, Text, TouchableOpacity, View, useWindowDimensions } from "react-native";
 import Icon from 'react-native-vector-icons/Ionicons'
 
 import { COLORS } from "../../../themes/COLORS";
 
-export const DishCard = () => {
+interface Props {
+    recipes: Recipe
+}
 
-    const {width, height} = useWindowDimensions()
+export const RecipeCard = ({recipes}: Props) => {
+
+    const {width, height} = useWindowDimensions();
 
     return (
         <View style ={[styles.container]}>
             <View>
-                <Image style={{width: width * 0.3, height: height *0.1, borderRadius: 20}} source={{uri: 'https://bgr.com/wp-content/uploads/2022/02/chicken-salad.jpg?quality=82&strip=all'}}/>
+                <Image style={{width: width * 0.3, height: height *0.1, borderRadius: 20}} source={{uri: recipes.image}}/>
             </View>
             <View style={[styles.titleCont, {width: '50%'}]} >
                 <Text style={styles.titleText}>
-                    Healthy Salad
+                    {recipes.name}
                 </Text>
 
                 <View style = {styles.infoCont}>
                     <View>
                         <Icon name={'time-outline'} size={16}> 
-                            <Text>15 min</Text>
+                            <Text>{recipes.cookingTime}</Text>
                         </Icon>
                         <Icon name={'star'} size={16} color={COLORS.yellow} style={{marginTop: 10}}> 
-                            <Text>4.8</Text>
+                            <Text>{recipes.rating}</Text>
                         </Icon>
                     </View>
                     <View>
                         <Icon name={'restaurant-outline'} size={16}> 
-                            <Text>Serves 2</Text>
+                            <Text>Serves {recipes.serves}</Text>
                         </Icon>
                         <Icon name={'flame'} size={16} color={COLORS.red} style={{marginTop: 10}}> 
-                            <Text>394</Text>
+                            <Text>{recipes.kcal} kcal</Text>
                         </Icon>
                     </View>
                 </View>
             </View>
                 <Icon name={'heart-outline'} size={20} color={COLORS.red}/>
-
         </View>
     )
 }

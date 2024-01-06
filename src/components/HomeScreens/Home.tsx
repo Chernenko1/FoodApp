@@ -4,12 +4,12 @@ import { HomeHeader } from "./Header/HomeHeader";
 import { SearchInput } from "./Header/SearchInput";
 import { FoodCategories } from "./Header/FoodCategories";
 import { PopularFC } from "./PopularFoodCategories/PopularFC";
-import { TopDishes } from "./TopDishes/TopDishes";
+import { TopDishes } from "./TopRecipes/TopRecipes";
 
 export const Home = () => {
     return (
     // <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View style={{flex: 12, marginTop: 20, paddingBottom: 60, marginHorizontal: 20}}>
+        <View style={{flex: 12, marginTop: 20, paddingBottom: 60, paddingHorizontal: 20}}>
  
                 <HomeHeader />
                 <SearchInput />
