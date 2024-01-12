@@ -2,11 +2,20 @@ import React from "react";
 import { Pressable, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { COLORS } from "../../../themes/COLORS";
 
-export const PRHeader = () => {
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { HomeParamList } from "../../../screens/HomeStack";
+
+type NavProp = NativeStackScreenProps<HomeParamList, 'StackHome'>
+
+export const TDHeader = () => {
+
+    const navigation: any = useNavigation()
+
     return (
         <View style = {styles.container}>
-            <Text style={styles.textLeft}>Popular Food Categories</Text>
-            <TouchableOpacity activeOpacity={0.7}>
+            <Text style={styles.textLeft}>Top Recipes</Text>
+            <TouchableOpacity activeOpacity={0.7} onPress={( ) => navigation.navigate('Recipes')}>
                 <Text style={styles.textRight}>See all</Text>
             </TouchableOpacity>
         </View>
@@ -18,7 +27,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        marginTop: 20
     },
     textLeft: {
         fontSize: 20, 

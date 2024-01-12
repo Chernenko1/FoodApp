@@ -40,13 +40,13 @@ return (
   ), headerShown: false}}/>
   <TabStack.Screen name={'Favourite'} component={FavouriteStack} options={{tabBarIcon: ({focused,  size, color}): any => (
     <Icon name={focused ? 'heart' : 'heart-outline'} size={focused ? 29 : 24} color={color}/>
-  )}}/>
+  ), headerShown: false}}/>
   <TabStack.Screen name={'Creation'} component={CreationStack} options={{tabBarIcon: ({focused,  size, color}): any => (
     <Icon name={focused ? 'document-text' : 'document-text-outline'} size={focused ? 29 : 24} color={color}/>
-  )}}/>
+  ), headerShown: false}}/>
   <TabStack.Screen name={'Profile'} component={ProfileStack} options={{tabBarIcon: ({focused,  size, color}): any => (
     <Icon name={focused ? 'person' : 'person-outline'} size={focused ? 29 : 24} color={color}/>
-  )}}/>
+  ), headerShown: false}}/>
 </TabStack.Navigator>
 )
 

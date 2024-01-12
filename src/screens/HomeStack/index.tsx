@@ -5,13 +5,21 @@ import {
     NativeStackNavigationOptions,
   } from '@react-navigation/native-stack';
 import { Home } from "../../components/HomeScreens/Home";
+import {  RecipeCards } from "../../components/HomeScreens/TopRecipes/RecipeCards";
+import { Recipe } from "../../components/HomeScreens/TopRecipes/Recipe";
+import Icon from 'react-native-vector-icons/Ionicons'
+import { COLORS } from "../../themes/COLORS";
 
   const nativeStackOption: NativeStackNavigationOptions = {
-    headerShown: false,
+    headerShown: true,
+    headerStyle: {backgroundColor: 'rgb(242,242,242)'},
+    headerShadowVisible: false
   };
 
   export type HomeParamList ={
-    StackHome: undefined
+    StackHome: undefined,
+    Recipes: undefined,
+    Recipe: any
   }
 
   const Stack = createNativeStackNavigator<HomeParamList>();
@@ -19,7 +27,11 @@ import { Home } from "../../components/HomeScreens/Home";
   export const HomeStack = () => {
     return (
         <Stack.Navigator screenOptions={nativeStackOption}>
-            <Stack.Screen name="StackHome" component={Home}/>
+            <Stack.Screen name="StackHome" component={Home} options={{headerShown: false}}/>
+            <Stack.Screen name='Recipes' component={RecipeCards}/>
+            <Stack.Screen name="Recipe" component={Recipe} 
+            
+          />
         </Stack.Navigator>
     )
   }

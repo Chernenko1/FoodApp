@@ -1,25 +1,30 @@
 import React from "react";
 import { View, Text, StyleSheet, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard } from "react-native";
-import { HomeHeader } from "./HomeHeader";
-import { SearchInput } from "./SearchInput";
-import { FoodCategories } from "./FoodCategories";
-import { PRHeader } from "./PopularFoodCategories/PRHeader";
+import { HomeHeader } from "./Header/HomeHeader";
+import { SearchInput } from "./Header/SearchInput";
+import { FoodCategories } from "./Header/FoodCategories";
 import { PopularFC } from "./PopularFoodCategories/PopularFC";
+import { TopRecipes } from "./TopRecipes/TopRecipes";
 
 export const Home = () => {
     return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View style={{flex: 1, marginTop: 20}}>
-            <View style ={{marginHorizontal: 20}}>
+    // <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View style={{flex: 12, marginTop: 20, paddingBottom: 60, paddingHorizontal: 20}}>
+ 
                 <HomeHeader />
                 <SearchInput />
-            </View>
+
+
+
                 <FoodCategories />
-            <View style ={{marginHorizontal: 20}}>
+
+
+
                 <PopularFC />
-            </View>
+                <TopRecipes />
+
         </View>
-    </TouchableWithoutFeedback>
+    // </TouchableWithoutFeedback>
     )
 }
 

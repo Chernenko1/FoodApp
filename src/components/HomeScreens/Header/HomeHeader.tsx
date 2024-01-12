@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import { COLORS } from '../../themes/COLORS'
+import { COLORS } from '../../../themes/COLORS'
 import  Icon  from 'react-native-vector-icons/Ionicons'
 
 export const HomeHeader = () => {
@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
         marginBottom: 10
     },
     hiText: {
- color: COLORS.orange,
- fontSize: 30
+        color: COLORS.orange,
+        fontSize: 30
     }
 })

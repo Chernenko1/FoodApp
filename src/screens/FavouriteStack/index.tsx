@@ -7,7 +7,9 @@ import {
 import { Favourite } from "../../components/FavouritesScreens/Favourite";
 
   const nativeStackOption: NativeStackNavigationOptions = {
-    headerShown: false,
+    headerShown: true,
+    headerStyle: {backgroundColor: 'rgb(242,242,242)'},
+    headerShadowVisible: false
   };
 
   export type FavouriteParamList ={
@@ -19,7 +21,7 @@ import { Favourite } from "../../components/FavouritesScreens/Favourite";
   export const FavouriteStack = () => {
     return (
         <Stack.Navigator screenOptions={nativeStackOption}>
-            <Stack.Screen name="StackFavourite" component={Favourite}/>
+            <Stack.Screen name="StackFavourite" component={Favourite} options={{headerTitle: 'Favourites'}}/>
         </Stack.Navigator>
     )
   }

@@ -8,6 +8,8 @@ import { Profile } from "../../components/ProfileScreens/Profile";
 
   const nativeStackOption: NativeStackNavigationOptions = {
     headerShown: false,
+    headerStyle: {backgroundColor: 'rgb(242,242,242)'},
+    headerShadowVisible: false
   };
 
   export type ProfileParamList ={

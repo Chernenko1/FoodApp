@@ -1,11 +1,11 @@
 import React from "react";
 import { FlatList, Image, StyleSheet, Text, View } from "react-native";
-import { FakeCategories } from "../../data/FakeCategories";
+import { FakeCategories } from "../../../data/FakeCategories";
 import { ImageBackground } from "react-native";
 
 export const FoodCategories = () => {
     return (
-        <View> 
+        <View style={styles.container}> 
             <FlatList 
             data={FakeCategories} 
             keyExtractor={(itm, ind) => itm.name + ind} 
@@ -17,22 +17,28 @@ export const FoodCategories = () => {
             )} 
             horizontal={true}
             contentContainerStyle={{gap: 10}}
+            showsHorizontalScrollIndicator={false}
             />
         </View>
     )
 }
 
 const styles = StyleSheet.create({
+    container: {
+        marginHorizontal: -20,
+        marginTop: 10
+    },
     catContainer: {
-        marginVertical: 20,
-        justifyContent: 'center',
         alignItems: 'center',
-        columnGap: 10
+        justifyContent: 'center',
+        columnGap: 10,
+        marginVertical: 10,
+        marginLeft: 2
     },
     image: {
         borderRadius: 50,
-        height: 80,
-        width: 80,
+        height: 75,
+        width: 75,
     },
     text: {
         position: 'absolute',
