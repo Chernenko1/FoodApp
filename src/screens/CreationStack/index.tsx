@@ -9,7 +9,8 @@ import { SecondStep } from "../../components/CreationScreens/StepScreens/SecondS
 
   const nativeStackOption: NativeStackNavigationOptions = {
     headerStyle: {backgroundColor: 'rgb(242,242,242)'},
-    headerShadowVisible: false
+    headerShadowVisible: false,
+    headerShown: false
   };
 
   export type CreationParamList ={

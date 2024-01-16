@@ -15,3 +15,8 @@ declare interface Recipe {
   createdAt: string,
   updatedAt: string
 }
+
+declare interface RecipeCategories {
+  '_id': string,
+  name: string
+}
