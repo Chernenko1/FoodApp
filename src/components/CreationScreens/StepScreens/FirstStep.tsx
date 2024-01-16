@@ -8,21 +8,25 @@ export const FirstStep = () => {
     const [description, setDescription] = useState("")
 
     
+    const isInputEmpty = (): boolean => {
+        if(name.length === 0 || description.length === 0) return true
+        else return false
+      }
 
     return (
         <KeyboardAvoidingView style={{flex: 1}}>
-            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-                <View style={styles.inner}>
-                    <View style={styles.titleContainer}>
-                            <Text style={styles.textTitle}>Шаг 1. Введите данные рецепта</Text>
-                    </View>
-                    <View style={styles.textInputContainer}> 
-                            <InputText  placeholder="Название рецепта" onChangeText={text => setName(text)}/>
-                            <InputText  placeholder="Описание" onChangeText={text => setDescription(text)}/>
-                    </View>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            <View style={styles.inner}>
+                <View style={styles.titleContainer}>
+                        <Text style={styles.textTitle}>Шаг 1. Введите данные рецепта</Text>
                 </View>
-            </TouchableWithoutFeedback>
-        </KeyboardAvoidingView>
+                <View style={styles.textInputContainer}> 
+                        <InputText  placeholder="Название рецепта" onChangeText={text => setName(text)}/>
+                        <InputText  placeholder="Описание" onChangeText={text => setDescription(text)}/>
+                </View>
+            </View>
+        </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
     )
 }
 

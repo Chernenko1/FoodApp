@@ -5,9 +5,10 @@ import { COLORS } from "../../themes/COLORS";
 type Props = {
     placeholder: string
     onChangeText: (text: string) => any
+    keyboardType?: string 
 }
 
-export const InputText = ({placeholder, onChangeText}: Props) => {
+export const InputText = ({placeholder, onChangeText, ...rest}: Props) => {
     const [value, setValue] = useState("");
 
     useEffect(() => {
@@ -15,7 +16,7 @@ export const InputText = ({placeholder, onChangeText}: Props) => {
     }, [value])
 
     return (
-        <TextInput style={styles.textInput} value={value} onChangeText={text => setValue(text)} placeholder={placeholder}/>
+        <TextInput style={styles.textInput} value={value} onChangeText={text => setValue(text)} placeholder={placeholder} keyboardType={rest.keyboardType ?? 'default'}/>
     )
 }
 

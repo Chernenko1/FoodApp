@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, Button, StyleSheet, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard } from "react-native";
+import { View, Text, Button, StyleSheet, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard, ScrollView } from "react-native";
 import { FirstStep } from "./StepScreens/FirstStep";
 import { HeaderButton } from "../components/HeaderButton";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { CreationParamList } from "../../screens/CreationStack";
 import { InputText } from "../components/InputText";
+import { CreationHeader } from "./StepScreens/CreationHeader";
+import { SecondStep } from "./StepScreens/SecondStep";
+import { HorizontalRule } from "../components/HorizontalRule";
+import { ThirdStep } from "./StepScreens/ThirdStep";
 
 type Navigation = NativeStackScreenProps<CreationParamList, 'StackCreation'>
 
@@ -21,49 +25,30 @@ export const Creation = ({navigation}: Navigation) => {
         navigation.push('SecondStep', {name, description})
     }
 
-    useEffect(() => {
-        navigation.setOptions({
-            headerRight: () => (
-                <HeaderButton title="следущий шаг" disabled={isInputEmpty()} onPress={nextStep}/>
-            )
-        })
-    }, [isInputEmpty])
+    // useEffect(() => {
+    //     navigation.setOptions({
+    //         headerRight: () => (
+    //             <HeaderButton title="следующий шаг" disabled={isInputEmpty()} onPress={nextStep}/>
+    //         )
+    //     })
+    // }, [isInputEmpty])
 
     return (
-        <View style={styles.container}>
-            <KeyboardAvoidingView style={{flex: 1}}>
-                <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-                    <View style={styles.inner}>
-                        <View style={styles.titleContainer}>
-                                <Text style={styles.textTitle}>Шаг 1. Введите данные рецепта</Text>
-                        </View>
-                        <View style={styles.textInputContainer}> 
-                                <InputText  placeholder="Название рецепта" onChangeText={text => setName(text)}/>
-                                <InputText  placeholder="Описание" onChangeText={text => setDescription(text)}/>
-                        </View>
-                    </View>
-                </TouchableWithoutFeedback>
-            </KeyboardAvoidingView>
+        <View style ={styles.container}>
+            <CreationHeader />
+                <ScrollView scrollEnabled={true} showsVerticalScrollIndicator={false}> 
+                    <FirstStep />
+                        <HorizontalRule />
+                    <SecondStep />
+                    <HorizontalRule />
+                    <ThirdStep />
+                </ScrollView>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        paddingHorizontal: 20
+        paddingHorizontal: 20,
     },
-    inner: {
-        flex: 1
-    },
-    textInputContainer: {
-        rowGap: 10
-    },
-    titleContainer: {
-        marginVertical: 10
-    },
-    textTitle: {
-        fontFamily: 'Rubik-Medium',
-        fontSize: 20
-    }
 })
