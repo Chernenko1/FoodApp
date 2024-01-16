@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View, Text, StyleSheet, Dimensions } from "react-native";
 import Icon from 'react-native-vector-icons/Ionicons'
 import { COLORS } from "../../../themes/COLORS";
 import { InputText } from "../../components/InputText";
+import { fetchRecipeCategories } from "../../../http/recipeCategoriesAPI";
 
 export const ThirdStep = () => {
+
+
+    useEffect(() => {
+        fetchRecipeCategories().then(data => console.log(data)).catch(e => console.log(e))
+    }, [])
+
     return (
         <View style={styles.inner}>
         <View style={styles.titleContainer}>
