@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, Button, StyleSheet, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard, ScrollView } from "react-native";
+import { View, Text, Button, StyleSheet, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard, ScrollView, Dimensions } from "react-native";
 import { FirstStep } from "./StepScreens/FirstStep";
 import { HeaderButton } from "../components/HeaderButton";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
@@ -9,6 +9,7 @@ import { CreationHeader } from "./StepScreens/CreationHeader";
 import { SecondStep } from "./StepScreens/SecondStep";
 import { HorizontalRule } from "../components/HorizontalRule";
 import { ThirdStep } from "./StepScreens/ThirdStep";
+import Test from "./StepScreens/Test";
 
 type Navigation = NativeStackScreenProps<CreationParamList, 'StackCreation'>
 
@@ -42,6 +43,7 @@ export const Creation = ({navigation}: Navigation) => {
                     <SecondStep />
                     <HorizontalRule />
                     <ThirdStep />
+                    {/* <Test /> */}
                 </ScrollView>
         </View>
     )
@@ -50,5 +52,6 @@ export const Creation = ({navigation}: Navigation) => {
 const styles = StyleSheet.create({
     container: {
         paddingHorizontal: 20,
+        marginBottom: Dimensions.get('screen').width * 0.3
     },
 })

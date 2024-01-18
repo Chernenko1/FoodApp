@@ -1,20 +1,31 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, Dimensions, Modal, Pressable, ScrollView } from "react-native";
+import { View, Text, StyleSheet, Pressable, TextInput, Button } from "react-native";
 import Icon from 'react-native-vector-icons/Ionicons'
 import { COLORS } from "../../../themes/COLORS";
 import { InputText } from "../../components/InputText";
 import { fetchRecipeCategories } from "../../../http/recipeCategoriesAPI";
 import { CheckBox } from "../../components/CheckBox";
 import { ModalV } from "../../components/Modal";
+import { HorizontalRule } from "../../components/HorizontalRule";
 
 export const ThirdStep = () => {
     const [modalVisible, setModalVisible] = useState(false)
     const [categories, setCategories] = useState<RecipeCategories[]>([])
-
-
     const [selectedItems, setSelectedItems] = useState<string[]>([])
+    const [description, setDescription] = useState([])
 
-    console.log(selectedItems)
+    const [textInputs, setTextInputs] = useState(['']);
+
+    const addTextInput = () => {
+      setTextInputs([...textInputs, '']);
+    };
+  
+    const removeTextInput = (index:number) => {
+      const newInputs = [...textInputs];
+      newInputs.splice(index, 1);
+      setTextInputs(newInputs);
+    };
+  
 
     const onCheckBoxClick = (itemId: string) => {
         const isSelected = selectedItems.includes(itemId)
@@ -25,42 +36,62 @@ export const ThirdStep = () => {
         }
     }
 
+
+
+
     useEffect(() => {
         fetchRecipeCategories().then(data => setCategories(data)).catch(e => console.log(e))
     }, [])
 
     return (
-        <View style={styles.inner}>
-        <View style={styles.titleContainer}>
-                <Text style={styles.textTitle}>Шаг 3. Введите детали</Text>
-        </View>
-        <View style={styles.textInputContainer}>
-            <View style={styles.inputContainer}>
-                <Pressable onPress={() => setModalVisible(!modalVisible)}>
-                    <Text>Выберите категории</Text>
-                </Pressable>
-                <ModalV visible={modalVisible} onPress={() => setModalVisible(!modalVisible)}>           
-                    {categories.map((item) => 
-                        <CheckBox text={item.name} key={item._id} checked={selectedItems.includes(item._id)} onPress={() => onCheckBoxClick(item._id)}/>
-                    )}
-                </ModalV>
+        <View>
+            <View style={styles.titleContainer}>
+                    <Text style={styles.textTitle}>Шаг 3. Введите подробную инофрмацию</Text>
             </View>
-            <View style={styles.inputContainer}>
-                <Icon name="stopwatch-outline" size={24} color={COLORS.deepOrange}/>
-                <InputText keyboardType="numeric" placeholder="Время подготовки" onChangeText={text => {}}/>
+            <View style={styles.textInputContainer}>
+                <View style={styles.inputContainer}>
+                    <Pressable onPress={() => setModalVisible(!modalVisible)} style={styles.inputContainer}>
+                        <Icon name="add-circle-outline" size={24} color={COLORS.deepOrange}/>
+                        <Text style={styles.inputText}>Выберите категории</Text>
+                    </Pressable>
+                    <ModalV visible={modalVisible} onPress={() => setModalVisible(!modalVisible)}>           
+                        {categories.map((item) => 
+                            <CheckBox text={item.name} key={item._id} checked={selectedItems.includes(item._id)} onPress={() => onCheckBoxClick(item._id)}/>
+                        )}
+                    </ModalV>
+                </View>
+                <HorizontalRule />
+                <View>
+                    <Pressable onPress={() => {}}>
+                        <Text style={styles.inputText}>Отправить ингредиеты</Text>
+                    </Pressable>
+                </View>
+                <HorizontalRule />
+                <View style={{ padding: 20 }}>
+                    {textInputs.map((value, index) => {
+                        return (
+                        <View key={index} style={{ marginBottom: 10 }}>
+                            <InputText
+                            // style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 5 }}
+                            value={value}
+                            onChangeText={(text) => {
+                                const newInputs = [...textInputs];
+                                newInputs[index] = text;
+                                setTextInputs(newInputs);
+                            }}
+                            />
+                            <Button title="Удалить" onPress={() => removeTextInput(index)} />
+                        </View>
+                        );
+                    })}
+                    <Button title="Добавить" onPress={addTextInput} />
+                </View>
             </View>
-            <View style={styles.inputContainer}>
-                <Icon name="stopwatch-outline" size={24} color={COLORS.deepOrange}/>
-                <InputText keyboardType="numeric" placeholder="Время приготовления" onChangeText={text => {}}/>
-            </View>
-        </View>
     </View>
     )
 }
 
 const styles = StyleSheet.create({
-    inner: {
-    },
     textInputContainer: {
         rowGap: 10
     },
@@ -72,39 +103,17 @@ const styles = StyleSheet.create({
         fontSize: 20
     },
     inputContainer:{
-        flexDirection: 'row', 
+        flexDirection: 'row',
         alignItems:'center', 
         columnGap: 10
     },
-    centeredModal: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
+    inputText: {
+        fontFamily: "Rubik-Regular",
+        fontSize: 18
     },
-    modalView: {
-        backgroundColor: COLORS.white,
-        padding: 35, 
-        borderRadius: 15,
-        elevation: 2,
-        shadowOffset: {
-        width: 0,
-        height: 1,
-        },
-       shadowOpacity: 0.15,
-       shadowRadius: 2,
-    },
-    modalCategories: {
-        marginBottom: 10
-    },
-    modalHide: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: COLORS.orange,
-        borderRadius: 5,
-    },
-    modalHideText: {
-        fontSize: 20,
-        fontFamily: 'Rubik-Regular',
-        color: COLORS.white
+    fieldView: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center'
     }
 })
