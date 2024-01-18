@@ -13,13 +13,7 @@ export const Home = () => {
  
                 <HomeHeader />
                 <SearchInput />
-
-
-
                 <FoodCategories />
-
-
-
                 <PopularFC />
                 <TopRecipes />
 

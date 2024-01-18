@@ -1,15 +1,19 @@
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React from "react";
-import { KeyboardAvoidingView, StyleSheet, TextInput, View } from "react-native";
+import {Pressable, StyleSheet, Text, View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { HomeParamList } from "../../../screens/HomeStack";
+
+// type NavProp = NativeStackScreenProps<HomeParamList, 'Search'>
 
 export const SearchInput = () => {
-    return (
-        <KeyboardAvoidingView behavior='height'>
- 
+    const navigation = useNavigation()
+    return ( 
+        <Pressable onPress={() => navigation.navigate('Search')}>
             <View style={styles.container}>
-                <TextInput style={styles.input} placeholder="Search..."/>
+                <Text style={styles.input}>Search...</Text>
             </View>
-
-        </KeyboardAvoidingView>
+        </Pressable>
     )
 }
 
@@ -22,6 +26,8 @@ const styles = StyleSheet.create({
         borderColor: 'lightgray',
         borderWidth: 1,
         paddingVertical: 8,
-       
+        paddingHorizontal: 5,
+        fontSize: 18,
+        fontFamily: 'Rubik-Regular'
     }
 })
