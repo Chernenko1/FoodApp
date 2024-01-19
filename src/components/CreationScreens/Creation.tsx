@@ -38,9 +38,9 @@ export const Creation = ({navigation}: Navigation) => {
         <View style ={styles.container}>
             <CreationHeader />
                 <ScrollView scrollEnabled={true} showsVerticalScrollIndicator={false}> 
-                    <FirstStep />
+                    {/* <FirstStep /> */}
                         <HorizontalRule />
-                    <SecondStep />
+                    {/* <SecondStep /> */}
                     <HorizontalRule />
                     <ThirdStep />
                     {/* <Test /> */}

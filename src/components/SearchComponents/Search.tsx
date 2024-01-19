@@ -6,12 +6,18 @@ import Icon from 'react-native-vector-icons/Ionicons'
 import { searchProduct } from "../../http/productAPI";
 import { COLORS } from "../../themes/COLORS";
 import { HomeParamList } from "../../screens/HomeStack";
+import { Pressable } from "react-native";
+import { CreationParamList } from "../../screens/CreationStack";
 
-type NavProps = NativeStackScreenProps<HomeParamList, 'Search'>
+type NavProps = NativeStackScreenProps<CreationParamList, 'Search'>
 
 export const Search = ({navigation, route}: NavProps) => {
     const [value, setValue] = useState('')
     const [searchAnswer, setSearchAnswer] = useState([])
+
+    const handleBackToScreen = () => { 
+        navigation.navigate('StackCreation',{name: 'a'})
+    }
 
     useEffect(() => {
         searchProduct(value).then(data => setSearchAnswer(data)).catch(e => console.log(e))
@@ -27,9 +33,11 @@ export const Search = ({navigation, route}: NavProps) => {
                 <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
                     <View style={styles.containerAnswer}>
                             {searchAnswer.map(item => 
-                            <View key={item._id} style={styles.containerText}>
-                                <Text style={styles.text}>{item.name}</Text>
-                            </View>
+                            <Pressable key={item._id} onPress={() => handleBackToScreen(item._id)}> 
+                                <View style={styles.containerText}>
+                                    <Text style={styles.text}>{item.name}</Text>
+                                </View>
+                            </Pressable>
                             )}
                     </View>
                 </TouchableWithoutFeedback>
