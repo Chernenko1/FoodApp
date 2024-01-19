@@ -71,7 +71,7 @@ export const ThirdStep = () => {
                     {textInputs.map((value, index) => {
                         return (
                         <View key={index} style={{ marginBottom: 10 }}>
-                            <InputText
+                            <TextInput
                             // style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 5 }}
                             value={value}
                             onChangeText={(text) => {

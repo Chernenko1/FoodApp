@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
-import { View, Text, StyleSheet, Dimensions } from "react-native";
-import { InputText } from "../../components/InputText";
+import { View, Text, StyleSheet, Dimensions, TextInput } from "react-native";
 import Icon from 'react-native-vector-icons/Ionicons'
 import { COLORS } from "../../../themes/COLORS";
 
@@ -16,15 +15,15 @@ export const SecondStep = () => {
                 <View style={styles.textInputContainer}>
                     <View style={styles.inputContainer}>
                         <Icon name="happy-outline" size={24} color={COLORS.deepOrange}/>
-                        <InputText keyboardType="numeric" placeholder="Количество порций" onChangeText={text => {}}/>
+                        <TextInput keyboardType="numeric" placeholder="Количество порций" onChangeText={text => {}}/>
                     </View>
                     <View style={styles.inputContainer}>
                         <Icon name="stopwatch-outline" size={24} color={COLORS.deepOrange}/>
-                        <InputText keyboardType="numeric" placeholder="Время подготовки" onChangeText={text => {}}/>
+                        <TextInput keyboardType="numeric" placeholder="Время подготовки" onChangeText={text => {}}/>
                     </View>
                     <View style={styles.inputContainer}>
                         <Icon name="stopwatch-outline" size={24} color={COLORS.deepOrange}/>
-                        <InputText keyboardType="numeric" placeholder="Время приготовления" onChangeText={text => {}}/>
+                        <TextInput keyboardType="numeric" placeholder="Время приготовления" onChangeText={text => {}}/>
                     </View>
                 </View>
             </View>
