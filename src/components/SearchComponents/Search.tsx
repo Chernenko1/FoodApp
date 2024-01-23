@@ -15,8 +15,8 @@ export const Search = ({navigation, route}: NavProps) => {
     const [value, setValue] = useState('')
     const [searchAnswer, setSearchAnswer] = useState([])
 
-    const handleBackToScreen = () => { 
-        navigation.navigate('StackCreation',{name: 'a'})
+    const handleBackToScreen = (_id, name) => { 
+        navigation.navigate('StackCreation',{_id, name, quantity: 100})
     }
 
     useEffect(() => {
@@ -33,7 +33,7 @@ export const Search = ({navigation, route}: NavProps) => {
                 <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
                     <View style={styles.containerAnswer}>
                             {searchAnswer.map(item => 
-                            <Pressable key={item._id} onPress={() => handleBackToScreen(item._id)}> 
+                            <Pressable key={item._id} onPress={() => handleBackToScreen(item._id, item.name)}> 
                                 <View style={styles.containerText}>
                                     <Text style={styles.text}>{item.name}</Text>
                                 </View>

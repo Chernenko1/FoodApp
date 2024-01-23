@@ -1,11 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, Dimensions, TextInput } from "react-native";
 import Icon from 'react-native-vector-icons/Ionicons'
 import { COLORS } from "../../../themes/COLORS";
 
-export const SecondStep = () => {
+export const SecondStep = ({secondData}) => {
+    const [service, setService] = useState('0')
+    const [cookTime, setCookTime] = useState('0')
 
-    // console.log(Dimensions.get('screen')).
+    secondData(service,cookTime)
 
     return (
         <View style={styles.inner}>
@@ -15,15 +17,11 @@ export const SecondStep = () => {
                 <View style={styles.textInputContainer}>
                     <View style={styles.inputContainer}>
                         <Icon name="happy-outline" size={24} color={COLORS.deepOrange}/>
-                        <TextInput keyboardType="numeric" placeholder="Количество порций" onChangeText={text => {}}/>
+                        <TextInput keyboardType="numeric" value={service} placeholder="Количество порций" onChangeText={text => {setService(text)}}/>
                     </View>
                     <View style={styles.inputContainer}>
                         <Icon name="stopwatch-outline" size={24} color={COLORS.deepOrange}/>
-                        <TextInput keyboardType="numeric" placeholder="Время подготовки" onChangeText={text => {}}/>
-                    </View>
-                    <View style={styles.inputContainer}>
-                        <Icon name="stopwatch-outline" size={24} color={COLORS.deepOrange}/>
-                        <TextInput keyboardType="numeric" placeholder="Время приготовления" onChangeText={text => {}}/>
+                        <TextInput keyboardType="numeric" value={cookTime} placeholder="Время приготовления" onChangeText={text => {setCookTime(text)}}/>
                     </View>
                 </View>
             </View>

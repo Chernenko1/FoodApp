@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, StyleSheet, KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard } from "react-native";
+import { View, Text, TextInput, StyleSheet, KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard, Pressable, Button } from "react-native";
 import { COLORS } from "../../../themes/COLORS";
 
-export const FirstStep = () => {
+export const FirstStep = ({firstData}) => {
     const [name, setName] = useState("")
     const [description, setDescription] = useState("")
 
@@ -11,6 +11,8 @@ export const FirstStep = () => {
         if(name.length === 0 || description.length === 0) return true
         else return false
       }
+
+      firstData(name, description)
 
     return (
         <KeyboardAvoidingView style={{flex: 1}}>

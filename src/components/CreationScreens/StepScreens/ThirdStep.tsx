@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { View, Text, StyleSheet, Pressable, TextInput, Button, Dimensions } from "react-native";
 import Icon from 'react-native-vector-icons/Ionicons'
 import { COLORS } from "../../../themes/COLORS";
@@ -8,14 +8,18 @@ import { ModalV } from "../../components/Modal";
 import { HorizontalRule } from "../../components/HorizontalRule";
 import { useNavigation } from "@react-navigation/native";
 
-export const ThirdStep = () => {
+export const ThirdStep = ({params, firdData},) => {
+    const firstRender = useRef(false)
+
     const [modalVisible, setModalVisible] = useState(false)
     const [categories, setCategories] = useState<RecipeCategories[]>([])
     const [selectedItems, setSelectedItems] = useState<string[]>([])
-    const [ingrediants, setIngrediants] = useState(['a'])
+    const [ingrediants, setIngrediants] = useState([])
     const [textInputs, setTextInputs] = useState(['']);
 
     const navigation = useNavigation()
+
+    firdData(ingrediants, textInputs, selectedItems)
 
     const addTextInput = () => {
       setTextInputs([...textInputs, '']);
@@ -26,7 +30,6 @@ export const ThirdStep = () => {
       newInputs.splice(index, 1);
       setTextInputs(newInputs);
     };
-  
 
     const onCheckBoxClick = (itemId: string) => {
         const isSelected = selectedItems.includes(itemId)
@@ -36,10 +39,21 @@ export const ThirdStep = () => {
             setSelectedItems(prev => [...prev, itemId])
         }
     }
+
     
+    useEffect(() => {
+        if(firstRender.current) {
+            console.log(1)
+            setIngrediants(prev => [...prev, params])
+        } else firstRender.current = true
+        
+    }, [params])
 
     useEffect(() => {
-        fetchRecipeCategories().then(data => setCategories(data)).catch(e => console.log(e))
+       if(firstRender.current) {
+        console.log(2)
+           fetchRecipeCategories().then(data => setCategories(data)).catch(e => console.log(e))
+       } else firstRender.current = true
     }, [])
 
     return (
@@ -65,7 +79,11 @@ export const ThirdStep = () => {
                 <View>
                     <Text style={styles.textPartName}>Ингредиеты</Text>
                     <View>
-                        {ingrediants.map(item => <Text key={item}>1</Text>)}
+                        {ingrediants.map((item, ind) => 
+                        <View key={item._id} style={styles.ingrediantsView}>
+                            <Text style={styles.inputText}>{item.name}</Text>
+                            <Text style={styles.inputText}> {item.quantity}</Text>
+                        </View>)}
                     </View>
                     <Pressable onPress={() => navigation.navigate('Search')} style={styles.pressableView}>
                         <Icon name='add-circle-outline' size={30} color={COLORS.deepOrange}/>
@@ -156,5 +174,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginVertical: 5,
         columnGap: 5
+    },
+    ingrediantsView: {
+        flexDirection: 'row'
     }
 })
