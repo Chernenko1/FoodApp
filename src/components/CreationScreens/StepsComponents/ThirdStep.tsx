@@ -8,7 +8,12 @@ import { ModalV } from "../../components/Modal";
 import { HorizontalRule } from "../../components/HorizontalRule";
 import { useNavigation } from "@react-navigation/native";
 
-export const ThirdStep = ({params, firdData},) => {
+interface Props {
+    params: {}
+    handleData: ({}) => void
+}
+
+export const ThirdStep = ({params, handleData}: Props) => {
     const firstRender = useRef(false)
 
     const [modalVisible, setModalVisible] = useState(false)
@@ -19,7 +24,7 @@ export const ThirdStep = ({params, firdData},) => {
 
     const navigation = useNavigation()
 
-    firdData(ingrediants, textInputs, selectedItems)
+    handleData({ingrediants, textInputs, selectedItems})
 
     const addTextInput = () => {
       setTextInputs([...textInputs, '']);

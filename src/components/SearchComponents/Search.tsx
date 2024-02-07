@@ -16,6 +16,7 @@ export const Search = ({navigation, route}: NavProps) => {
     const [searchAnswer, setSearchAnswer] = useState([])
 
     const handleBackToScreen = (_id, name) => { 
+        console.log(_id, name)
         navigation.navigate('StackCreation',{_id, name, quantity: 100})
     }
 

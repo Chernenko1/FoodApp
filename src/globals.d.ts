@@ -2,18 +2,18 @@ declare interface Recipe {
     '_id': string, 
   name: string, 
   description: string, 
+  cookTime: string,
   products:
   {
     productId: string, 
     quantity: number
   }[],
   image: string,
-  cookingTime: string,
-  serves: number,
+  service: number,
+  ingrediants: [],
+  instruction: string[],
+  category: []
   rating: number,
-  kcal: number,
-  createdAt: string,
-  updatedAt: string
 }
 
 declare interface RecipeCategories {
