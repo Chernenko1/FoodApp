@@ -6,7 +6,6 @@ export const fetchRecipe = async () => {
 }
 
 export const createRecipe = async (recipe:any) => {
-    console.log(recipe)
-    const {data} = await $host.post('api/recipe/create', recipe)
+    const {data} = await $host.post('api/recipe/create',recipe)
     return data
 }

@@ -5,7 +5,7 @@ import {
     NativeStackNavigationOptions,
   } from '@react-navigation/native-stack';
 import { Creation } from "../../components/CreationScreens/Creation";
-import { SecondStep } from "../../components/CreationScreens/StepScreens/SecondStep";
+import { SecondStep } from "../../components/CreationScreens/StepsComponents/SecondStep";
 import { Search } from "../../components/SearchComponents/Search";
 
   const nativeStackOption: NativeStackNavigationOptions = {

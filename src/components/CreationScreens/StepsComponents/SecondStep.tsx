@@ -3,11 +3,11 @@ import { View, Text, StyleSheet, Dimensions, TextInput } from "react-native";
 import Icon from 'react-native-vector-icons/Ionicons'
 import { COLORS } from "../../../themes/COLORS";
 
-export const SecondStep = ({secondData}) => {
+export const SecondStep = ({handleData}) => {
     const [service, setService] = useState('0')
     const [cookTime, setCookTime] = useState('0')
 
-    secondData(service,cookTime)
+    handleData({service,cookTime})
 
     return (
         <View style={styles.inner}>
