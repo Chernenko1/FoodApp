@@ -1,14 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { HeaderButton } from "../../components/HeaderButton";
 import { COLORS } from "../../../themes/COLORS";
 
 export const CreationHeader = ({handlePress}) => {
-    return (
- 
+
+    return(
             <View style={styles.container}>
                 <Text style={styles.text}>Новый рецепт</Text>
-                <HeaderButton  title="следующий шаг" disabled={false} onPress={() => handlePress()}/>
+                <HeaderButton  title="следующий шаг" disabled={true} onPress={() => handlePress()}/>
             </View>
  
     )
