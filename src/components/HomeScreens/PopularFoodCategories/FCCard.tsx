@@ -31,19 +31,9 @@ export const FCCard = () => {
                     <View>
                         <Image source={require('../../../../assets/images/noodles.png')} style={{width: width * 0.15, height: height * 0.10}}/>
                     </View>
-<<<<<<< HEAD
-                    <View style={{flexShrink: 1}}>
-                        <Text style={styles.nameText}>Soup</Text>
-                        <Text style={styles.descText}>40 Dishesssssssssss</Text>
-=======
-                    <View>
-                        <Text style={styles.nameText}>Soup</Text>
-                        <Text style={styles.descText}>40 Dishes</Text>
->>>>>>> 9221724c1bbd1812527b63e82f70a1ccfb9ac225
                     </View>
                 </View>
             </View>
-        </View>
     )
 }
 

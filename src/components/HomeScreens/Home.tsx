@@ -5,17 +5,19 @@ import { SearchInput } from "./Header/SearchInput";
 import { FoodCategories } from "./Header/FoodCategories";
 import { PopularFC } from "./PopularFoodCategories/PopularFC";
 import { TopRecipes } from "./TopRecipes/TopRecipes";
+import { BasicEnergyInfo } from "./EnergyInfoComonents/BasicEnergyInfo";
 
 export const Home = () => {
     return (
     // <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View style={{flex: 12, marginTop: 20, paddingBottom: 60, paddingHorizontal: 20}}>
+        <View style={styles.mainView}>
  
-                <HomeHeader />
+                {/* <HomeHeader />
                 <SearchInput />
                 <FoodCategories />
                 <PopularFC />
-                <TopRecipes />
+                <TopRecipes /> */}
+                <BasicEnergyInfo />
 
         </View>
     // </TouchableWithoutFeedback>
@@ -23,5 +25,7 @@ export const Home = () => {
 }
 
 const styles = StyleSheet.create({
-    
+    mainView: {
+        flex:1,
+    }
 })
