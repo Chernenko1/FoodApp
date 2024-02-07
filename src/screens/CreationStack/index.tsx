@@ -4,14 +4,20 @@ import {
     createNativeStackNavigator,
     NativeStackNavigationOptions,
   } from '@react-navigation/native-stack';
-import { Home } from "../../components/HomeScreens/Home";
+import { Creation } from "../../components/CreationScreens/Creation";
+import { SecondStep } from "../../components/CreationScreens/StepScreens/SecondStep";
+import { Search } from "../../components/SearchComponents/Search";
 
   const nativeStackOption: NativeStackNavigationOptions = {
-    headerShown: false,
+    headerStyle: {backgroundColor: 'rgb(242,242,242)'},
+    headerShadowVisible: false,
+    headerShown: false
   };
 
   export type CreationParamList ={
     StackCreation: undefined
+    SecondStep: {}
+    Search: undefined
   }
 
   const Stack = createNativeStackNavigator<CreationParamList>();
@@ -19,7 +25,9 @@ import { Home } from "../../components/HomeScreens/Home";
   export const CreationStack = () => {
     return (
         <Stack.Navigator screenOptions={nativeStackOption}>
-            <Stack.Screen name="StackCreation" component={Home}/>
+            <Stack.Screen name="StackCreation" component={Creation} options={{headerTitle: 'Новый рецепт'}}/>
+            <Stack.Screen name="SecondStep" component={SecondStep} options={{headerTitle: 'Новый рецепт'}}/>
+            <Stack.Screen name="Search" component={Search} options={{headerShown: false}}/>
         </Stack.Navigator>
     )
   }
