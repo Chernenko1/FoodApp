@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, FlatList, TouchableOpacity } from "react-native";
 import { useAppSelector } from "../../store/hooks";
-import { RecipeCard } from "../HomeScreens/TopRecipes/RecipeCard";
+import { RecipeCard } from "../HomeScreens/_TopRecipes/RecipeCard";
 import { useNavigation } from "@react-navigation/native";
 
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
@@ -21,7 +21,7 @@ export const Favourite = () => {
                 keyExtractor={item => item._id}
                 renderItem={({item}) =>
                     <TouchableOpacity activeOpacity={0.9} onPress={() => {navigation.navigate('Recipe', {recipe: item})}}>
-                        <RecipeCard recipes={item}/>
+                        {/* <RecipeCard recipes={item}/> */}
                     </TouchableOpacity>}
             />
         </View>

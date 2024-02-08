@@ -5,11 +5,12 @@ import {
     NativeStackNavigationOptions,
   } from '@react-navigation/native-stack';
 import { Home } from "../../components/HomeScreens/Home";
-import {  RecipeCards } from "../../components/HomeScreens/TopRecipes/RecipeCards";
-import { Recipe } from "../../components/HomeScreens/TopRecipes/Recipe";
+import {  RecipeCards } from "../../components/HomeScreens/_TopRecipes/RecipeCards";
+import { Recipe } from "../../components/HomeScreens/_TopRecipes/Recipe";
 import Icon from 'react-native-vector-icons/Ionicons'
 import { COLORS } from "../../themes/COLORS";
 import { Search } from "../../components/SearchComponents/Search";
+import { MealInfo } from "../../components/HomeScreens/MealsComponents/MealInfo";
 
   const nativeStackOption: NativeStackNavigationOptions = {
     headerShown: true,
@@ -21,7 +22,10 @@ import { Search } from "../../components/SearchComponents/Search";
     StackHome: undefined,
     Recipes: undefined,
     Recipe: any
-    Search: undefined
+    Search: undefined,
+    MealInfo: {
+      headerTitle: string
+    }
   }
 
   const Stack = createNativeStackNavigator<HomeParamList>();
@@ -33,6 +37,7 @@ import { Search } from "../../components/SearchComponents/Search";
             <Stack.Screen name='Recipes' component={RecipeCards}/>
             <Stack.Screen name="Recipe" component={Recipe} />
             <Stack.Screen name="Search" component={Search} options={{headerShown: false}}/>
+            <Stack.Screen name='MealInfo' component={MealInfo}/>
         </Stack.Navigator>
     )
   }

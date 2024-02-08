@@ -9,6 +9,7 @@ import { HomeParamList, HomeStack } from '../screens/HomeStack';
 import { CreationParamList, CreationStack } from '../screens/CreationStack';
 import { FavouriteParamList, FavouriteStack } from '../screens/FavouriteStack';
 import { ProfileParamList, ProfileStack } from '../screens/ProfileStack';
+import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 
 export type RootTabParamList = {
     Home: HomeParamList
@@ -35,9 +36,14 @@ export const BottomNavigation = () => {
 
 return (
   <TabStack.Navigator screenOptions={tabOption}>
-    <TabStack.Screen name={'Home'} component={HomeStack} options={{tabBarIcon: ({focused, color, size}): any => (
-      <Icon name={focused ? 'home' : 'home-outline'} size={focused ? 29 : 24} color={color}/>
-    ), headerShown: false}}/>
+    <TabStack.Screen name={'Home'} component={HomeStack} options={({route}) => (
+      {
+        tabBarIcon: ({focused, color, size}): any => 
+        (
+        <Icon name={focused ? 'home' : 'home-outline'} size={focused ? 29 : 24} color={color}/>
+        ), 
+        headerShown: false, 
+    })}/>
     <TabStack.Screen name={'Favourite'} component={FavouriteStack} options={{tabBarIcon: ({focused,  size, color}): any => (
       <Icon name={focused ? 'heart' : 'heart-outline'} size={focused ? 29 : 24} color={color}/>
     ), headerShown: false}}/>

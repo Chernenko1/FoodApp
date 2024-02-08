@@ -1,7 +1,10 @@
-import { StyleSheet, View, Text } from "react-native"
+import { StyleSheet, View, Text, Pressable, TouchableHighlight } from "react-native"
 import Icon from 'react-native-vector-icons/Ionicons'
 
 import { COLORS } from "../../../themes/COLORS"
+import { StackNavigationState, useNavigation } from "@react-navigation/native"
+import {NativeStackNavigationProp } from "@react-navigation/native-stack/lib/typescript/src/types"
+import { HomeParamList } from "../../../screens/HomeStack"
 
 interface Props {
     title: string,
@@ -9,19 +12,25 @@ interface Props {
     maxKcal: number
 }
 
+type Navigation = NativeStackNavigationProp<HomeParamList, 'MealInfo'>
+
 export const Meal = ({title, kcal = 0, maxKcal = 0}: Props) => {
+
+    const navigation = useNavigation<Navigation>()
 
     return (
         <View style={styles.mainView}>
-            <View style={styles.frameView}>
-                <Text style={styles.titleText}>{title}</Text>
-                <Text style = {styles.kcalText}>
-                    <Text style={styles.countText}>{kcal} </Text> 
-                     ккал из 
-                    <Text style={styles.countText}> {maxKcal} </Text> 
-                     ккал
-                    </Text>
-            </View>
+            <Pressable onPress={() => navigation.navigate('MealInfo', {headerTitle: title})}>
+                <View style={styles.frameView}>
+                    <Text style={styles.titleText}>{title}</Text>
+                    <Text style = {styles.kcalText}>
+                        <Text style={styles.countText}>{kcal} </Text> 
+                        ккал из 
+                        <Text style={styles.countText}> {maxKcal} </Text> 
+                        ккал
+                        </Text>
+                </View>
+            </Pressable>    
             <View style={styles.iconView}>
                 <Icon name='add-outline' size={35} color='black'/>
             </View>

@@ -64,3 +64,9 @@ yarn-error.log
 
 # testing
 /coverage
+
+#delete
+
+**/_Header
+**/_PopularFoodCategories
+**/_TopRecipes
