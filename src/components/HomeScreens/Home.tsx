@@ -6,6 +6,8 @@ import { FoodCategories } from "./Header/FoodCategories";
 import { PopularFC } from "./PopularFoodCategories/PopularFC";
 import { TopRecipes } from "./TopRecipes/TopRecipes";
 import { BasicEnergyInfo } from "./EnergyInfoComonents/BasicEnergyInfo";
+import { MealList } from "./MealsComponents/MealList";
+import { DatePicker } from "./DatePicker";
 
 export const Home = () => {
     return (
@@ -18,6 +20,8 @@ export const Home = () => {
                 <PopularFC />
                 <TopRecipes /> */}
                 <BasicEnergyInfo />
+                <DatePicker />
+                <MealList />
 
         </View>
     // </TouchableWithoutFeedback>

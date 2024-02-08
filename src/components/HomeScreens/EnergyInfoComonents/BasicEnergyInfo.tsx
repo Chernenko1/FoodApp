@@ -8,7 +8,7 @@ export const BasicEnergyInfo = () => {
     return (
         <SafeAreaView style={styles.mainView}>
             <View style={styles.caloriesView}>
-                <Calories type="Съедено" count={1111} icon="open"/>
+                <Calories type="Съедено" count={1273} icon="open"/>
                 <View style={styles.progressView}>
                     <View style={{width: 110, height: 110, borderRadius: 55, backgroundColor: COLORS.white, justifyContent: 'center'}}>
                         <Calories type="Осталось" count={2440}/>
