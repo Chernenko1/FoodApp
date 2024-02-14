@@ -8,12 +8,7 @@ export const Home = () => {
     return (
     // <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.mainView}>
- 
-                {/* <HomeHeader />
-                <SearchInput />
-                <FoodCategories />
-                <PopularFC />
-                <TopRecipes /> */}
+
                 <BasicEnergyInfo />
                 <DatePicker />
                 <MealList />

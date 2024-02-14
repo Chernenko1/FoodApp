@@ -6,6 +6,7 @@ import Icon from 'react-native-vector-icons/Ionicons'
 import { InputText } from "../components/TextInput"
 import { COLORS } from "../../themes/COLORS"
 import { Button } from "../components/Button"
+import { addProductToMeal } from "../../http/mealAPI"
 
 
 type Navigation = NativeStackScreenProps<HomeParamList, 'ProductInfo'>
@@ -17,6 +18,13 @@ export const ProductInfo = ({navigation, route}: Navigation) => {
     const {productData,backScreen } = route.params
 
     const buttonPress = () => {
+         addProductToMeal(
+            {
+                id: '65ccec41d6d72a1e86c8714f',
+                data: {productId: productData._id, quantity: value},
+                type: 'breakfast'
+            }
+        )
         navigation.navigate(backScreen,{})
     }
 
@@ -29,7 +37,7 @@ export const ProductInfo = ({navigation, route}: Navigation) => {
             <View style={styles.inputMainView}>
                 <View style={styles.inputView}>
                     <Icon name="scale-outline" size={35} style={styles.icon} color={COLORS.orange}/>
-                    <InputText value={value} keyboardType='numeric'/>
+                    <InputText value={value} keyboardType='numeric' onChangeText={(text: string) => setValue(text)}/>
                 </View>
                 <View style={styles.inputView}>
                     <Icon name="list-outline" size={35} style={styles.icon} color={COLORS.orange}/>

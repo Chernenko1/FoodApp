@@ -5,8 +5,6 @@ import {
     NativeStackNavigationOptions,
   } from '@react-navigation/native-stack';
 import { Home } from "../../components/HomeScreens/Home";
-import {  RecipeCards } from "../../components/HomeScreens/_TopRecipes/RecipeCards";
-import { Recipe } from "../../components/HomeScreens/_TopRecipes/Recipe";
 import Icon from 'react-native-vector-icons/Ionicons'
 import { COLORS } from "../../themes/COLORS";
 import { Search } from "../../components/SearchComponents/Search";
@@ -21,8 +19,6 @@ import { ProductInfo } from "../../components/ProductComponent/ProductInfo";
 
   export type HomeParamList ={
     StackHome: undefined,
-    Recipes: undefined,
-    Recipe: any
     Search: {
       backScreen: string,
     },
@@ -41,8 +37,6 @@ import { ProductInfo } from "../../components/ProductComponent/ProductInfo";
     return (
         <Stack.Navigator screenOptions={nativeStackOption}>
             <Stack.Screen name="StackHome" component={Home} options={{headerShown: false}}/>
-            <Stack.Screen name='Recipes' component={RecipeCards}/>
-            <Stack.Screen name="Recipe" component={Recipe} />
             <Stack.Screen name="Search" component={Search} options={{headerShown: false}}/>
             <Stack.Screen name='MealInfo' component={MealInfo}/>
             <Stack.Screen name='ProductInfo' component={ProductInfo}/>
