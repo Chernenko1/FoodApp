@@ -1,15 +1,17 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack"
-import { useEffect } from "react"
-import { Pressable, SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native"
+import { useEffect, useState } from "react"
+import { FlatList, Pressable, SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native"
 import { HomeParamList } from "../../../screens/HomeStack"
 import { COLORS } from "../../../themes/COLORS"
 import { Calories } from "../EnergyInfoComonents/Calories"
 import { Product } from "../../ProductComponent/ProductCard"
 import { ButtonIcon } from "../../components/ButtonIcon"
+import { getMealData } from "../../../http/mealAPI"
 
 type Navigation = NativeStackScreenProps<HomeParamList, 'MealInfo'>
 
 export const MealInfo = ({navigation, route}: Navigation) => {
+    const [products, setProducts] = useState([])
 
     const {headerTitle} = route.params
 
@@ -23,12 +25,12 @@ export const MealInfo = ({navigation, route}: Navigation) => {
     }, [])
 
     useEffect(() => {
-        
+        getMealData("65ca22610be656a878bb704e", 'breakfast' ).then((data) => setProducts(data)).catch(e => console.log(e))
     }, [])
 
     return (
-        <SafeAreaView>
-            <ScrollView style={styles.mainView}>
+        <SafeAreaView style={styles.mainView}>
+            <ScrollView>
                 <View style={styles.headerView}>
                     <View style={styles.progressView}>
                             <View style={{width: 110, height: 110, borderRadius: 55, backgroundColor: COLORS.white, justifyContent: 'center'}}>
@@ -40,13 +42,9 @@ export const MealInfo = ({navigation, route}: Navigation) => {
                     </View>
                 </View>
                 <View style={styles.productView}>
-                    <Product productName="Название" productQuantity="100 г" kcal={100}/>
-                    <Product productName="Название" productQuantity="100 г" kcal={100}/>
-                    <Product productName="Название" productQuantity="100 г" kcal={100}/>
-                    <Product productName="Название" productQuantity="100 г" kcal={100}/>
-                    <Product productName="Название" productQuantity="100 г" kcal={100}/>
-                    <Product productName="Название" productQuantity="100 г" kcal={100}/>
-                    <Product productName="Название" productQuantity="100 г" kcal={100}/>
+                 {
+                    products.map(item => <Product productName={item.productId.name} productQuantity={item.quantity} kcal={item.productId.calories} /> )
+                 }
                 </View>
             </ScrollView>
                 <Pressable onPress={() => navigation.navigate('Search', {backScreen: route.name})}>
@@ -68,7 +66,7 @@ const styles = StyleSheet.create({
         borderRadius: 70,
     },
     mainView: {
-
+        flex: 1
     },
     headerView: {
         alignItems: 'center',

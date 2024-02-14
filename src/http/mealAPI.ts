@@ -1,7 +1,8 @@
 import { $host } from "."
 
 export const getMealData = async (id:string, mealType: string) => {
-    const data = await $host.get(`/api/meals/one?id=${id}&type=${mealType}`)
+    console.log(id, mealType)
+    const {data} = await $host.get(`/api/meals/one/${id}/${mealType}`)
     return data
 }
 export const addProductToMeal = async(productInfo: {}) => {

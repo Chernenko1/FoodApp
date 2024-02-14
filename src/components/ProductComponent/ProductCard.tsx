@@ -13,7 +13,7 @@ export const Product = ({productName, productQuantity, kcal}: Props) => {
         <View style={styles.mainView}>
             <View>
                 <Text style={styles.productNameText}>{productName}</Text>
-                <Text style={styles.productInfoText}>{productQuantity}</Text>
+                <Text style={styles.productInfoText}>{productQuantity} г</Text>
                 <Text style={styles.productInfoText}>{kcal} ккал</Text>
             </View>
             <View style={styles.iconView}>
