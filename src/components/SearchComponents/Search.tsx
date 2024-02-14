@@ -7,21 +7,21 @@ import { searchProduct } from "../../http/productAPI";
 import { COLORS } from "../../themes/COLORS";
 import { HomeParamList } from "../../screens/HomeStack";
 import { Pressable } from "react-native";
-import { CreationParamList } from "../../screens/CreationStack";
 
-type NavProps = NativeStackScreenProps<CreationParamList, 'Search'>
+type NavProps = NativeStackScreenProps<HomeParamList, 'Search'>
 
 export const Search = ({navigation, route}: NavProps) => {
     const [value, setValue] = useState('')
-    const [searchAnswer, setSearchAnswer] = useState([])
+    const [searchAnswer, setSearchAnswer] = useState<Product[]>([])
 
-    const handleBackToScreen = (_id, name) => { 
-        console.log(_id, name)
-        navigation.navigate('StackCreation',{_id, name, quantity: 100})
+    const {backScreen} = route.params
+
+    const nextScreen = (item:Product) => { 
+        navigation.navigate('ProductInfo', {backScreen: backScreen, productData: item})
     }
 
     useEffect(() => {
-        searchProduct(value).then(data => setSearchAnswer(data)).catch(e => console.log(e))
+        searchProduct(value).then((data: Product[]) => setSearchAnswer(data)).catch(e => console.log(e))
     }, [value])
 
     return (
@@ -34,7 +34,7 @@ export const Search = ({navigation, route}: NavProps) => {
                 <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
                     <View style={styles.containerAnswer}>
                             {searchAnswer.map(item => 
-                            <Pressable key={item._id} onPress={() => handleBackToScreen(item._id, item.name)}> 
+                            <Pressable key={item._id} onPress={() => nextScreen(item)}> 
                                 <View style={styles.containerText}>
                                     <Text style={styles.text}>{item.name}</Text>
                                 </View>

@@ -4,12 +4,13 @@ import Icon from 'react-native-vector-icons/Ionicons'
 
 interface Props {
     icon: string,
+    value: string,
     otherProps: any
     error: any,
     touched: boolean | undefined
 }
 
-export const InputText = ({icon,error, touched, ...otherProps}: Props) => {
+export const InputText = ({icon, value,error, touched, ...otherProps}: Props) => {
     const validationColor = !touched ? '#223e4b' : error ? '#FF5A5F' : '#223e4b';
 
     return (
@@ -21,6 +22,7 @@ export const InputText = ({icon,error, touched, ...otherProps}: Props) => {
       </View>
       <View style={{ flex: 1}}>
         <TextInput
+          value={value}
           underlineColorAndroid="transparent"
           placeholderTextColor="rgba(34, 62, 75, 0.7)"
           {...otherProps}
@@ -33,11 +35,12 @@ export const InputText = ({icon,error, touched, ...otherProps}: Props) => {
 
 const styles = StyleSheet.create({
     mainView: {
+        flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
-        height: 48,
+        height: 40,
         borderRadius: 8,
-        borderWidth: StyleSheet.hairlineWidth,
+        borderWidth: 1,
         // marginBottom: 5,
     }
 })

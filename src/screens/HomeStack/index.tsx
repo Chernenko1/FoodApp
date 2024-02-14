@@ -11,6 +11,7 @@ import Icon from 'react-native-vector-icons/Ionicons'
 import { COLORS } from "../../themes/COLORS";
 import { Search } from "../../components/SearchComponents/Search";
 import { MealInfo } from "../../components/HomeScreens/MealsComponents/MealInfo";
+import { ProductInfo } from "../../components/ProductComponent/ProductInfo";
 
   const nativeStackOption: NativeStackNavigationOptions = {
     headerShown: true,
@@ -22,9 +23,15 @@ import { MealInfo } from "../../components/HomeScreens/MealsComponents/MealInfo"
     StackHome: undefined,
     Recipes: undefined,
     Recipe: any
-    Search: undefined,
+    Search: {
+      backScreen: string,
+    },
     MealInfo: {
       headerTitle: string
+    }
+    ProductInfo: {
+      backScreen?: string,
+      productData: Product
     }
   }
 
@@ -38,6 +45,7 @@ import { MealInfo } from "../../components/HomeScreens/MealsComponents/MealInfo"
             <Stack.Screen name="Recipe" component={Recipe} />
             <Stack.Screen name="Search" component={Search} options={{headerShown: false}}/>
             <Stack.Screen name='MealInfo' component={MealInfo}/>
+            <Stack.Screen name='ProductInfo' component={ProductInfo}/>
         </Stack.Navigator>
     )
   }

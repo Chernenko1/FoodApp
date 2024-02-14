@@ -1,6 +1,6 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack"
 import { useEffect } from "react"
-import { SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native"
+import { Pressable, SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native"
 import { HomeParamList } from "../../../screens/HomeStack"
 import { COLORS } from "../../../themes/COLORS"
 import { Calories } from "../EnergyInfoComonents/Calories"
@@ -19,8 +19,11 @@ export const MealInfo = ({navigation, route}: Navigation) => {
             headerStyle:{ backgroundColor: COLORS.deepOrange},
             headerTintColor: COLORS.white,
             headerTitleAlign: 'center',
-            
         })
+    }, [])
+
+    useEffect(() => {
+        
     }, [])
 
     return (
@@ -46,9 +49,11 @@ export const MealInfo = ({navigation, route}: Navigation) => {
                     <Product productName="Название" productQuantity="100 г" kcal={100}/>
                 </View>
             </ScrollView>
-                <View style={styles.addIconView}>
-                    <ButtonIcon name="add-outline" size={40} backgroundColor={COLORS.deepOrange}/>
-                </View>
+                <Pressable onPress={() => navigation.navigate('Search', {backScreen: route.name})}>
+                    <View style={styles.addIconView}>
+                        <ButtonIcon name="add-outline" size={40} backgroundColor={COLORS.deepOrange}/>
+                    </View>
+                </Pressable>    
         </SafeAreaView>
     )
 }

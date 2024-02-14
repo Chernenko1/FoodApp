@@ -20,3 +20,23 @@ declare interface RecipeCategories {
   '_id': string,
   name: string
 }
+
+declare interface Product {
+  _id: string,
+  name: string,
+  nutrients: {
+    calories:number,
+    protein: number,
+    fat:number,
+    carbohydrates: number,
+    water?: number,
+    dietaryFiber?: number
+  },
+  vitamins?: {
+    B1: number
+  },
+  minerals?: {
+    Mg: number,
+    },
+  picture?: string,
+}
