@@ -20,7 +20,7 @@ export const ProductInfo = ({navigation, route}: Navigation) => {
     const buttonPress = () => {
          addProductToMeal(
             {
-                id: '65ccec41d6d72a1e86c8714f',
+                id: '65ca22610be656a878bb704e',
                 data: {productId: productData._id, quantity: value},
                 type: 'breakfast'
             }

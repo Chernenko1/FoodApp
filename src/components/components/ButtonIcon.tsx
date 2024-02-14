@@ -1,4 +1,4 @@
-import { StyleSheet, View } from "react-native"
+import { Pressable, StyleSheet, View } from "react-native"
 import Icon from "react-native-vector-icons/Ionicons"
 import { COLORS } from "../../themes/COLORS"
 
@@ -6,13 +6,14 @@ interface Props {
     size?: number,
     backgroundColor?: string
     name: string
+    onPress: () => void
 }
 
-export const ButtonIcon = ({backgroundColor, size, name}: Props) => {
+export const ButtonIcon = ({backgroundColor, size, name, onPress}: Props) => {
     return (
-        <View style={styles.iconView}>
+        <Pressable style={styles.iconView} onPress={onPress}>
             <Icon style ={[styles.iconView, {backgroundColor}]} name={name} size={size} color={COLORS.black}/>
-        </View>
+        </Pressable>
     )
 }
 

@@ -25,7 +25,7 @@ export const MealInfo = ({navigation, route}: Navigation) => {
     }, [])
 
     useEffect(() => {
-        getMealData("65ca22610be656a878bb704e", 'breakfast' ).then((data) => setProducts(data)).catch(e => console.log(e))
+        navigation.addListener('focus', () => getMealData("65ca22610be656a878bb704e", 'breakfast' ).then((data) => setProducts(data)).catch(e => console.log(e)))
     }, [])
 
     return (
@@ -43,15 +43,13 @@ export const MealInfo = ({navigation, route}: Navigation) => {
                 </View>
                 <View style={styles.productView}>
                  {
-                    products.map(item => <Product productName={item.productId.name} productQuantity={item.quantity} kcal={item.productId.calories} /> )
+                    products.map(item => <Product key={item._id} productName={item.productId.name} productQuantity={item.quantity} kcal={item.productId.calories} /> )
                  }
                 </View>
             </ScrollView>
-                <Pressable onPress={() => navigation.navigate('Search', {backScreen: route.name})}>
                     <View style={styles.addIconView}>
-                        <ButtonIcon name="add-outline" size={40} backgroundColor={COLORS.deepOrange}/>
-                    </View>
-                </Pressable>    
+                        <ButtonIcon name="add-outline" size={40} backgroundColor={COLORS.deepOrange} onPress={() => navigation.navigate('Search', {backScreen: route.name})}/>
+                    </View> 
         </SafeAreaView>
     )
 }
