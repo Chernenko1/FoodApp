@@ -1,14 +1,21 @@
 import { StyleSheet, Text, View } from "react-native"
 import { COLORS } from "../../themes/COLORS"
 import Icon from "react-native-vector-icons/Ionicons"
+import { ButtonIcon } from "../components/ButtonIcon"
+import { deleteProducFromMeal } from "../../http/mealAPI"
+import { useEffect } from "react"
 
 interface Props {
     productName: string,
     kcal: number,
-    productQuantity: string
+    productQuantity: string,
+    productId: stringб
+    onPress: () => void
 }
 
-export const Product = ({productName, productQuantity, kcal}: Props) => {
+
+export const ProductCard = ({productName, productQuantity, kcal, productId, onPress}: Props) => {
+
     return (
         <View style={styles.mainView}>
             <View>
@@ -16,9 +23,7 @@ export const Product = ({productName, productQuantity, kcal}: Props) => {
                 <Text style={styles.productInfoText}>{productQuantity} г</Text>
                 <Text style={styles.productInfoText}>{kcal} ккал</Text>
             </View>
-            <View style={styles.iconView}>
-                <Icon name='close-outline' size={30} color={COLORS.black}/>
-            </View>
+            <ButtonIcon name='close-outline' size={30} backgroundColor={COLORS.lightGray} onPress={onPress}/>
         </View>
     )
 }
@@ -42,10 +47,5 @@ const styles = StyleSheet.create({
     productInfoText: {
         fontFamily: 'Rubik-Regular',
         fontSize: 15
-    },
-    iconView: {
-        backgroundColor: COLORS.lightGray,
-        padding: 5,
-        borderRadius: 10
     },
 })

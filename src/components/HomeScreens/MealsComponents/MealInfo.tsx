@@ -1,12 +1,12 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack"
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { FlatList, Pressable, SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native"
 import { HomeParamList } from "../../../screens/HomeStack"
 import { COLORS } from "../../../themes/COLORS"
 import { Calories } from "../EnergyInfoComonents/Calories"
-import { Product } from "../../ProductComponent/ProductCard"
+import { ProductCard } from "../../ProductComponent/ProductCard"
 import { ButtonIcon } from "../../components/ButtonIcon"
-import { getMealData } from "../../../http/mealAPI"
+import { deleteProducFromMeal, getMealData } from "../../../http/mealAPI"
 
 type Navigation = NativeStackScreenProps<HomeParamList, 'MealInfo'>
 
@@ -14,6 +14,15 @@ export const MealInfo = ({navigation, route}: Navigation) => {
     const [products, setProducts] = useState([])
 
     const {headerTitle} = route.params
+
+    const deleteProduct  = (productId: string) => {
+        deleteProducFromMeal({
+            mealId: '65ca22610be656a878bb704e',
+            productId,
+            type: 'breakfast'
+        })
+        getMealData("65ca22610be656a878bb704e", 'breakfast' ).then((data) => setProducts(data)).catch(e => console.log(e))
+    }
 
     useEffect(() => {
         navigation.setOptions({
@@ -43,7 +52,7 @@ export const MealInfo = ({navigation, route}: Navigation) => {
                 </View>
                 <View style={styles.productView}>
                  {
-                    products.map(item => <Product key={item._id} productName={item.productId.name} productQuantity={item.quantity} kcal={item.productId.calories} /> )
+                    products.map(item => <ProductCard key={item._id} productName={item.productId.name} productQuantity={item.quantity} kcal={item.productId.calories} productId={item._id} onPress={() => deleteProduct(item._id)}/> )
                  }
                 </View>
             </ScrollView>

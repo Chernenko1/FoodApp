@@ -6,7 +6,7 @@ interface Props {
     size?: number,
     backgroundColor?: string
     name: string
-    onPress: () => void
+    onPress?: () => void
 }
 
 export const ButtonIcon = ({backgroundColor, size, name, onPress}: Props) => {
