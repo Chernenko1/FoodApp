@@ -7,14 +7,22 @@ import { Calories } from "../EnergyInfoComonents/Calories"
 import { ProductCard } from "../../ProductComponent/ProductCard"
 import { ButtonIcon } from "../../components/ButtonIcon"
 import { deleteProducFromMeal, getMealData } from "../../../http/mealAPI"
+import { MealInfoHeader } from "./MealInhoHeader"
 
 type Navigation = NativeStackScreenProps<HomeParamList, 'MealInfo'>
 
+interface IProduct {
+    _id: string
+    quantity: string
+    productId: Product
+}
+
 export const MealInfo = ({navigation, route}: Navigation) => {
-    const [products, setProducts] = useState([])
+    const [products, setProducts] = useState<IProduct[]>([])
 
     const {headerTitle} = route.params
 
+    
     const deleteProduct  = (productId: string) => {
         deleteProducFromMeal({
             mealId: '65ca22610be656a878bb704e',
@@ -23,7 +31,7 @@ export const MealInfo = ({navigation, route}: Navigation) => {
         })
         getMealData("65ca22610be656a878bb704e", 'breakfast' ).then((data) => setProducts(data)).catch(e => console.log(e))
     }
-
+    
     useEffect(() => {
         navigation.setOptions({
             title: headerTitle, 
@@ -37,25 +45,26 @@ export const MealInfo = ({navigation, route}: Navigation) => {
         navigation.addListener('focus', () => getMealData("65ca22610be656a878bb704e", 'breakfast' ).then((data) => setProducts(data)).catch(e => console.log(e)))
     }, [])
 
+    console.log('MealInfo')
+
     return (
         <SafeAreaView style={styles.mainView}>
-            <ScrollView>
-                <View style={styles.headerView}>
-                    <View style={styles.progressView}>
-                            <View style={{width: 110, height: 110, borderRadius: 55, backgroundColor: COLORS.white, justifyContent: 'center'}}>
-                                <Calories type="Осталось" count={2440}/>
-                            </View>
+                <FlatList 
+                ListHeaderComponent={<MealInfoHeader />}
+                data={products} 
+                keyExtractor={item => item._id} 
+                renderItem={({item}) => 
+                    <View style = {styles.productView}>
+                        <ProductCard
+                            productName={item.productId.name} 
+                            productQuantity={item.quantity} 
+                            kcal={item.productId.nutrients.calories} 
+                            productId={item._id} 
+                            onPress={() => deleteProduct(item._id)}
+                        />
                     </View>
-                    <View style={styles.dateView}>
-                        <Text style={styles.dateText}>08 месяц 2024</Text>
-                    </View>
-                </View>
-                <View style={styles.productView}>
-                 {
-                    products.map(item => <ProductCard key={item._id} productName={item.productId.name} productQuantity={item.quantity} kcal={item.productId.calories} productId={item._id} onPress={() => deleteProduct(item._id)}/> )
-                 }
-                </View>
-            </ScrollView>
+                }
+                />
                     <View style={styles.addIconView}>
                         <ButtonIcon name="add-outline" size={40} backgroundColor={COLORS.deepOrange} onPress={() => navigation.navigate('Search', {backScreen: route.name})}/>
                     </View> 
@@ -64,39 +73,17 @@ export const MealInfo = ({navigation, route}: Navigation) => {
 }
 
 const styles = StyleSheet.create({
-    progressView: {
-        alignItems:'center',
-        justifyContent: 'center',
-        backgroundColor: COLORS.orange,
-        width: 140,
-        height: 140,
-        borderRadius: 70,
-    },
     mainView: {
         flex: 1
     },
-    headerView: {
-        alignItems: 'center',
-        paddingBottom: 20,
-        backgroundColor: COLORS.deepOrange
-    },
-    dateView: {
-        top: 15,
-    },
     productView: {
         marginTop: 10,
-        paddingVertical: 10,
-        paddingHorizontal: 25,
-        rowGap: 10
+        paddingHorizontal: 15,
+        marginBottom: 2
     },
     addIconView: {
         position: 'absolute',
         bottom: 60,
         right: 0,
-    },
-    dateText: {
-        fontFamily: 'Rubik-Regular',
-        fontSize: 20,
-        color: COLORS.white
     },
 })

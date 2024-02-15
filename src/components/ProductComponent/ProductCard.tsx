@@ -3,19 +3,19 @@ import { COLORS } from "../../themes/COLORS"
 import Icon from "react-native-vector-icons/Ionicons"
 import { ButtonIcon } from "../components/ButtonIcon"
 import { deleteProducFromMeal } from "../../http/mealAPI"
-import { useEffect } from "react"
+import { memo, useCallback, useEffect } from "react"
 
 interface Props {
     productName: string,
     kcal: number,
     productQuantity: string,
-    productId: stringб
+    productId: string
     onPress: () => void
 }
 
 
 export const ProductCard = ({productName, productQuantity, kcal, productId, onPress}: Props) => {
-
+    console.log(5)
     return (
         <View style={styles.mainView}>
             <View>
