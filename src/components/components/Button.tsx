@@ -3,7 +3,7 @@ import { Pressable, StyleProp, StyleSheet, Text, View } from "react-native"
 interface Props {
     title: string
     onPress: () => void
-    color: string
+    color?: string
     textColor?: string
 }
 

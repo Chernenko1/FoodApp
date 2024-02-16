@@ -1,15 +1,48 @@
-import { StyleSheet, Text, View } from "react-native"
+import { Pressable, StyleSheet, Text, View } from "react-native"
+import DateTimePicker, { DateTimePickerEvent } from '@react-native-community/datetimepicker';
 import Icon from 'react-native-vector-icons/Ionicons'
 import { COLORS } from "../../themes/COLORS"
+import { useState } from "react";
+import { Button } from "../components/Button";
 
 
 export const DatePicker = () => {
+    const [date, setDate] = useState(new Date());
+    const [show, setShow] = useState(false);
+
+    const onChange = (event: DateTimePickerEvent, selectedDate: Date | undefined) => {
+        const currentDate = selectedDate;
+        setShow(false);
+        setDate(currentDate as Date);
+    };
+
+    const showMode = () => {
+        setShow(true);
+      };
+
+    const formatDate = (date: Date) => {
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const year = date.getFullYear();
+        
+        return `${day}-${month}-${year}`;
+    }     
+
     return (
         <View style={styles.mainView}>
-            <View style={styles.contentView}>
-                <Text style={styles.text}>Каледарь</Text>
+            <Pressable style={styles.contentView} onPress={showMode}>
+                <Text style={styles.text}>{formatDate(date)}</Text>
                 <Icon name="calendar-outline" color={COLORS.black} size={20}/>
-            </View>
+            </Pressable>
+        <View>
+            {show && (
+                <DateTimePicker
+                value={date}
+                mode={'date'}
+                onChange={onChange}
+                />
+            )}
+        </View>
         </View>
     )
 }
