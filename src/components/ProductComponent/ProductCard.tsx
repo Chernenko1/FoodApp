@@ -15,7 +15,6 @@ interface Props {
 
 
 export const ProductCard = ({productName, productQuantity, kcal, productId, onPress}: Props) => {
-    console.log(5)
     return (
         <View style={styles.mainView}>
             <View>

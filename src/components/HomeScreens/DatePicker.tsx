@@ -2,11 +2,14 @@ import { Pressable, StyleSheet, Text, View } from "react-native"
 import DateTimePicker, { DateTimePickerEvent } from '@react-native-community/datetimepicker';
 import Icon from 'react-native-vector-icons/Ionicons'
 import { COLORS } from "../../themes/COLORS"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "../components/Button";
 
+interface Props {
+    handleDate: (date: string) => void
+}
 
-export const DatePicker = () => {
+export const DatePicker = ({handleDate}: Props) => {
     const [date, setDate] = useState(new Date());
     const [show, setShow] = useState(false);
 
@@ -25,8 +28,10 @@ export const DatePicker = () => {
         const month = String(date.getMonth() + 1).padStart(2, '0');
         const year = date.getFullYear();
         
-        return `${day}-${month}-${year}`;
+        return `${day}-${month}-${year}`
     }     
+
+    useEffect(() => {handleDate(formatDate(date))}, [date])
 
     return (
         <View style={styles.mainView}>

@@ -45,8 +45,6 @@ export const MealInfo = ({navigation, route}: Navigation) => {
         navigation.addListener('focus', () => getMealData("65ca22610be656a878bb704e", 'breakfast' ).then((data) => setProducts(data)).catch(e => console.log(e)))
     }, [])
 
-    console.log('MealInfo')
-
     return (
         <SafeAreaView style={styles.mainView}>
                 <FlatList 
