@@ -3,19 +3,12 @@ import { RootState } from "../store";
 
 interface UserState {
   isAuth: boolean;
-  user: {};
+  user: User;
 }
 
 const initialState: UserState = {
   isAuth: false,
-  user: {
-    "_id": "user_id_1",
-    "username": "user123",
-    "password": "hashed_password",
-    "email": "user123@example.com",
-    "createdAt":"timestamp",
-    "updatedAt": "timestamp",
-  },
+  user: {},
 };
 
 export const userSlice = createSlice({

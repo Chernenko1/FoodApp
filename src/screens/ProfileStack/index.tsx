@@ -4,7 +4,7 @@ import {
     createNativeStackNavigator,
     NativeStackNavigationOptions,
   } from '@react-navigation/native-stack';
-import { Profile } from "../../components/ProfileScreens/Profile";
+import { Profile } from "../../components/ProfileComponents/Profile";
 
   const nativeStackOption: NativeStackNavigationOptions = {
     headerShown: false,

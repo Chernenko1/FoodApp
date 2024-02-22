@@ -45,7 +45,16 @@ export const ProductInfo = ({navigation, route}: Navigation) => {
                 </View>
                 <Button title="Сохранить" color={COLORS.deepOrange} textColor={COLORS.white} onPress={buttonPress}/>
             </View>
-            
+            <View style={styles.infoView}>
+                <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                    <Text style={styles.infoText}>{productData.nutrients.calories}г</Text>
+                    <Text style={styles.infoText}>{productData.nutrients.carbohydrates}г</Text>
+                </View>
+                <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                    <Text style={styles.infoText}>{productData.nutrients.fat}г</Text>
+                    <Text style={styles.infoText}>{productData.nutrients.protein}г</Text>
+                </View>
+            </View>
         </View>
     )
 }
@@ -67,5 +76,12 @@ const styles = StyleSheet.create({
     },
     icon: {
 
+    },
+    infoView: {
+    },
+    infoText: {
+        fontSize: 20,
+        color: COLORS.orange,
+        backgroundColor:COLORS.white
     }
 })
