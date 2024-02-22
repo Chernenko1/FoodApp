@@ -12,7 +12,6 @@ interface Props {
 
 export const ProfileMenuItem = ({title, icon, onPress}:Props) => {
     return (
-
         <Pressable style={styles.mainView} onPress={onPress}>
             <View style={styles.leftView}>
                 <Icon name={icon} size={20} color={COLORS.orange}/>
@@ -30,9 +29,12 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        paddingHorizontal: 20,
-        paddingVertical: 10,
+        paddingVertical: 15,
+        paddingHorizontal: 10,
+        marginTop: 10,
         backgroundColor: COLORS.white,
+        borderRadius: 10,
+        elevation: 2
     },
     leftView:{ 
         flexDirection: 'row',

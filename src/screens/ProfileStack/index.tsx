@@ -5,15 +5,18 @@ import {
     NativeStackNavigationOptions,
   } from '@react-navigation/native-stack';
 import { Profile } from "../../components/ProfileComponents/Profile";
+import { UserDetails } from "../../components/ProfileComponents/UserDetails";
+import { COLORS } from "../../themes/COLORS";
 
   const nativeStackOption: NativeStackNavigationOptions = {
-    headerShown: false,
-    headerStyle: {backgroundColor: 'rgb(242,242,242)'},
+    headerShown: true,
+    headerStyle: {backgroundColor: COLORS.white},
     headerShadowVisible: false
   };
 
   export type ProfileParamList ={
-    StackProfile: undefined
+    StackProfile: undefined,
+    UserDetails: undefined
   }
 
   const Stack = createNativeStackNavigator<ProfileParamList>();
@@ -21,7 +24,8 @@ import { Profile } from "../../components/ProfileComponents/Profile";
   export const ProfileStack = () => {
     return (
         <Stack.Navigator screenOptions={nativeStackOption}>
-            <Stack.Screen name="StackProfile" component={Profile}/>
+            <Stack.Screen name="StackProfile" component={Profile} options={{headerShown: false}}/>
+            <Stack.Screen name='UserDetails' component={UserDetails} />
         </Stack.Navigator>
     )
   }
