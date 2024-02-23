@@ -8,6 +8,7 @@ import { UserDetailItem } from "./UserDetailsItem"
 import { UserWeightModal } from "./UserDetailsModal/UserWeightModal"
 import { UserHeightModal } from "./UserDetailsModal/UserHeightModal"
 import { UserAgeModal } from "./UserDetailsModal/UserAgeModal"
+import { UserGenderModal } from "./UserDetailsModal/UserGenderModal"
 
 type NavProps = NativeStackScreenProps<ProfileParamList, 'UserDetails'>
 
@@ -51,7 +52,11 @@ export const UserDetails = ({navigation}:NavProps) => {
                     visible={ageModal}
                     closeModal={() => setAgeModal(false)}/>
                 </UserDetailItem>
-                <UserDetailItem title="Гендер" info={details.gender}/>
+                <UserDetailItem title="Гендер" info={details.gender} onPress={() => setGenderModal(true)}>
+                    <UserGenderModal 
+                    visible={genderModal}
+                    closeModal={() => setGenderModal(false)}/>
+                </UserDetailItem>
                 <UserDetailItem title="Активность" info={details.activity}/>
             </View>
         </View>

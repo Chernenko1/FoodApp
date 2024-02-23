@@ -1,0 +1,37 @@
+import { useState } from "react"
+import {Text, TextInput, View } from "react-native"
+import { ModalV } from "../../components/Modal"
+import { useAppDispatch } from "../../../store/hooks"
+import { updateUserDetails } from "../../../http/userAPI"
+import { updateDetails } from "../../../store/slices/userSlice"
+
+import { styles } from "./styles"
+import { RadioButton } from "../../components/RadioButtons"
+
+interface Props {
+    visible: boolean,
+    closeModal: () => void
+}
+
+export const UserGenderModal = ({visible,closeModal}: Props) => {
+
+    const [checked, setChecked] = useState(true)
+    const dispatch = useAppDispatch()
+
+    function handlePress () {
+        updateUserDetails({id: "65d614788d7d99748725f156", type: 'gender', data: checked})
+        dispatch(updateDetails({type: 'gender', checked}))
+        closeModal()
+    }
+
+    return (
+        <ModalV visible={visible} closeModal={closeModal} onPress={handlePress}>
+            <View style={styles.mainView}>
+                <Text style={styles.titleText}>Ваш пол: </Text>
+               <RadioButton value="Мужской" status={checked === true ? true : false} onPress={() => setChecked(true)}/>
+               <RadioButton value="Женский" status={checked === false ? true : false} onPress={() => setChecked(false)}/>
+            </View>
+        </ModalV>
+    )
+}
+
