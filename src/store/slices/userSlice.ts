@@ -21,10 +21,13 @@ export const userSlice = createSlice({
     setUser(state, action) {
       state.user = action.payload;
     },
+    updateDetails(state, action) {
+      state.user.details =  {...state.user.details, [action.payload.type]: action.payload.value}
+    }
   },
 });
 
-export const { setIsAuth, setUser } = userSlice.actions;
+export const { setIsAuth, setUser, updateDetails } = userSlice.actions;
 
 export const selectUser = (state: RootState) => state.user;
 

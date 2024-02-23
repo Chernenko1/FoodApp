@@ -1,24 +1,26 @@
 import React, { ReactNode } from "react";
 import { Pressable, Text, View, Modal, StyleSheet } from "react-native";
 import { COLORS } from "../../themes/COLORS";
+import { Button } from "./Button";
 
 interface Props {
     children: ReactNode
-    visible: boolean
+    visible: boolean,
+    closeModal: () => void,
     onPress: () => void
 }
 
-export const ModalV = ({children, visible, onPress}: Props) => { 
+export const ModalV = ({children, visible,closeModal, onPress}: Props) => { 
     
     return (
-        <Modal visible={visible} transparent={true}>
+        <Modal visible={visible} transparent={true} onRequestClose={closeModal}>
             <View style={styles.centeredModal}>
-                <View style={styles.modalView}>{children}
-                    <Pressable style ={styles.modalHide} onPress={onPress}>
-                        <Text style={styles.modalHideText}>Закрыть</Text>
-                    </Pressable>
+                <View style={styles.modalView}>
+                    {children}
+                    <Button title="Сохранить" onPress={onPress} color={COLORS.orange}/>
+                    <Button title="Отмена" onPress={closeModal}/>
                 </View>
-            </View>
+            </View> 
         </Modal>
     )
 }
@@ -29,9 +31,11 @@ const styles = StyleSheet.create(
             flex: 1,
             alignItems: 'center',
             justifyContent: 'center',
+            backgroundColor: 'rgba(0, 0, 0, 0.5)'
         },
         modalView: {
             backgroundColor: COLORS.white,
+            width: '80%',
             padding: 35, 
             borderRadius: 15,
             elevation: 2,
@@ -41,6 +45,7 @@ const styles = StyleSheet.create(
             },
            shadowOpacity: 0.15,
            shadowRadius: 2,
+           rowGap: 10
         },
         modalCategories: {
             marginBottom: 10
@@ -55,6 +60,9 @@ const styles = StyleSheet.create(
             fontSize: 20,
             fontFamily: 'Rubik-Regular',
             color: COLORS.white
+        },
+        buttonView: {
+            rowGap: 10
         }
     }
 )

@@ -2,16 +2,20 @@ import { Pressable, StyleSheet, Text, View } from "react-native"
 import Icon from 'react-native-vector-icons/Ionicons'
 import { COLORS } from "../../themes/COLORS"
 import { HorizontalRule } from "../components/HorizontalRule"
+import { ModalV } from "../components/Modal"
+import { ReactNode, useState } from "react"
 
 interface Props {
     title: string,
     onPress?: () => void,
-    info: string | number
+    info: string | number,
+    children?: React.ReactNode
 }
 
-export const UserDetailItem = ({title, onPress, info}:Props) => {
+export const UserDetailItem = ({title, onPress, info, children}:Props) => {
+
     return (
-        <Pressable>
+        <Pressable onPress={onPress}>
             <View style={styles.mainView}>
                 <View>
                     <Text style={styles.titleText}>{title}</Text>
@@ -20,7 +24,9 @@ export const UserDetailItem = ({title, onPress, info}:Props) => {
                     <Text style={styles.infoText}>{info}</Text>
                     <Icon name="chevron-forward-outline" size={20} color={COLORS.black}/>
                 </View>
+                {children}
             </View>
+            
         </Pressable>
     )
 }
