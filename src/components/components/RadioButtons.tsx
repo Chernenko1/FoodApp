@@ -3,12 +3,12 @@ import Icon from 'react-native-vector-icons/Ionicons'
 import { COLORS } from "../../themes/COLORS"
 
 interface Props {
-    value: string,
+    value?: string,
     status: boolean,
-    onPress: () => void
+    onPress?: () => void
 }
 
-export const RadioButton = ({value ='Asfd', status, onPress}:Props) => { 
+export const RadioButton = ({value ='', status, onPress}:Props) => { 
     return (
         <View style={styles.radioButtonView}>
             <TouchableOpacity activeOpacity={0.7} style={styles.radioButton} onPress={onPress}>

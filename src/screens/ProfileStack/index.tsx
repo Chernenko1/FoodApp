@@ -8,6 +8,7 @@ import { Profile } from "../../components/ProfileComponents/Profile";
 import { UserDetails } from "../../components/ProfileComponents/UserComponents/UserDetails";
 import { COLORS } from "../../themes/COLORS";
 import {UserGoal } from "../../components/ProfileComponents/UserComponents/UserGoal";
+import { UserActivity } from "../../components/ProfileComponents/UserComponents/UserActivity";
 
   const nativeStackOption: NativeStackNavigationOptions = {
     headerShown: true,
@@ -18,7 +19,8 @@ import {UserGoal } from "../../components/ProfileComponents/UserComponents/UserG
   export type ProfileParamList ={
     StackProfile: undefined,
     UserDetails: undefined,
-    UserGoal: undefined
+    UserGoal: undefined,
+    UserActivity: undefined
   }
 
   const Stack = createNativeStackNavigator<ProfileParamList>();
@@ -29,6 +31,7 @@ import {UserGoal } from "../../components/ProfileComponents/UserComponents/UserG
             <Stack.Screen name="StackProfile" component={Profile} options={{headerShown: false}}/>
             <Stack.Screen name='UserDetails' component={UserDetails} />
             <Stack.Screen name='UserGoal' component={UserGoal} />
+            <Stack.Screen name='UserActivity' component={UserActivity} />
         </Stack.Navigator>
     )
   }
