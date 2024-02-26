@@ -9,6 +9,7 @@ import { UserDetails } from "../../components/ProfileComponents/UserComponents/U
 import { COLORS } from "../../themes/COLORS";
 import {UserGoal } from "../../components/ProfileComponents/UserComponents/UserGoal";
 import { UserActivity } from "../../components/ProfileComponents/UserComponents/UserActivity";
+import { KBFUSettings } from "../../components/ProfileComponents/KBFUSettings/KBFUSettings";
 
   const nativeStackOption: NativeStackNavigationOptions = {
     headerShown: true,
@@ -20,7 +21,8 @@ import { UserActivity } from "../../components/ProfileComponents/UserComponents/
     StackProfile: undefined,
     UserDetails: undefined,
     UserGoal: undefined,
-    UserActivity: undefined
+    UserActivity: undefined,
+    KBFUSettings: undefined,
   }
 
   const Stack = createNativeStackNavigator<ProfileParamList>();
@@ -32,6 +34,7 @@ import { UserActivity } from "../../components/ProfileComponents/UserComponents/
             <Stack.Screen name='UserDetails' component={UserDetails} />
             <Stack.Screen name='UserGoal' component={UserGoal} />
             <Stack.Screen name='UserActivity' component={UserActivity} />
+            <Stack.Screen name='KBFUSettings' component={KBFUSettings} />
         </Stack.Navigator>
     )
   }

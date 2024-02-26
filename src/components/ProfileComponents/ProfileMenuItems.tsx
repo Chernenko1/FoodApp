@@ -1,20 +1,19 @@
-import { Pressable, StyleSheet, Text, View } from "react-native"
-import Icon from 'react-native-vector-icons/Ionicons'
-import { COLORS } from "../../themes/COLORS";
+import { StyleSheet, View } from "react-native"
 import { ProfileMenuItem } from "./ProfileMenuItem";
-import { HorizontalRule } from "../components/HorizontalRule";
 import { useNavigation } from "@react-navigation/native";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { ProfileParamList } from "../../screens/ProfileStack";
 
+type Navigation = NativeStackScreenProps<ProfileParamList, 'StackProfile'>
 
 export const ProfileMenuItems = () => {
 
-    const navigation = useNavigation()
+    const navigation: Navigation = useNavigation()
 
     return (
        <View style={styles.mainView}>
             <ProfileMenuItem title="Персональные данные" icon="person-outline" onPress={() => navigation.navigate('UserDetails')}/>
-            <ProfileMenuItem title="Настройка БЖУ" icon="pie-chart-outline" onPress={() => {}}/>
-            <ProfileMenuItem title="Настрока ккал" icon="flame-outline" onPress={() => {}}/>
+            <ProfileMenuItem title="Настройка KБЖУ" icon="pie-chart-outline" onPress={() => navigation.navigate('KBFUSettings')}/>
        </View>
     )
 }
