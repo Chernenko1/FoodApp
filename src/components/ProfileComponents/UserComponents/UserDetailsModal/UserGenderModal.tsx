@@ -1,12 +1,12 @@
 import { useState } from "react"
 import {Text, TextInput, View } from "react-native"
-import { ModalV } from "../../components/Modal"
-import { useAppDispatch } from "../../../store/hooks"
-import { updateUserDetails } from "../../../http/userAPI"
-import { updateDetails } from "../../../store/slices/userSlice"
+import { ModalV } from "../../../components/Modal"
+import { useAppDispatch } from "../../../../store/hooks"
+import { updateUserDetails } from "../../../../http/userAPI"
+import { updateDetails } from "../../../../store/slices/userSlice"
 
 import { styles } from "./styles"
-import { RadioButton } from "../../components/RadioButtons"
+import { RadioButton } from "../../../components/RadioButtons"
 
 interface Props {
     visible: boolean,

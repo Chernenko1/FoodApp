@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { View, Text, Pressable, StyleSheet } from "react-native";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { setUser } from "../../store/slices/userSlice";
-import { UserInfo } from "./UserInfo";
+import { UserInfo } from "./UserComponents/UserInfo";
 import { ProfileMenuItems } from "./ProfileMenuItems";
 
 export const Profile = () => {

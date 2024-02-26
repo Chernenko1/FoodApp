@@ -1,24 +1,25 @@
 import { NativeStackNavigationProp, NativeStackScreenProps } from "@react-navigation/native-stack"
 import { useEffect, useState } from "react"
 import { StyleSheet, Text, View } from "react-native"
-import { ProfileParamList } from "../../screens/ProfileStack"
-import { COLORS } from "../../themes/COLORS"
-import { useAppSelector } from "../../store/hooks"
+import { ProfileParamList } from "../../../screens/ProfileStack"
+import { COLORS } from "../../../themes/COLORS"
+import { useAppSelector } from "../../../store/hooks"
 import { UserDetailItem } from "./UserDetailsItem"
 import { UserWeightModal } from "./UserDetailsModal/UserWeightModal"
 import { UserHeightModal } from "./UserDetailsModal/UserHeightModal"
 import { UserAgeModal } from "./UserDetailsModal/UserAgeModal"
 import { UserGenderModal } from "./UserDetailsModal/UserGenderModal"
+import { GOAL } from "./constants"
 
 type NavProps = NativeStackScreenProps<ProfileParamList, 'UserDetails'>
+
+
 
 export const UserDetails = ({navigation}:NavProps) => {
     const [weightModal, setWeightModal] = useState(false)
     const [heightModal, setHeightModal] = useState(false)
     const [ageModal, setAgeModal] = useState(false)
     const [genderModal, setGenderModal ] = useState(false)
-    const [activityModal, setActivityModal] = useState(false)
-    const [goalModal, setGoalModal] = useState(false)
 
     const {details} = useAppSelector(state => state.user.user)
 
@@ -31,9 +32,7 @@ export const UserDetails = ({navigation}:NavProps) => {
     return (
         <View style={styles.mainView}>
             <View style={styles.contentView}>
-                <UserDetailItem title="Цель" info={details.purpose}>
-                    
-                </UserDetailItem>
+                <UserDetailItem title="Цель" info={GOAL[details.purpose]} onPress={() => navigation.navigate('UserGoal')}/>
                 <UserDetailItem title="Вес" info={details.weight + ' кг'} onPress={() => setWeightModal(!weightModal)}>
                     <UserWeightModal 
                     text={String(details.weight)} 
@@ -52,7 +51,7 @@ export const UserDetails = ({navigation}:NavProps) => {
                     visible={ageModal}
                     closeModal={() => setAgeModal(false)}/>
                 </UserDetailItem>
-                <UserDetailItem title="Гендер" info={details.gender} onPress={() => setGenderModal(true)}>
+                <UserDetailItem title="Гендер" info={details.gender ? 'Мужской' : 'Женский'} onPress={() => setGenderModal(true)}>
                     <UserGenderModal 
                     visible={genderModal}
                     closeModal={() => setGenderModal(false)}/>

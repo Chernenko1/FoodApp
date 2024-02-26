@@ -1,5 +1,5 @@
 import { SafeAreaView, StyleSheet, Text, View } from "react-native"
-import { COLORS } from "../../themes/COLORS"
+import { COLORS } from "../../../themes/COLORS"
 
 
 interface Props {

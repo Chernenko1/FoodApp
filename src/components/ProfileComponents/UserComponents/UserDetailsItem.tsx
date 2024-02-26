@@ -1,8 +1,8 @@
 import { Pressable, StyleSheet, Text, View } from "react-native"
 import Icon from 'react-native-vector-icons/Ionicons'
-import { COLORS } from "../../themes/COLORS"
-import { HorizontalRule } from "../components/HorizontalRule"
-import { ModalV } from "../components/Modal"
+import { COLORS } from "../../../themes/COLORS"
+import { HorizontalRule } from "../../components/HorizontalRule"
+import { ModalV } from "../../components/Modal"
 import { ReactNode, useState } from "react"
 
 interface Props {
