@@ -42,15 +42,16 @@ export const Creation = ({navigation, route}: Navigation) => {
    }
 
     return (
-            <View style ={styles.container}>
-                   <View style={styles.headerContainer}>
-                        <Text style={styles.text}>Новый рецепт</Text>
-                        <HeaderButton  title="следующий шаг" disabled={headerButton} onPress={() => showNextStep()}/>
-                    </View>
-                    <ScrollView scrollEnabled={true} showsVerticalScrollIndicator={false}> 
-                        <RenderSteps handleRecipeData={handleRecipeData} params={route.params} stepCount = {stepCount}/>
-                    </ScrollView>
-            </View>
+        <View><Text>Not work</Text></View>
+            // <View style ={styles.container}>
+            //        <View style={styles.headerContainer}>
+            //             <Text style={styles.text}>Новый рецепт</Text>
+            //             <HeaderButton  title="следующий шаг" disabled={headerButton} onPress={() => showNextStep()}/>
+            //         </View>
+            //         <ScrollView scrollEnabled={true} showsVerticalScrollIndicator={false}> 
+            //             <RenderSteps handleRecipeData={handleRecipeData} params={route.params} stepCount = {stepCount}/>
+            //         </ScrollView>
+            // </View>
     )
 }
 
