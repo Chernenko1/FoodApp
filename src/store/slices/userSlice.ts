@@ -23,11 +23,14 @@ export const userSlice = createSlice({
     },
     updateDetails(state, action) {
       state.user.details =  {...state.user.details, [action.payload.type]: action.payload.value}
+    },
+    updateReqMacros(state, action) {
+      state.user.required_macros = action.payload
     }
   },
 });
 
-export const { setIsAuth, setUser, updateDetails } = userSlice.actions;
+export const { setIsAuth, setUser, updateDetails, updateReqMacros } = userSlice.actions;
 
 export const selectUser = (state: RootState) => state.user;
 

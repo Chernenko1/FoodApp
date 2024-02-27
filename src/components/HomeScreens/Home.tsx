@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, StyleSheet} from "react-native";
+import { View, StyleSheet, ScrollView} from "react-native";
 import { BasicEnergyInfo } from "./EnergyInfoComonents/BasicEnergyInfo";
 import { MealList } from "./MealsComponents/MealList";
 import { DatePicker } from "./DatePicker";
@@ -15,13 +15,13 @@ export const Home = () => {
     }
     return (
     // <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View style={styles.mainView}>
+        <ScrollView contentContainerStyle={styles.mainView}>
             <MealContext.Provider value={{date: date}}>
                 <BasicEnergyInfo />
                 <DatePicker handleDate={getDate}/>
                 <MealList />
             </MealContext.Provider>
-        </View>
+        </ScrollView>
     // </TouchableWithoutFeedback>
     )
 }
