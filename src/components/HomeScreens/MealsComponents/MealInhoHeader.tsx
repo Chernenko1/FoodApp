@@ -1,6 +1,7 @@
 import { StyleSheet, View, Text } from "react-native"
 import { Calories } from "../EnergyInfoComonents/Calories"
 import { COLORS } from "../../../themes/COLORS"
+import { AppText } from "../../components/AppText"
 
 export const MealInfoHeader = () => {
     return (
@@ -11,7 +12,7 @@ export const MealInfoHeader = () => {
                         </View>
                 </View>
                 <View style={styles.dateView}>
-                    <Text style={styles.dateText}>08 месяц 2024</Text>
+                    <AppText style={styles.dateText}>08 месяц 2024</AppText>
                 </View>
             </View>
     )
@@ -35,7 +36,6 @@ const styles = StyleSheet.create({
         top: 15,
     },
     dateText: {
-        fontFamily: 'Rubik-Regular',
         fontSize: 20,
         color: COLORS.white
     },

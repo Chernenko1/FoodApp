@@ -4,6 +4,7 @@ import Icon from 'react-native-vector-icons/Ionicons'
 import { COLORS } from "../../themes/COLORS"
 import { useEffect, useState } from "react";
 import { Button } from "../components/Button";
+import { AppText } from "../components/AppText";
 
 interface Props {
     handleDate: (date: string) => void
@@ -36,7 +37,7 @@ export const DatePicker = ({handleDate}: Props) => {
     return (
         <View style={styles.mainView}>
             <Pressable style={styles.contentView} onPress={showMode}>
-                <Text style={styles.text}>{formatDate(date)}</Text>
+                <AppText style={styles.text}>{formatDate(date)}</AppText>
                 <Icon name="calendar-outline" color={COLORS.black} size={20}/>
             </Pressable>
         <View>
@@ -68,7 +69,6 @@ const styles = StyleSheet.create({
     },
     text: {
         color: COLORS.black,
-        fontFamily: 'Rubik-Regular',
         fontSize: 18,
         marginRight: 10
     }

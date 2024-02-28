@@ -7,6 +7,7 @@ import { searchProduct } from "../../http/productAPI";
 import { COLORS } from "../../themes/COLORS";
 import { HomeParamList } from "../../screens/HomeStack";
 import { Pressable } from "react-native";
+import { AppText } from "../components/AppText";
 
 type NavProps = NativeStackScreenProps<HomeParamList, 'Search'>
 
@@ -36,7 +37,7 @@ export const Search = ({navigation, route}: NavProps) => {
                             {searchAnswer.map(item => 
                             <Pressable key={item._id} onPress={() => nextScreen(item)}> 
                                 <View style={styles.containerText}>
-                                    <Text style={styles.text}>{item.name}</Text>
+                                    <AppText style={styles.text}>{item.name}</AppText>
                                 </View>
                             </Pressable>
                             )}
@@ -78,7 +79,6 @@ const styles = StyleSheet.create({
         width: Dimensions.get('screen').width * 0.8
     },
     text: {
-        fontFamily: 'Rubik-Regular',
         fontSize: 18,
         color: COLORS.black
     }

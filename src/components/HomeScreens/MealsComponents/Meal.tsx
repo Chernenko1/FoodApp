@@ -5,6 +5,7 @@ import { COLORS } from "../../../themes/COLORS"
 import { StackNavigationState, useNavigation } from "@react-navigation/native"
 import {NativeStackNavigationProp } from "@react-navigation/native-stack/lib/typescript/src/types"
 import { HomeParamList } from "../../../screens/HomeStack"
+import { AppText } from "../../components/AppText"
 
 interface Props {
     title: string,
@@ -22,13 +23,13 @@ export const Meal = ({title, kcal = 0, maxKcal = 0}: Props) => {
         <View style={styles.mainView}>
             <Pressable onPress={() => navigation.navigate('MealInfo', {headerTitle: title})}>
                 <View style={styles.frameView}>
-                    <Text style={styles.titleText}>{title}</Text>
-                    <Text style = {styles.kcalText}>
-                        <Text style={styles.countText}>{kcal} </Text> 
+                    <AppText style={styles.titleText} fontWeight="medium">{title}</AppText>
+                    <AppText style = {styles.kcalText}>
+                        <AppText style={styles.countText}>{kcal} </AppText> 
                         ккал из 
-                        <Text style={styles.countText}> {maxKcal} </Text> 
+                        <AppText style={styles.countText}> {maxKcal} </AppText> 
                         ккал
-                        </Text>
+                        </AppText>
                 </View>
             </Pressable>    
             <View style={styles.iconView}>
@@ -60,12 +61,10 @@ const styles = StyleSheet.create({
         color: COLORS.orange
     },
     titleText: {
-        fontFamily: 'Rubik-Medium',
         fontSize: 24,
         color: COLORS.black
     },
     kcalText: {
-        fontFamily: 'Rubik-Regular',
         color: COLORS.black,
         fontSize: 18
     }
