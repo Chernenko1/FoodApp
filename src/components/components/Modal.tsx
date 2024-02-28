@@ -2,6 +2,7 @@ import React, { ReactNode } from "react";
 import { Pressable, Text, View, Modal, StyleSheet } from "react-native";
 import { COLORS } from "../../themes/COLORS";
 import { Button } from "./Button";
+import { useTheme } from "@react-navigation/native";
 
 interface Props {
     children: ReactNode
@@ -11,14 +12,16 @@ interface Props {
 }
 
 export const ModalV = ({children, visible,closeModal, onPress}: Props) => { 
+
+    const {colors} = useTheme()
     
     return (
         <Modal visible={visible} transparent={true} onRequestClose={closeModal}>
             <View style={styles.centeredModal}>
-                <View style={styles.modalView}>
+                <View style={[styles.modalView, {backgroundColor: colors.card}]}>
                     {children}
                     <Button title="Сохранить" onPress={onPress} color={COLORS.orange}/>
-                    <Button title="Отмена" onPress={closeModal}/>
+                    <Button textColor={colors.text} title="Отмена" onPress={closeModal}/>
                 </View>
             </View> 
         </Modal>
@@ -34,7 +37,6 @@ const styles = StyleSheet.create(
             backgroundColor: 'rgba(0, 0, 0, 0.5)'
         },
         modalView: {
-            backgroundColor: COLORS.white,
             width: '80%',
             padding: 35, 
             borderRadius: 15,
@@ -49,17 +51,6 @@ const styles = StyleSheet.create(
         },
         modalCategories: {
             marginBottom: 10
-        },
-        modalHide: {
-            alignItems: 'center',
-            justifyContent: 'center',
-            backgroundColor: COLORS.orange,
-            borderRadius: 5,
-        },
-        modalHideText: {
-            fontSize: 20,
-            fontFamily: 'Rubik-Regular',
-            color: COLORS.white
         },
         buttonView: {
             rowGap: 10

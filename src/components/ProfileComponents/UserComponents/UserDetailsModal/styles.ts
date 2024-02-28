@@ -1,5 +1,4 @@
 import { StyleSheet } from "react-native";
-import { COLORS } from "../../../../themes/COLORS";
 
 export const styles = StyleSheet.create({
     mainView: {
@@ -12,7 +11,6 @@ export const styles = StyleSheet.create({
     },
     titleText: {
         fontSize: 40,
-        color: COLORS.black,
         textAlign: 'center'
     },
     input: {

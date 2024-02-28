@@ -1,11 +1,11 @@
 export const DarkTheme = {
     dark: true,
     colors: {
-        background: 'rgb(242,242,242)',
-        card: 'rgb(255,255,255)',
-        text: 'rgb(0,0,0)',
-        border: 'rgb(0,0,0)',
+        background: 'rgb(28,28,28)',
+        card: 'rgb(48,48,48)',
+        text: 'rgb(255,255,255)',
+        border: 'rgb(255,255,255)',
         primary: 'rgb(255,152,0)',
-        notification: 'rgb(255, 69, 58)'
+        notification: 'rgb(255, 69, 58)',
     }
 }

@@ -10,6 +10,7 @@ interface Props {
 }
 
 export const RadioButton = ({value ='', status, onPress}:Props) => { 
+
     return (
         <View style={styles.radioButtonView}>
             <TouchableOpacity activeOpacity={0.7} style={styles.radioButton} onPress={onPress}>
@@ -31,6 +32,5 @@ const styles = StyleSheet.create({
     text: {
         fontSize: 24,
         marginLeft: 16,
-        color: COLORS.black
     }
 })

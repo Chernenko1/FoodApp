@@ -7,6 +7,7 @@ import { InputText } from "../components/TextInput"
 import { COLORS } from "../../themes/COLORS"
 import { Button } from "../components/Button"
 import { addProductToMeal } from "../../http/mealAPI"
+import { AppText } from "../components/AppText"
 
 
 type Navigation = NativeStackScreenProps<HomeParamList, 'ProductInfo'>
@@ -47,12 +48,12 @@ export const ProductInfo = ({navigation, route}: Navigation) => {
             </View>
             <View style={styles.infoView}>
                 <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                    <Text style={styles.infoText}>{productData.nutrients.calories}г</Text>
-                    <Text style={styles.infoText}>{productData.nutrients.carbohydrates}г</Text>
+                    <AppText style={styles.infoText}>{productData.nutrients.calories}г</AppText>
+                    <AppText style={styles.infoText}>{productData.nutrients.carbohydrates}г</AppText>
                 </View>
                 <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                    <Text style={styles.infoText}>{productData.nutrients.fat}г</Text>
-                    <Text style={styles.infoText}>{productData.nutrients.protein}г</Text>
+                    <AppText style={styles.infoText}>{productData.nutrients.fat}г</AppText>
+                    <AppText style={styles.infoText}>{productData.nutrients.protein}г</AppText>
                 </View>
             </View>
         </View>
@@ -82,6 +83,5 @@ const styles = StyleSheet.create({
     infoText: {
         fontSize: 20,
         color: COLORS.orange,
-        backgroundColor:COLORS.white
     }
 })

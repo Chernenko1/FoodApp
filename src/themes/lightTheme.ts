@@ -6,6 +6,6 @@ export const LightTheme = {
         text: 'rgb(0,0,0)',
         border: 'rgb(0,0,0)',
         primary: 'rgb(255,152,0)',
-        notification: 'rgb(255, 69, 58)'
+        notification: 'rgb(255, 69, 58)',
     }
 }

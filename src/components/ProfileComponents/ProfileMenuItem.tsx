@@ -4,6 +4,7 @@ import { COLORS } from "../../themes/COLORS";
 import { HorizontalRule } from "../components/HorizontalRule";
 import { ModalV } from "../components/Modal";
 import { AppText } from "../components/AppText";
+import { useTheme } from "@react-navigation/native";
 
 
 interface Props {
@@ -13,14 +14,17 @@ interface Props {
 }
 
 export const ProfileMenuItem = ({title, icon, onPress}:Props) => {
+
+    const {colors} = useTheme()
+
     return (
-        <Pressable style={styles.mainView} onPress={onPress}>
+        <Pressable style={[styles.mainView, {backgroundColor: colors.card}]} onPress={onPress}>
             <View style={styles.leftView}>
                 <Icon name={icon} size={20} color={COLORS.orange}/>
                 <AppText style={styles.textTitle} fontWeight='light'>{title}</AppText>
             </View>
             <View>
-                <Icon name='chevron-forward-outline' size={20} color={COLORS.black}/>
+                <Icon name='chevron-forward-outline' size={20} color={colors.text}/>
             </View>
         </Pressable>
     )
@@ -34,7 +38,6 @@ const styles = StyleSheet.create({
         paddingVertical: 15,
         paddingHorizontal: 10,
         marginTop: 10,
-        backgroundColor: COLORS.white,
         borderRadius: 10,
         elevation: 2
     },
@@ -45,6 +48,5 @@ const styles = StyleSheet.create({
     },
     textTitle: {
         fontSize: 18,
-        color: COLORS.black
     }
 })

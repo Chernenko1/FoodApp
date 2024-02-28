@@ -8,6 +8,7 @@ import { updateDetails } from "../../../../store/slices/userSlice"
 import { styles } from "./styles"
 import { RadioButton } from "../../../components/RadioButtons"
 import { AppText } from "../../../components/AppText"
+import { useTheme } from "@react-navigation/native"
 
 interface Props {
     visible: boolean,
@@ -17,7 +18,9 @@ interface Props {
 export const UserGenderModal = ({visible,closeModal}: Props) => {
 
     const [checked, setChecked] = useState(true)
+
     const dispatch = useAppDispatch()
+    const {colors} = useTheme()
 
     function handlePress () {
         updateUserDetails({id: "65d614788d7d99748725f156", type: 'gender', data: checked})
@@ -28,7 +31,7 @@ export const UserGenderModal = ({visible,closeModal}: Props) => {
     return (
         <ModalV visible={visible} closeModal={closeModal} onPress={handlePress}>
             <View style={styles.mainView}>
-                <AppText style={styles.titleText}>Ваш пол: </AppText>
+                <AppText style={[styles.titleText, {color: colors.text}]}>Ваш пол: </AppText>
                 <RadioButton value="Мужской" status={checked === true ? true : false} onPress={() => setChecked(true)}/>
                 <RadioButton value="Женский" status={checked === false ? true : false} onPress={() => setChecked(false)}/>
             </View>

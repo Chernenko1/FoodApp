@@ -10,10 +10,10 @@ export const BasicEnergyInfo = () => {
     const {colors} = useTheme()
 
     return (
-        <SafeAreaView style={[styles.mainView, {backgroundColor: colors.background}]}>
+        <SafeAreaView style={[styles.mainView, {backgroundColor: colors.card}]}>
             <View style={styles.caloriesView}>
                 <Calories type="Съедено" count={1273} icon="open"/>
-                <View style={styles.progressView}>
+                <View style={[styles.progressView, {backgroundColor:colors.primary}]}>
                     <View style={{width: 110, height: 110, borderRadius: 55, backgroundColor: COLORS.white, justifyContent: 'center'}}>
                         <Calories type="Осталось" count={2440}/>
                     </View>
@@ -47,7 +47,6 @@ const styles = StyleSheet.create({
     progressView: {
         alignItems:'center',
         justifyContent: 'center',
-        backgroundColor: COLORS.orange,
         width: 140,
         height: 140,
         borderRadius: 70

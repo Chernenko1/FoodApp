@@ -13,7 +13,6 @@ import { ProductInfo } from "../../components/ProductComponent/ProductInfo";
 
   const nativeStackOption: NativeStackNavigationOptions = {
     headerShown: true,
-    headerStyle: {backgroundColor: 'rgb(242,242,242)'},
     headerShadowVisible: false
   };
 

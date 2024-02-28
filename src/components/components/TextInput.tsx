@@ -1,3 +1,4 @@
+import { useTheme } from '@react-navigation/native'
 import react from 'react'
 import { InputAccessoryViewProps, StyleSheet, TextComponent, TextInput, View } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
@@ -11,7 +12,9 @@ interface Props {
 }
 
 export const InputText = ({icon, value,error, touched, ...otherProps}: Props) => {
-    const validationColor = !touched ? '#223e4b' : error ? '#FF5A5F' : '#223e4b';
+    const {colors} = useTheme()
+
+    const validationColor = !touched ? colors.border : error ? '#FF5A5F' : '#223e4b';
 
     return (
 <View
@@ -24,9 +27,9 @@ export const InputText = ({icon, value,error, touched, ...otherProps}: Props) =>
         <TextInput
           value={value}
           underlineColorAndroid="transparent"
-          placeholderTextColor="rgba(34, 62, 75, 0.7)"
+          placeholderTextColor={colors.text}
           {...otherProps}
-          style={{padding: 2}}
+          style={{padding: 2, color: colors.text}}
         />
       </View>
     </View>

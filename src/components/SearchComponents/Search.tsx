@@ -8,6 +8,7 @@ import { COLORS } from "../../themes/COLORS";
 import { HomeParamList } from "../../screens/HomeStack";
 import { Pressable } from "react-native";
 import { AppText } from "../components/AppText";
+import { useTheme } from "@react-navigation/native";
 
 type NavProps = NativeStackScreenProps<HomeParamList, 'Search'>
 
@@ -16,6 +17,8 @@ export const Search = ({navigation, route}: NavProps) => {
     const [searchAnswer, setSearchAnswer] = useState<Product[]>([])
 
     const {backScreen} = route.params
+
+    const {colors} = useTheme()
 
     const nextScreen = (item:Product) => { 
         navigation.navigate('ProductInfo', {backScreen: backScreen, productData: item})
@@ -28,8 +31,8 @@ export const Search = ({navigation, route}: NavProps) => {
     return (
         <SafeAreaView style={styles.container}> 
            <View style={styles.containerInput}>
-                <Icon name='arrow-back-outline' size={30} color={COLORS.black} onPress={() => navigation.goBack()}/>
-                <TextInput style={styles.input} value={value} onChangeText={text => setValue(text)} multiline={true}/>
+                <Icon name='arrow-back-outline' size={30} color={colors.text} onPress={() => navigation.goBack()}/>
+                <TextInput style={[styles.input, {borderColor: colors.border}]} value={value} onChangeText={text => setValue(text)} multiline={true}/>
            </View>
            <KeyboardAvoidingView behavior="height">
                 <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -80,6 +83,5 @@ const styles = StyleSheet.create({
     },
     text: {
         fontSize: 18,
-        color: COLORS.black
     }
 })

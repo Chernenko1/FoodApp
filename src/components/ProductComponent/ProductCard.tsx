@@ -4,6 +4,8 @@ import Icon from "react-native-vector-icons/Ionicons"
 import { ButtonIcon } from "../components/ButtonIcon"
 import { deleteProducFromMeal } from "../../http/mealAPI"
 import { memo, useCallback, useEffect } from "react"
+import { AppText } from "../components/AppText"
+import { useTheme } from "@react-navigation/native"
 
 interface Props {
     productName: string,
@@ -15,12 +17,15 @@ interface Props {
 
 
 export const ProductCard = ({productName, productQuantity, kcal, productId, onPress}: Props) => {
+
+    const {colors} = useTheme()
+
     return (
-        <View style={styles.mainView}>
+        <View style={[styles.mainView, {backgroundColor: colors.card}]}>
             <View>
-                <Text style={styles.productNameText}>{productName}</Text>
-                <Text style={styles.productInfoText}>{productQuantity} г</Text>
-                <Text style={styles.productInfoText}>{kcal} ккал</Text>
+                <AppText style={[styles.productNameText]}  fontWeight="medium">{productName}</AppText>
+                <AppText style={styles.productInfoText}>{productQuantity} г</AppText>
+                <AppText style={styles.productInfoText}>{kcal} ккал</AppText>
             </View>
             <ButtonIcon name='close-outline' size={30} backgroundColor={COLORS.lightGray} onPress={onPress}/>
         </View>
@@ -35,16 +40,12 @@ const styles = StyleSheet.create({
         paddingHorizontal: 15,
         paddingVertical: 10,
         borderRadius: 15,
-        backgroundColor: COLORS.white,
         elevation: 3
     },
     productNameText: {
         fontSize: 18,
-        color: COLORS.black, 
-        fontFamily: 'Rubik-Medium'
     },
     productInfoText: {
-        fontFamily: 'Rubik-Regular',
         fontSize: 15
     },
 })

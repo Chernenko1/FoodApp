@@ -9,7 +9,6 @@ import { SecondStep } from "../../components/CreationScreens/StepsComponents/Sec
 import { Search } from "../../components/SearchComponents/Search";
 
   const nativeStackOption: NativeStackNavigationOptions = {
-    headerStyle: {backgroundColor: 'rgb(242,242,242)'},
     headerShadowVisible: false,
     headerShown: false
   };

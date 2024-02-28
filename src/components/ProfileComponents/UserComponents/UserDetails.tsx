@@ -31,7 +31,7 @@ export const UserDetails = ({navigation}:NavProps) => {
 
     return (
         <View style={styles.mainView}>
-            <View style={styles.contentView}>
+            <View>
                 <UserDetailItem title="Цель" info={GOAL[details.purpose]} onPress={() => navigation.navigate('UserGoal')}/>
                 <UserDetailItem title="Вес" info={details.weight + ' кг'} onPress={() => setWeightModal(!weightModal)}>
                     <UserWeightModal 
@@ -69,7 +69,5 @@ const styles = StyleSheet.create({
     mainView: {
         paddingHorizontal: 20,
         marginTop: 20,
-    },
-    contentView: {
     },
 })

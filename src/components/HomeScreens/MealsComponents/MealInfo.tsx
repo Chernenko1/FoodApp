@@ -8,6 +8,7 @@ import { ProductCard } from "../../ProductComponent/ProductCard"
 import { ButtonIcon } from "../../components/ButtonIcon"
 import { deleteProducFromMeal, getMealData } from "../../../http/mealAPI"
 import { MealInfoHeader } from "./MealInhoHeader"
+import { useTheme } from "@react-navigation/native"
 
 type Navigation = NativeStackScreenProps<HomeParamList, 'MealInfo'>
 
@@ -17,11 +18,12 @@ interface IProduct {
     productId: Product
 }
 
-export const MealInfo = ({navigation, route}: Navigation) => {
+export const MealInfo = ({navigation, route}: Navigation) => {   
     const [products, setProducts] = useState<IProduct[]>([])
 
     const {headerTitle} = route.params
 
+    const {colors} = useTheme()
     
     const deleteProduct  = (productId: string) => {
         deleteProducFromMeal({
@@ -46,7 +48,7 @@ export const MealInfo = ({navigation, route}: Navigation) => {
     }, [])
 
     return (
-        <SafeAreaView style={styles.mainView}>
+        <SafeAreaView style={[styles.mainView, {backgroundColor: colors.background}]}>
                 <FlatList 
                 ListHeaderComponent={<MealInfoHeader />}
                 data={products} 
@@ -72,7 +74,7 @@ export const MealInfo = ({navigation, route}: Navigation) => {
 
 const styles = StyleSheet.create({
     mainView: {
-        flex: 1
+        flex: 1,
     },
     productView: {
         marginTop: 10,

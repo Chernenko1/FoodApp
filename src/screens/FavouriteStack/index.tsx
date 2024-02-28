@@ -8,7 +8,6 @@ import { Favourite } from "../../components/FavouritesScreens/Favourite";
 
   const nativeStackOption: NativeStackNavigationOptions = {
     headerShown: true,
-    headerStyle: {backgroundColor: 'rgb(242,242,242)'},
     headerShadowVisible: false
   };
 

@@ -1,6 +1,7 @@
 import { Pressable, StyleSheet, Text, View, useWindowDimensions } from "react-native"
 import { COLORS } from "../../../themes/COLORS"
 import { AppText } from "../../components/AppText"
+import { useTheme } from "@react-navigation/native"
 
 interface Props {
     header: string,
@@ -14,8 +15,10 @@ interface Props {
 export const UserGoalItem = ({header, description, onPress, status}: Props) => {
 
     const {width} = useWindowDimensions()
+    const {colors} = useTheme()
+
     return (
-        <Pressable style={[styles.textView, {width: width * 0.8, backgroundColor: status ? COLORS.orange : COLORS.white}]} onPress={onPress}>
+        <Pressable style={[styles.textView, {width: width * 0.8, backgroundColor: status ? COLORS.orange : colors.card}]} onPress={onPress}>
                 <AppText style={styles.headerText}>{header}</AppText>
                 <AppText style={styles.descriptText}>{description}</AppText>
         </Pressable>

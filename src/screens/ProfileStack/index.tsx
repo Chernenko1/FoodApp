@@ -13,7 +13,6 @@ import { KBFUSettings } from "../../components/ProfileComponents/KBFUSettings/KB
 
   const nativeStackOption: NativeStackNavigationOptions = {
     headerShown: true,
-    headerStyle: {backgroundColor: COLORS.white},
     headerShadowVisible: false
   };
 

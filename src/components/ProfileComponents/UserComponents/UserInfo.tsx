@@ -2,6 +2,7 @@ import { SafeAreaView, StyleSheet, Text, View } from "react-native"
 import { COLORS } from "../../../themes/COLORS"
 import { AppText } from "../../components/AppText"
 import { ACTIVITY, GOAL } from "./constants"
+import { useTheme } from "@react-navigation/native"
 
 
 interface Props {
@@ -14,8 +15,11 @@ interface Props {
 
 
 export const UserInfo = ({username, email, weight, goal, activity }: Props) => {
+
+    const {colors} = useTheme()
+
     return (
-        <SafeAreaView style={styles.mainView}> 
+        <SafeAreaView style={[styles.mainView, {backgroundColor: colors.card}]}> 
             <View>
                 <AppText style={styles.text}>Username: {username}</AppText>
                 <AppText style={styles.text}>Вес: {weight} кг</AppText>
@@ -31,10 +35,8 @@ const styles= StyleSheet.create({
     mainView: {
         flexDirection: 'row',
         alignItems: 'center',
-        backgroundColor: COLORS.white
     },
     text: {
         fontSize: 20,
-        color: COLORS.black
     }
 })

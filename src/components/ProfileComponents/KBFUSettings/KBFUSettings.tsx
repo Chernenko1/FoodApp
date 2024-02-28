@@ -10,10 +10,13 @@ import { updateUserBFUUsingCalories, updateUserCaloriesUsingBFU } from "../../..
 import { updateReqMacros } from "../../../store/slices/userSlice"
 import { TextButton } from "../../components/TextButton"
 import { AppText } from "../../components/AppText"
+import { useTheme } from "@react-navigation/native"
 
 type Navigation = NativeStackScreenProps<ProfileParamList, 'KBFUSettings'>
 
 export const KBFUSettings = ({navigation}: Navigation) => {
+
+    const {colors} = useTheme()
     
     const {required_macros, _id} = useAppSelector(state => state.user.user)
 

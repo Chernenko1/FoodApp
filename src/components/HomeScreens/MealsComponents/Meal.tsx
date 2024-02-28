@@ -2,7 +2,7 @@ import { StyleSheet, View, Text, Pressable, TouchableHighlight } from "react-nat
 import Icon from 'react-native-vector-icons/Ionicons'
 
 import { COLORS } from "../../../themes/COLORS"
-import { StackNavigationState, useNavigation } from "@react-navigation/native"
+import { StackNavigationState, useNavigation, useTheme } from "@react-navigation/native"
 import {NativeStackNavigationProp } from "@react-navigation/native-stack/lib/typescript/src/types"
 import { HomeParamList } from "../../../screens/HomeStack"
 import { AppText } from "../../components/AppText"
@@ -17,17 +17,19 @@ type Navigation = NativeStackNavigationProp<HomeParamList, 'MealInfo'>
 
 export const Meal = ({title, kcal = 0, maxKcal = 0}: Props) => {
 
+    const {colors} = useTheme()
+
     const navigation = useNavigation<Navigation>()
 
     return (
-        <View style={styles.mainView}>
+        <View style={[styles.mainView, {backgroundColor: colors.card}]}>
             <Pressable onPress={() => navigation.navigate('MealInfo', {headerTitle: title})}>
                 <View style={styles.frameView}>
                     <AppText style={styles.titleText} fontWeight="medium">{title}</AppText>
                     <AppText style = {styles.kcalText}>
-                        <AppText style={styles.countText}>{kcal} </AppText> 
+                        <AppText style={[{color: colors.primary}]}>{kcal} </AppText> 
                         ккал из 
-                        <AppText style={styles.countText}> {maxKcal} </AppText> 
+                        <AppText style={[{color: colors.primary}]}> {maxKcal} </AppText> 
                         ккал
                         </AppText>
                 </View>
@@ -46,7 +48,6 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         paddingHorizontal: 20,
         paddingVertical: 20,
-        backgroundColor: COLORS.white,
         borderRadius: 15,
         elevation: 3
     },
@@ -57,15 +58,10 @@ const styles = StyleSheet.create({
         padding: 5,
         borderRadius: 10
     },
-    countText: {
-        color: COLORS.orange
-    },
     titleText: {
         fontSize: 24,
-        color: COLORS.black
     },
     kcalText: {
-        color: COLORS.black,
         fontSize: 18
     }
 })

@@ -32,7 +32,6 @@ const styles = StyleSheet.create({
     },
     titleText: {
         fontSize: 20,
-        color: COLORS.black
     },
     descriptionText: {
         fontSize: 16,
