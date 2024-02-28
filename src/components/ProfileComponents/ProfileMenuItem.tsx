@@ -3,6 +3,7 @@ import Icon from 'react-native-vector-icons/Ionicons'
 import { COLORS } from "../../themes/COLORS";
 import { HorizontalRule } from "../components/HorizontalRule";
 import { ModalV } from "../components/Modal";
+import { AppText } from "../components/AppText";
 
 
 interface Props {
@@ -16,7 +17,7 @@ export const ProfileMenuItem = ({title, icon, onPress}:Props) => {
         <Pressable style={styles.mainView} onPress={onPress}>
             <View style={styles.leftView}>
                 <Icon name={icon} size={20} color={COLORS.orange}/>
-                <Text style={styles.textTitle}>{title}</Text>
+                <AppText style={styles.textTitle} fontWeight='light'>{title}</AppText>
             </View>
             <View>
                 <Icon name='chevron-forward-outline' size={20} color={COLORS.black}/>
@@ -43,7 +44,6 @@ const styles = StyleSheet.create({
         columnGap: 15
     },
     textTitle: {
-        fontFamily: 'Rubik-Light',
         fontSize: 18,
         color: COLORS.black
     }

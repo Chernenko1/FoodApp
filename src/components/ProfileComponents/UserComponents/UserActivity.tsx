@@ -7,6 +7,7 @@ import { updateUserDetails } from "../../../http/userAPI"
 import { useAppDispatch, useAppSelector } from "../../../store/hooks"
 import { setUser } from "../../../store/slices/userSlice"
 import { COLORS } from "../../../themes/COLORS"
+import { AppText } from "../../components/AppText"
 
 type NavProps = NativeStackScreenProps<ProfileParamList, 'UserActivity'>
 
@@ -28,7 +29,7 @@ export const UserActivity = ({navigation}: NavProps) => {
 
     return (
         <View style={styles.activityView}>
-            <Text style={styles.text}>Ваша ежедневная активность</Text>
+            <AppText style={styles.text}>Ваша ежедневная активность</AppText>
             <UserActivityItem 
                 title="Низкая активность"
                 description="Легкие физические нагрузки либо занятия 1-3 раз в неделю, 5к шагов"
@@ -64,7 +65,6 @@ const styles = StyleSheet.create({
         rowGap: 10
     },
     text: {
-        fontFamily: 'Rubik-Regular',
         fontSize: 15,
         color: COLORS.black,
     }

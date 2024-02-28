@@ -1,4 +1,5 @@
 import { Pressable, StyleProp, StyleSheet, Text, View } from "react-native"
+import { AppText } from "./AppText"
 
 interface Props {
     title: string
@@ -10,7 +11,7 @@ interface Props {
 export const Button = ({title, onPress, color, textColor}: Props) => {
     return (
         <Pressable style={[styles.pressable, {backgroundColor: color}]} onPress={onPress}>
-                <Text style={[styles.text, {color: textColor}]}>{title}</Text>
+                <AppText style={[styles.text, {color: textColor}]}>{title}</AppText>
         </Pressable>
     )
 }

@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { setUser } from "../../store/slices/userSlice";
 import { UserInfo } from "./UserComponents/UserInfo";
 import { ProfileMenuItems } from "./ProfileMenuItems";
+import { AppText } from "../components/AppText";
 
 export const Profile = () => {
 
@@ -18,7 +19,7 @@ export const Profile = () => {
             goal={user.details.purpose}
             activity={user.details.activity}
             />
-            <Text>Настройки</Text>
+            <AppText>Настройки</AppText>
            <ProfileMenuItems />
         </View>
     )

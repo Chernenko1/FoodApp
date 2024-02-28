@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { COLORS } from '../../themes/COLORS'
+import { AppText } from './AppText'
 
 interface Props {
     text: string
@@ -15,7 +16,7 @@ export const CheckBox = ({text, checked, onPress}: Props) => {
         <TouchableOpacity activeOpacity={0.7} style={styles.checkBoxTouch} onPress={() => onPress(!checked)}>
             <View style={styles.checkBoxView}>
                 <Icon name={checked ? 'checkbox-outline' : 'square-outline'} size={24} color={checked ? COLORS.orange : COLORS.gray}/>
-                <Text style={styles.text}>{text}</Text>
+                <AppText style={styles.text}>{text}</AppText>
             </View>
         </TouchableOpacity>
     )
@@ -32,6 +33,5 @@ const styles = StyleSheet.create({
     },
     text: {
         fontSize: 20, 
-        fontFamily: 'Rubik-Regular'
     }
 })

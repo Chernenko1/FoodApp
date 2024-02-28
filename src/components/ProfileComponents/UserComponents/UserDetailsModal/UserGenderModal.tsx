@@ -7,6 +7,7 @@ import { updateDetails } from "../../../../store/slices/userSlice"
 
 import { styles } from "./styles"
 import { RadioButton } from "../../../components/RadioButtons"
+import { AppText } from "../../../components/AppText"
 
 interface Props {
     visible: boolean,
@@ -27,9 +28,9 @@ export const UserGenderModal = ({visible,closeModal}: Props) => {
     return (
         <ModalV visible={visible} closeModal={closeModal} onPress={handlePress}>
             <View style={styles.mainView}>
-                <Text style={styles.titleText}>Ваш пол: </Text>
-               <RadioButton value="Мужской" status={checked === true ? true : false} onPress={() => setChecked(true)}/>
-               <RadioButton value="Женский" status={checked === false ? true : false} onPress={() => setChecked(false)}/>
+                <AppText style={styles.titleText}>Ваш пол: </AppText>
+                <RadioButton value="Мужской" status={checked === true ? true : false} onPress={() => setChecked(true)}/>
+                <RadioButton value="Женский" status={checked === false ? true : false} onPress={() => setChecked(false)}/>
             </View>
         </ModalV>
     )

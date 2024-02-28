@@ -1,5 +1,6 @@
 import { Pressable, StyleProp, StyleSheet, Text, TextStyle, ViewStyle } from "react-native"
 import { COLORS } from "../../themes/COLORS"
+import { AppText } from "./AppText"
 
 interface Props {
     title: string,
@@ -11,7 +12,7 @@ interface Props {
 export const TextButton = ({title, onPress, style}:Props) => {
     return (
         <Pressable onPress={onPress}>
-            <Text style={[styles.text, style]}>{title}</Text>
+            <AppText style={[styles.text, style]} fontWeight="regular">{title}</AppText>
         </Pressable>
     )
 }
@@ -19,6 +20,5 @@ export const TextButton = ({title, onPress, style}:Props) => {
 const styles = StyleSheet.create({
     text: {
         fontSize: 15,
-        fontFamily: 'Rubik-Regular'
     }
 })

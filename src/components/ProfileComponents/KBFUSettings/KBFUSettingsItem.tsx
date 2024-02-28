@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { Keyboard, StyleSheet, Text, TextInput, View } from "react-native"
 import { COLORS } from "../../../themes/COLORS"
+import { AppText } from "../../components/AppText"
 
 interface Props {
     title: string,
@@ -13,7 +14,7 @@ export const KBFUSsettingsItem = ({title, value, onChangeText}: Props) => {
 
     return (
         <View style={styles.inputView}>
-        <Text style={styles.inputText}>{title}</Text>
+        <AppText style={styles.inputText}>{title}</AppText>
         <TextInput
             style={styles.input}
             value={value}
@@ -40,7 +41,6 @@ const styles = StyleSheet.create({
         minWidth: '20%'
     },
     inputText: {
-        fontFamily: 'Rubik-Regular',
         fontSize: 24,
         color: COLORS.black
     },

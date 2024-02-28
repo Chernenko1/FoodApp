@@ -2,6 +2,7 @@ import React from 'react'
 import { StyleSheet } from 'react-native'
 import { Pressable, Text, TouchableOpacity, View } from 'react-native'
 import { COLORS } from '../../themes/COLORS'
+import { AppText } from './AppText'
 
 type Props = {
     title: string
@@ -12,7 +13,7 @@ type Props = {
 export const HeaderButton = ({title,disabled, onPress}: Props) => {
     return (
         <Pressable style={disabled ? styles.inActiveComponent : styles.activeComponent} disabled={disabled} onPress={onPress}>
-           <Text style={styles.text}>{title}</Text>
+           <AppText style={styles.text} fontWeight='medium'>{title}</AppText>
         </Pressable>
     )
 }
@@ -29,7 +30,6 @@ const styles = StyleSheet.create({
             borderRadius: 5
         },
         text: {
-            fontFamily: 'Rubik-Medium',
             fontSize: 20,
             color: COLORS.white
         }

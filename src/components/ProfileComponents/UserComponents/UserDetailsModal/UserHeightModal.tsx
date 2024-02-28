@@ -7,6 +7,7 @@ import { updateUserDetails } from "../../../../http/userAPI"
 import { updateDetails } from "../../../../store/slices/userSlice"
 
 import { styles } from "./styles"
+import { AppText } from "../../../components/AppText"
 
 interface Props {
     text: string,
@@ -28,7 +29,7 @@ export const UserHeightModal = ({text,visible,closeModal}: Props) => {
     return (
         <ModalV visible={visible} closeModal={closeModal} onPress={handlePress}>
             <View style={styles.mainView}>
-                <Text style={styles.titleText}>Ваш рост: </Text>
+                <AppText style={styles.titleText}>Ваш рост: </AppText>
                 <View style={styles.inputView}>
                     <TextInput 
                     style={styles.input} 

@@ -9,6 +9,7 @@ import { KBFUSsettingsItem } from "./KBFUSettingsItem"
 import { updateUserBFUUsingCalories, updateUserCaloriesUsingBFU } from "../../../http/userAPI"
 import { updateReqMacros } from "../../../store/slices/userSlice"
 import { TextButton } from "../../components/TextButton"
+import { AppText } from "../../components/AppText"
 
 type Navigation = NativeStackScreenProps<ProfileParamList, 'KBFUSettings'>
 
@@ -44,11 +45,11 @@ export const KBFUSettings = ({navigation}: Navigation) => {
 
     return (
         <View style={styles.mainView}>
-            <Text style={styles.titleText}>Калории</Text>
+            <AppText style={styles.titleText}>Калории</AppText>
                 <KBFUSsettingsItem title='Калории' onChangeText={setCalories} value={calories}/>
                 <TextButton style={styles.textButton} title="Сохранить" onPress={sendCaloriesAmount}/>
             <HorizontalRule />
-            <Text style={styles.titleText}>БЖУ</Text>
+            <AppText style={styles.titleText}>БЖУ</AppText>
                 <View style ={styles.bfuView}>
                     <KBFUSsettingsItem title="Белки" value={protein} onChangeText={setProtein}/>
                     <KBFUSsettingsItem title="Жиры"  value={fat} onChangeText={setFat}/>
@@ -82,7 +83,6 @@ const styles = StyleSheet.create({
         minWidth: '20%'
     },
     inputText: {
-        fontFamily: 'Rubik-Regular',
         fontSize: 24,
         color: COLORS.black
     },

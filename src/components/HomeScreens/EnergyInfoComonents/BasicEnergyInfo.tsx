@@ -2,11 +2,15 @@ import { SafeAreaView, StyleSheet, Text, View } from "react-native"
 import { COLORS } from "../../../themes/COLORS"
 import { Calories } from "./Calories"
 import { CBFU } from "./CBFU"
+import { useTheme } from "@react-navigation/native"
 
 
 export const BasicEnergyInfo = () => {
+
+    const {colors} = useTheme()
+
     return (
-        <SafeAreaView style={styles.mainView}>
+        <SafeAreaView style={[styles.mainView, {backgroundColor: colors.background}]}>
             <View style={styles.caloriesView}>
                 <Calories type="Съедено" count={1273} icon="open"/>
                 <View style={styles.progressView}>
@@ -31,7 +35,6 @@ const styles = StyleSheet.create({
         justifyContent: 'space-around',
         paddingHorizontal: 25,
         paddingVertical: 10,
-        backgroundColor: COLORS.white,
         borderBottomRightRadius: 40,
         borderBottomLeftRadius: 40,
         elevation: 5

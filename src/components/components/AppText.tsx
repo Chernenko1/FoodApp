@@ -3,14 +3,15 @@ import { StyleProp, Text, TextComponent, TextStyle, View } from "react-native";
 interface Props {
     style?: StyleProp<TextStyle>,
     children?: React.ReactNode,
-    fontWeight: 'regular' | 'medium'
+    fontWeight?: 'regular' | 'medium' | 'light'
 }
 
-export function AppText ({style, children, fontWeight = 'regular'}: Props) {
+export const AppText =  ({style, children, fontWeight = 'regular'}: Props) =>{
 
     let font = {
         'regular': 'Rubik-Regular',
-        'medium': 'Rubik-Medium'
+        'medium': 'Rubik-Medium',
+        'light': 'Rubik-Light'
     }
 
     return (

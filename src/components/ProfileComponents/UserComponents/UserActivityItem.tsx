@@ -1,6 +1,7 @@
 import { Pressable, StyleSheet, Text, TouchableOpacity, View } from "react-native"
 import { RadioButton } from "../../components/RadioButtons"
 import { COLORS } from "../../../themes/COLORS"
+import { AppText } from "../../components/AppText"
 
 interface Props {
     title: string,
@@ -14,8 +15,8 @@ export const UserActivityItem = ({title, description, status, onPress}: Props) =
         <TouchableOpacity style={styles.activityItem} activeOpacity={0.7} onPress={onPress}>
             <RadioButton status={status}/>
             <View style={styles.textView}>
-                <Text style={styles.titleText}>{title}</Text>
-                <Text style={styles.descriptionText}>{description}</Text>
+                <AppText style={styles.titleText} fontWeight="medium">{title}</AppText>
+                <AppText style={styles.descriptionText}>{description}</AppText>
             </View>
         </TouchableOpacity>
     )
@@ -30,12 +31,10 @@ const styles = StyleSheet.create({
         paddingHorizontal: 15,
     },
     titleText: {
-        fontFamily: 'Rubik-Medium',
         fontSize: 20,
         color: COLORS.black
     },
     descriptionText: {
-        fontFamily: 'Rubik-Regular',
         fontSize: 16,
         textAlign: 'left',
         color: COLORS.gray,

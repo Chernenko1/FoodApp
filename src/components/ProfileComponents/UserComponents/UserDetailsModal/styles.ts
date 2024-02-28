@@ -13,7 +13,6 @@ export const styles = StyleSheet.create({
     titleText: {
         fontSize: 40,
         color: COLORS.black,
-        fontFamily: 'Rubik-Regular',
         textAlign: 'center'
     },
     input: {
