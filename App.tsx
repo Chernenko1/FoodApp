@@ -15,7 +15,7 @@ export const App = () => {
   return (
     <PersistGate persistor={persistor} loading={null}>
       <Provider store={store}>
-        <NavigationContainer theme={scheme === 'dark' ? LightTheme : DarkTheme}>
+        <NavigationContainer theme={scheme === 'light' ? LightTheme : DarkTheme}>
           <AppNavigator />
         </NavigationContainer> 
       </Provider>
