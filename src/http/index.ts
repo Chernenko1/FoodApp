@@ -1,6 +1,7 @@
 import axios from "axios";
+import Config from "react-native-config";
 
 export const $host = axios.create({
-    baseURL: 'http://192.168.38.68:5000',
+    baseURL: Config.URL,
     // headers: {"Content-Type": "multipart/form-data"}
 })
