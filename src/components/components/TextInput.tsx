@@ -1,30 +1,30 @@
 import { useTheme } from '@react-navigation/native'
-import { TextInputProps } from 'react-native'
+import { StyleProp, TextInputProps, TextStyle, ViewStyle } from 'react-native'
 import { StyleSheet, TextInput, View } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
+import { COLORS } from '../../themes/COLORS'
 
 interface Props extends TextInputProps {
     value?: string,
     error?: any,
-    touched: boolean | undefined
+    touched?: boolean | undefined,
+    style?: StyleProp<ViewStyle & TextStyle>
 }
 
-export const InputText = ({value,error, touched, ...restProps}: Props) => {
+export const InputText = ({value,error,style, touched, ...restProps}: Props) => {
     const {colors} = useTheme()
 
-    const validationColor = !touched ? colors.border : error ? '#FF5A5F' : '#223e4b';
+    const validationColor = !touched ? COLORS.black : error ? '#FF5A5F' : COLORS.orange;
 
     return (
-<View
-      style={[styles.mainView, {borderColor: validationColor,}]}
-    >
+<View style={[styles.mainView, {borderColor: validationColor,}]}>
       <View style={{ flex: 1}}>
         <TextInput
           value={value}
           underlineColorAndroid="transparent"
           placeholderTextColor={colors.text}
           {...restProps}
-          style={{padding: 2, color: colors.text}}
+          style={[{padding: 2, color: colors.text,fontSize: 20, borderColor: validationColor}, style]}
         />
       </View>
     </View>
@@ -33,12 +33,10 @@ export const InputText = ({value,error, touched, ...restProps}: Props) => {
 
 const styles = StyleSheet.create({
     mainView: {
-        flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
         height: 40,
         borderRadius: 8,
-        borderWidth: 1,
         // marginBottom: 5,
     }
 })

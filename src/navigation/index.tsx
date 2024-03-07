@@ -1,11 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BottomNavigation } from "./BottomNavigation";
 import { getStorageItem } from "../utils/getStorageItem";
-import { StartStackNavigation } from "./startStackNavigation";
+import { StartStackNavigation } from "./AuthStackNavigation";
 
   export const AppNavigator = () => {
-    let isFirstStart: string | undefined
-    getStorageItem('isFirstStart').then(e => isFirstStart = e)
 
-    return isFirstStart ? <BottomNavigation /> : <StartStackNavigation />
+    const [isAuth, setIsAuth] = useState(false)
+
+    useEffect(() => {
+      async function checkAuth() {
+          const authValue = await getStorageItem("isAuth");
+          setIsAuth(!!authValue);
+      }
+
+      checkAuth();
+  }, []);
+
+    return isAuth ? <BottomNavigation /> : <StartStackNavigation />
   }
