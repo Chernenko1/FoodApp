@@ -18,6 +18,6 @@ export const AppText =  ({style, children, fontWeight = 'regular'}: Props) =>{
     }
 
     return (
-        <Text style={[{fontFamily: font[fontWeight], color:colors.text}, style]}>{children}</Text>
+        <Text style={[{textAlign: 'center', fontFamily: font[fontWeight], color:colors.text}, style]}>{children}</Text>
     )
 }
