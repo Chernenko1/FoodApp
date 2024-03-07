@@ -18,7 +18,7 @@ export const BasicEnergyInfo = () => {
                         <Calories type="Осталось" count={2440}/>
                     </View>
                 </View>
-                <Calories type="Сожено" count={536} icon="open"/>
+                <Calories type="Сожжено" count={536} icon="open"/>
             </View>
             <View style={styles.cbfuView}>
                 <CBFU count={50} maxCount={400} title="Углеводы"/>

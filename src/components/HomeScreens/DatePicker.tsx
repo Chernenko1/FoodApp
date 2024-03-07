@@ -3,7 +3,6 @@ import DateTimePicker, { DateTimePickerEvent } from '@react-native-community/dat
 import Icon from 'react-native-vector-icons/Ionicons'
 import { COLORS } from "../../themes/COLORS"
 import { useEffect, useState } from "react";
-import { Button } from "../components/Button";
 import { AppText } from "../components/AppText";
 
 interface Props {

@@ -7,11 +7,13 @@ import {Provider} from 'react-redux';
 import {PersistGate} from 'redux-persist/integration/react';
 import { LightTheme } from "./src/themes/lightTheme";
 import { DarkTheme } from "./src/themes/darkTheme";
+import Config from "react-native-config";
 
 export const App = () => {
 
-  const scheme = useColorScheme()
+  console.log(Config.URL)
 
+  const scheme = useColorScheme()
   return (
     <PersistGate persistor={persistor} loading={null}>
       <Provider store={store}>

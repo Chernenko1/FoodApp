@@ -70,3 +70,7 @@ yarn-error.log
 **/_Header
 **/_PopularFoodCategories
 **/_TopRecipes
+
+# --------------------
+
+.env
