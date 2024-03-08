@@ -12,6 +12,7 @@ import { login } from '../../http/authAPI';
 import { useAppDispatch } from '../../store/hooks';
 import { setUser } from '../../store/slices/userSlice';
 import { setStorageItem } from '../../utils/setStorageItem';
+import { setAuth, setToken } from '../../store/slices/authSlice';
 
 type Navigation = NativeStackScreenProps<AuthParamList, 'Login'>
 
@@ -31,7 +32,7 @@ export const Login = ({navigation}: Navigation) => {
 
     function sendReq () {
         login({email: values.email, password: values.password})
-        .then((data) => {dispatch(setUser(data)); setStorageItem('isAuth', 'true')})
+        .then((data) => {dispatch(setUser(data.user)); dispatch(setAuth(true)); dispatch(setToken(data.token))})
         .catch((e) => console.log(e))
     }
 

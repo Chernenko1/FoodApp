@@ -1,20 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { BottomNavigation } from "./BottomNavigation";
-import { getStorageItem } from "../utils/getStorageItem";
 import { StartStackNavigation } from "./AuthStackNavigation";
+import { useAppSelector } from "../store/hooks";
 
   export const AppNavigator = () => {
 
-    const [isAuth, setIsAuth] = useState(false)
-
-    useEffect(() => {
-      async function checkAuth() {
-          const authValue = await getStorageItem("isAuth");
-          setIsAuth(!!authValue);
-      }
-
-      checkAuth();
-  }, []);
+    const {isAuth} = useAppSelector(state => state.auth)
 
     return isAuth ? <BottomNavigation /> : <StartStackNavigation />
   }

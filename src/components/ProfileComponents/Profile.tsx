@@ -10,8 +10,6 @@ export const Profile = () => {
 
     const user = useAppSelector(state => state.user.user)
 
-    console.log(user)
-
     return (
         <View style={styles.mainView}>
             <UserInfo 
