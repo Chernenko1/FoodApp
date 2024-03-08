@@ -31,7 +31,7 @@ export const RegGenderSelect = ({navigation}:Navigation) => {
             </View>
             <Button 
                 title="Далее" 
-                onPress={() => navigation.navigate('RegUserDateOfBirth')} 
+                onPress={() => navigation.navigate('RegUserBirth')} 
                 color={COLORS.orange}
                 textColor={COLORS.black} 
                 disabled={!value}/>
