@@ -31,6 +31,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 15,
     },
     titleText: {
+        textAlign: 'left',
         fontSize: 20,
     },
     descriptionText: {
