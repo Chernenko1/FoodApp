@@ -1,5 +1,6 @@
 import { Pressable, StyleProp, StyleSheet, Text, View, ViewStyle } from "react-native"
 import { AppText } from "./AppText"
+import { COLORS } from "../../themes/COLORS"
 
 interface Props {
     title: string
@@ -7,12 +8,13 @@ interface Props {
     color?: string
     textColor?: string,
     size?: number,
-    style?: StyleProp<ViewStyle>
+    style?: StyleProp<ViewStyle>,
+    disabled?: boolean
 }
 
-export const Button = ({title, onPress, color, textColor, size, style}: Props) => {
+export const Button = ({title, onPress, color, textColor, size, style, disabled = false}: Props) => {
     return (
-        <Pressable style={[styles.pressable, {backgroundColor: color}, style]} onPress={onPress}>
+        <Pressable style={[styles.pressable, {backgroundColor:disabled ? COLORS.gray : color}, style]} onPress={onPress} disabled={disabled}>
                 <AppText style={[{color: textColor, fontSize: size ?? 18}]}>{title}</AppText>
         </Pressable>
     )
