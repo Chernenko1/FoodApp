@@ -24,7 +24,7 @@ export const Start = () => {
             <View style={styles.bottomView}>
                 <AppText style={styles.titleText} fontWeight="medium">Здоровое питание — это просто.</AppText>
                 <AppText style={styles.descriptionText}>Питание — это ключ к здоровому весу, хорошему настроению, спокойному сну и долголетию.</AppText>
-                <Button style={{paddingHorizontal: '30%'}} title="Начать" color={COLORS.orange} onPress={() => {}} textColor={COLORS.black}/>
+                <Button style={{paddingHorizontal: '30%'}} title="Начать" color={COLORS.orange} onPress={() => navigation.navigate('RegGoal')} textColor={COLORS.black}/>
                 <View style={styles.loginView}>
                     <AppText style={styles.loginText}>Уже есть аккаунт?</AppText>
                     <TextButton style={styles.loginButton} title="Войти" onPress={() => navigation.navigate('Login')}/>

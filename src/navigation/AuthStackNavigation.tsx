@@ -2,15 +2,17 @@ import { NativeStackNavigationOptions, createNativeStackNavigator } from '@react
 import React from 'react'
 import { Start } from '../components/StartComponents/Start'
 import { Login } from '../components/StartComponents/Login'
+import { RegGoal } from '../components/StartComponents/RegGoal'
 
 
 export type AuthParamList = {
     StackHome: undefined
     Login: undefined
+    RegGoal: undefined
 }
 
 const nativeStackOption: NativeStackNavigationOptions = {
-    headerShown: false,
+    headerShown: true,
     headerShadowVisible: false
   };
 
@@ -19,8 +21,9 @@ const Stack =  createNativeStackNavigator<AuthParamList>()
 export const StartStackNavigation = () => {
     return (
         <Stack.Navigator screenOptions={nativeStackOption}>
-            <Stack.Screen name='StackHome' component={Start}/>
-            <Stack.Screen name='Login' component={Login} options={{headerShown: true}}/>
+            <Stack.Screen name='StackHome' component={Start} options={{headerShown: false}}/>
+            <Stack.Screen name='Login' component={Login} />
+            <Stack.Screen name = 'RegGoal' component={RegGoal} />
         </Stack.Navigator>
     )
 }
