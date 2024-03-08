@@ -9,34 +9,31 @@ interface Props extends TextInputProps {
     error?: any,
     touched?: boolean | undefined,
     style?: StyleProp<ViewStyle & TextStyle>
+    height?: number 
 }
 
-export const InputText = ({value,error,style, touched, ...restProps}: Props) => {
+export const InputText = ({value,error,style, touched, height = 40, ...restProps}: Props) => {
     const {colors} = useTheme()
 
     const validationColor = !touched ? COLORS.black : error ? '#FF5A5F' : COLORS.orange;
 
     return (
-<View style={[styles.mainView, {borderColor: validationColor,}]}>
-      <View style={{ flex: 1}}>
-        <TextInput
-          value={value}
-          underlineColorAndroid="transparent"
-          placeholderTextColor={colors.text}
-          {...restProps}
-          style={[{padding: 2, color: colors.text,fontSize: 20, borderColor: validationColor}, style]}
-        />
-      </View>
-    </View>
+        <View style={[styles.mainView, {borderColor: validationColor, height}]}>
+          <View style={{}}>
+            <TextInput
+              value={value}
+              underlineColorAndroid="transparent"
+              placeholderTextColor={colors.text}
+              {...restProps}
+              style={[{padding: 2, color: colors.text,fontSize: 20, borderColor: validationColor}, style]}
+            />
+          </View>
+        </View>
     )
 }
 
 const styles = StyleSheet.create({
     mainView: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        height: 40,
-        borderRadius: 8,
         // marginBottom: 5,
     }
 })

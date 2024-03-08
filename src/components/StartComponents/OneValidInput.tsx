@@ -41,6 +41,7 @@ export const OneValidInput = ({min, max, errorText, handlePress}:Props) => {
                     touched={touched.valid}
                     keyboardType="numeric"
                     maxLength={3}
+                    height={80}
                 />
                 {errors.valid && <AppText style={{fontSize: 18}}>{errorText}</AppText>}
             </View>
@@ -58,5 +59,6 @@ const styles = StyleSheet.create({
     input: {
         borderWidth: 3,
         borderRadius: 10,
+        fontSize: 40
     }
 })

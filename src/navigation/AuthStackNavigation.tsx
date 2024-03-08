@@ -4,7 +4,7 @@ import { Start } from '../components/StartComponents/Start'
 import { Login } from '../components/StartComponents/Login'
 import { RegGoal } from '../components/StartComponents/RegGoal'
 import { RegGenderSelect } from '../components/StartComponents/RegGenderSelect'
-import { RegUserBirth } from '../components/StartComponents/RegUserBirth'
+import { RegUserInfo} from '../components/StartComponents/RegUserInfo'
 
 
 export type AuthParamList = {
@@ -12,7 +12,7 @@ export type AuthParamList = {
     Login: undefined
     RegGoal: undefined
     RegGenderSelect: undefined
-    RegUserBirth: undefined
+    RegUserInfo: undefined
 }
 
 const nativeStackOption: NativeStackNavigationOptions = {
@@ -29,7 +29,7 @@ export const StartStackNavigation = () => {
             <Stack.Screen name='Login' component={Login} />
             <Stack.Screen name = 'RegGoal' component={RegGoal} />
             <Stack.Screen name='RegGenderSelect' component={RegGenderSelect} />
-            <Stack.Screen name='RegUserBirth' component={RegUserBirth} />
+            <Stack.Screen name='RegUserInfo' component={RegUserInfo} />
         </Stack.Navigator>
     )
 }
