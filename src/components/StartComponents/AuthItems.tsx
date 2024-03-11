@@ -6,16 +6,18 @@ import { AppText } from '../components/AppText'
 import { InputText } from '../components/TextInput'
 import { Button } from '../components/Button'
 import { COLORS } from '../../themes/COLORS'
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { AuthParamList } from '../../navigation/AuthStackNavigation';
+
 import { login } from '../../http/authAPI';
 import { useAppDispatch } from '../../store/hooks';
 import { setUser } from '../../store/slices/userSlice';
+
 import { setAuth, setToken } from '../../store/slices/authSlice';
 
-type Navigation = NativeStackScreenProps<AuthParamList, 'Login'>
+interface Props {
+    handlePress: () => void
+}
 
-export const Login = ({navigation}: Navigation) => {
+export const AuthItems = ({handlePress}: Props) => {
 
     const dispatch = useAppDispatch()
 
@@ -34,10 +36,6 @@ export const Login = ({navigation}: Navigation) => {
         .then((data) => {dispatch(setUser(data.user)); dispatch(setAuth(true)); dispatch(setToken(data.token))})
         .catch((e) => console.log(e))
     }
-
-    useEffect(() => {
-        navigation.setOptions({headerTitle: "Авторизация"})
-    }, [navigation])
 
     return (
         <View style={styles.mainView}> 
@@ -64,7 +62,7 @@ export const Login = ({navigation}: Navigation) => {
             <View style={{alignItems: 'center'}}>
                 <Button 
                     style={{width: '100%'}} 
-                    title='Авторизироваться' 
+                    title='Зарегистрироваться' 
                     color={COLORS.orange} 
                     textColor={COLORS.black}
                     onPress={() => handleSubmit()}/>
@@ -84,7 +82,7 @@ const styles = StyleSheet.create({
         // alignItems: 'flex-start',
     },
     input: {
-        borderBottomWidth: 1
+        borderBottomWidth: 1,
     },
     titleText: {
         textAlign: 'left',

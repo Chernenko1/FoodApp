@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { StyleSheet, View } from "react-native"
+import { ScrollView, StyleSheet, View } from "react-native"
 import * as Yup from 'yup'
 import { useFormik } from "formik"
 import { AppText } from "../components/AppText"
@@ -13,7 +13,7 @@ import { COLORS } from "../../themes/COLORS"
 
 type Navigation = NativeStackScreenProps<AuthParamList>
 
-export const RegUserInfo = ({navigation}:Navigation) => {
+export const RegUserInfo = ({navigation, route}:Navigation) => {
     const {colors} = useTheme()
 
     const InfoSchema = Yup.object().shape({
@@ -26,12 +26,19 @@ export const RegUserInfo = ({navigation}:Navigation) => {
     const {handleChange, handleSubmit, values, handleBlur, errors, touched} = useFormik({
         validationSchema: InfoSchema,
         initialValues: {age: '', weight: '', height: '', fatPercentage: ''},
-        onSubmit: (values) => {navigation.navigate('RegActivity')}
+        onSubmit: (values) => {
+            navigation.navigate('RegActivity', 
+            {...route.params, 
+                age: values.age, 
+                height: values.height, 
+                weight: values.weight,
+                fatPercentage: values.fatPercentage
+            })}
     })
 
     return (
         <View style={[styles.mainView, {backgroundColor: colors.background}]}>
-            <View style={{alignItems:'center', rowGap: 10}}>
+            <ScrollView contentContainerStyle={{alignItems:'center', rowGap: 10}} showsVerticalScrollIndicator={false}>
                 <AppText style={styles.headerText}>Укажите ваш возраст</AppText>
                 <InputText
                         value={values.age} 
@@ -52,7 +59,7 @@ export const RegUserInfo = ({navigation}:Navigation) => {
                         style={styles.input} 
                         onChangeText={handleChange('weight')}
                         onBlur={handleBlur('weight')}
-                        error={errors.weight}
+                        error={errors.weight && touched.weight ? errors.weight : null}
                         touched={touched.weight}
                         keyboardType="numeric"
                         height={80}
@@ -87,7 +94,7 @@ export const RegUserInfo = ({navigation}:Navigation) => {
                         maxLength={3}
                     />
                     {errors.fatPercentage && <AppText style={{fontSize: 18, color: 'red'}}>{errors.fatPercentage}</AppText>}
-            </View>
+            </ScrollView>
             <Button title="Далее" onPress={handleSubmit} textColor={COLORS.black} color={COLORS.orange}/>
         </View>
     )

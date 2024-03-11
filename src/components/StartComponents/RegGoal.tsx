@@ -38,7 +38,7 @@ export const RegGoal = ({navigation}: Navigation) => {
             <Button 
                 style={styles.button} 
                 title="Далее" 
-                onPress={() => navigation.navigate('RegGenderSelect')} 
+                onPress={() => navigation.navigate('RegGenderSelect', {purpose: value as number})} 
                 color={COLORS.orange}
                 textColor={COLORS.black} 
                 disabled={!value}/>

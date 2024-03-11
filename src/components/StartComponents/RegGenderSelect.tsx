@@ -10,11 +10,12 @@ import { AuthParamList } from "../../navigation/AuthStackNavigation"
 
 type Navigation = NativeStackScreenProps<AuthParamList>
 
-export const RegGenderSelect = ({navigation}:Navigation) => {
+export const RegGenderSelect = ({navigation, route}:Navigation) => {
     const [value, setValue] = useState<Number>()
 
     let {colors} = useTheme()
 
+    let gender = (value == 1) ? true : false
 
     return (
         <View style={[styles.mainView, {backgroundColor: colors.background}]}>
@@ -31,7 +32,7 @@ export const RegGenderSelect = ({navigation}:Navigation) => {
             </View>
             <Button 
                 title="Далее" 
-                onPress={() => navigation.navigate('RegUserInfo')} 
+                onPress={() => navigation.navigate('RegUserInfo', {...route.params, gender})} 
                 color={COLORS.orange}
                 textColor={COLORS.black} 
                 disabled={!value}/>

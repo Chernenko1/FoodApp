@@ -3,10 +3,14 @@ import { UserActivityItem } from "../ProfileComponents/UserComponents/UserActivi
 import { useState } from "react"
 import { AppText } from "../components/AppText"
 import { Button } from "../components/Button"
+import { COLORS } from "../../themes/COLORS"
+import { NativeStackScreenProps } from "@react-navigation/native-stack"
+import { AuthParamList } from "../../navigation/AuthStackNavigation"
 
+type Navigation = NativeStackScreenProps<AuthParamList>
 
-export const RegUserActivity = () => {
-    const [value, setValue] = useState<Number>()
+export const RegUserActivity = ({navigation, route}: Navigation) => {
+    const [value, setValue] = useState<number>()
 
     return (
         <View style={styles.mainView}>
@@ -37,7 +41,13 @@ export const RegUserActivity = () => {
                     onPress={() => setValue(3)}
                 />
             </View>
-            <Button title="Далее" onPress={() => {}}/>
+            <Button 
+                style={styles.button} 
+                title="Далее" 
+                onPress={() => navigation.navigate('Registration', {...route.params, activity: value})} 
+                color={COLORS.orange}
+                textColor={COLORS.black} 
+                disabled={typeof value === 'undefined'}/>
         </View>
     )
 }
@@ -45,6 +55,7 @@ export const RegUserActivity = () => {
 const styles = StyleSheet.create({
     mainView: {
         flex: 1,
+        alignItems: 'center',
         justifyContent: 'space-between',
         paddingVertical: 25
     },
@@ -55,5 +66,8 @@ const styles = StyleSheet.create({
     },
     text: {
         fontSize: 25,
-    }
+    },
+    button: {
+        width: '70%'
+    },
 })

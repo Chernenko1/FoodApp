@@ -25,6 +25,7 @@ export const UserActivityItem = ({title, description, status, onPress}: Props) =
 const styles = StyleSheet.create({
     activityItem:{ 
         flexDirection: 'row',
+        paddingHorizontal: 10,
         marginBottom: 15,
     },
     textView: {
