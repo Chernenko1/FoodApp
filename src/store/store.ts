@@ -6,6 +6,7 @@ import productReducer from './slices/productSlice'
 import recipesReducer from './slices/recipesSlice';
 import favouriteReducer from './slices/favouriteSlice'
 import authReducer from './slices/authSlice'
+import mealsReducer from './slices/MealSlice';
 
 const userPersistConfig = {
   key: 'user',
@@ -33,18 +34,25 @@ const authPersistConfig = {
   storage: AsyncStorage
 }
 
+const mealsPersistConfig = {
+  key: 'meals',
+   storage: AsyncStorage
+}
+
 const userPersistReducer = persistReducer (userPersistConfig, userReducer)
 const productPersistReducer = persistReducer(productPersistConfig, productReducer)
 const recipesPersistReducer = persistReducer(recipesPersistConfig, recipesReducer)
 const favouritePersistReducer = persistReducer(recipesPersistConfig, favouriteReducer)
 const authPersistReducer = persistReducer(authPersistConfig, authReducer)
+const mealsPersistReducer = persistReducer(mealsPersistConfig, mealsReducer)
 
 const reducers = combineReducers({
   user: userPersistReducer,
   product: productPersistReducer,
   recipes: recipesPersistReducer,
   favourite: favouritePersistReducer,
-  auth: authPersistReducer
+  auth: authPersistReducer,
+  meals: mealsPersistReducer
 });
 
 export const store = configureStore({

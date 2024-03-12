@@ -61,3 +61,14 @@ declare interface User {
     carbohydrates: number
   }
 }
+
+declare interface Meals {
+  _id: string,
+  date: string,
+  breakfast: [{ productId: string, quantity: number}],
+  lunch:  [{ productId: string, quantity: number}],
+  dinner: [{ productId: string, quantity: number}], 
+  snack:  [{ productId: string, quantity: number}],
+  necessaryCalories: number,
+  totalCalories: number
+}
