@@ -2,7 +2,7 @@ import { useState } from "react"
 import { Button, Modal, StyleSheet, Text, TextInput, View } from "react-native"
 import { COLORS } from "../../../../themes/COLORS"
 import { ModalV } from "../../../components/Modal"
-import { useAppDispatch } from "../../../../store/hooks"
+import { useAppDispatch, useAppSelector } from "../../../../store/hooks"
 import { updateUserDetails } from "../../../../http/userAPI"
 import { updateDetails } from "../../../../store/slices/userSlice"
 
@@ -23,8 +23,10 @@ export const UserHeightModal = ({text,visible,closeModal}: Props) => {
     const dispatch = useAppDispatch()
     const {colors} = useTheme()
 
+    const {_id} = useAppSelector(state => state.user.user)
+
     function handlePress () {
-        updateUserDetails({id: "65d614788d7d99748725f156", type: 'height', data: value})
+        updateUserDetails({id: _id, type: 'height', data: value})
         dispatch(updateDetails({type: 'height', value}))
         closeModal()
     }

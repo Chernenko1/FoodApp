@@ -1,7 +1,7 @@
 import { useState } from "react"
 import {Text, TextInput, View } from "react-native"
 import { ModalV } from "../../../components/Modal"
-import { useAppDispatch } from "../../../../store/hooks"
+import { useAppDispatch, useAppSelector } from "../../../../store/hooks"
 import { updateUserDetails } from "../../../../http/userAPI"
 import { updateDetails } from "../../../../store/slices/userSlice"
 
@@ -22,8 +22,10 @@ export const UserGenderModal = ({visible,closeModal}: Props) => {
     const dispatch = useAppDispatch()
     const {colors} = useTheme()
 
+    const {_id} = useAppSelector(state => state.user.user)
+
     function handlePress () {
-        updateUserDetails({id: "65d614788d7d99748725f156", type: 'gender', data: checked})
+        updateUserDetails({id: _id, type: 'gender', data: checked})
         dispatch(updateDetails({type: 'gender', checked}))
         closeModal()
     }

@@ -12,7 +12,7 @@ type NavProps = NativeStackScreenProps<ProfileParamList, 'UserGoal'>
 
 export const UserGoal = ({navigation}: NavProps) => {
 
-    const {details} = useAppSelector(state => state.user.user)
+    const {details, _id} = useAppSelector(state => state.user.user)
     const dispatch = useAppDispatch()
 
     useEffect(() => {
@@ -23,7 +23,7 @@ export const UserGoal = ({navigation}: NavProps) => {
     }, [navigation])
 
     const saveData = async (goal: number) => {
-       await updateUserDetails({id: '65d614788d7d99748725f156', 'data': goal, type: 'purpose', updateMacros: true})
+       await updateUserDetails({id: _id, 'data': goal, type: 'purpose', updateMacros: true})
        .then((data: User) => dispatch(setUser(data)))
     }
 
