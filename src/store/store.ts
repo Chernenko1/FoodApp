@@ -8,6 +8,8 @@ import favouriteReducer from './slices/favouriteSlice'
 import authReducer from './slices/authSlice'
 import mealsReducer from './slices/MealSlice';
 
+import { mealsAPI } from './services/mealsService';
+
 const userPersistConfig = {
   key: 'user',
   storage: AsyncStorage,
@@ -52,7 +54,8 @@ const reducers = combineReducers({
   recipes: recipesPersistReducer,
   favourite: favouritePersistReducer,
   auth: authPersistReducer,
-  meals: mealsPersistReducer
+  meals: mealsPersistReducer,
+  [mealsAPI.reducerPath]: mealsAPI.reducer
 });
 
 export const store = configureStore({
@@ -61,7 +64,7 @@ export const store = configureStore({
     getDefaultMiddleware({
       serializableCheck: false,
       immutableCheck: false,
-    }),
+    }).concat(mealsAPI.middleware),
 });
 
 export const persistor = persistStore(store);

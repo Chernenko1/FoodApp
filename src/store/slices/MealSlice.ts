@@ -18,13 +18,13 @@ export const mealsSlice = createSlice({
     name: 'meals',
     initialState,
     reducers: {
-        addMeals(state, action) {
+        setMeals(state, action) {
             state = action.payload
         }
     }
 })
 
-export const {addMeals} = mealsSlice.actions
+export const {setMeals} = mealsSlice.actions
 
 export const selectMeals = (state: RootState) => state.meals
 
