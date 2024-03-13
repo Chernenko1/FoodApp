@@ -69,6 +69,11 @@ declare interface Meals {
   lunch:  [{ productId: string, quantity: number}],
   dinner: [{ productId: string, quantity: number}], 
   snack:  [{ productId: string, quantity: number}],
-  necessaryCalories: number,
-  totalCalories: number
+  info: {
+    necessaryCalories: number,
+    totalCalories: number
+    fat: number,
+    protein: number,
+    carbohydrates: number
+  }
 }
