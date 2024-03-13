@@ -7,16 +7,19 @@ import { mealsAPI } from "../../../store/services/mealsService"
 import { useAppSelector } from "../../../store/hooks"
 import { useContext, useEffect } from "react"
 import { MealContext } from "../Context/MealContext"
+import {CircleProgressBar} from "../../components/Charts/CircleProgressBar"
 
 
 export const BasicEnergyInfo = () => {
 
     const {colors} = useTheme()
-    const {_id, required_macros} = useAppSelector(state => state.user.user)
     const date = useContext(MealContext)
+
+    const {_id, required_macros} = useAppSelector(state => state.user.user)
     const {data, refetch} = mealsAPI.useFetchDayMealsQuery({id: _id, date})
 
     
+    const progress = Math.round(((data?.info.totalCalories ?? 1) * 100) / (data?.info.necessaryCalories ?? 1)) 
 
     useEffect(() => {
        refetch()
@@ -26,10 +29,12 @@ export const BasicEnergyInfo = () => {
         <SafeAreaView style={[styles.mainView, {backgroundColor: colors.card}]}>
             <View style={styles.caloriesView}>
                 <Calories type="Съедено" count={data?.info.totalCalories ?? 0} icon="open"/>
-                <View style={[styles.progressView, {backgroundColor:colors.primary}]}>
-                    <View style={{width: 110, height: 110, borderRadius: 55, backgroundColor: COLORS.white, justifyContent: 'center'}}>
-                        <Calories type="Осталось" count={(data?.info.necessaryCalories ?? 0) - (data?.info.totalCalories ?? 0)}/>
-                    </View>
+                <View style={[styles.progressBarWrapper]}>
+                    
+                    <CircleProgressBar progress={progress ? progress : 0.1} />   
+                    <View style={styles.progressText}>
+                        <Calories  type="Осталось" count={(data?.info.necessaryCalories ?? 0) - (data?.info.totalCalories ?? 0)}/>
+                    </View> 
                 </View>
                 <Calories type="Сожжено" count={536} icon="open"/>
             </View>
@@ -57,15 +62,22 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center'
     },
-    progressView: {
-        alignItems:'center',
-        justifyContent: 'center',
-        width: 140,
-        height: 140,
-        borderRadius: 70
-    },
     cbfuView: {
         flexDirection: 'row',
         justifyContent: 'space-between',
     },
+    progressBarWrapper: {
+        position: 'relative',
+        alignItems: 'center',
+        justifyContent: 'center',
+      },
+      progressText: {
+        position: 'absolute',
+        textAlign: 'center',
+        fontSize: 20,
+        color: '#000',
+        bottom: '25%',
+        left: '44%',
+        transform: [{ translateX: -20 }, { translateY: -12 }],
+      },
 })
