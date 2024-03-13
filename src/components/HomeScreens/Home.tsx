@@ -4,11 +4,12 @@ import { BasicEnergyInfo } from "./EnergyInfoComonents/BasicEnergyInfo";
 import { MealList } from "./MealsComponents/MealList";
 import { DatePicker } from "./DatePicker";
 import { MealContext } from "./Context/MealContext";
-import { getMealData } from "../../http/mealAPI";
+
+import { formatDate } from "../../utils/formDate";
 
 export const Home = () => {
 
-    const [date, setDate] = useState('')
+    const [date, setDate] = useState(formatDate(new Date()))
 
     const getDate = async (date: string) => {
        setDate(date)
@@ -16,7 +17,7 @@ export const Home = () => {
     return (
     // <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <ScrollView contentContainerStyle={styles.mainView}>
-            <MealContext.Provider value={{date: date}}>
+            <MealContext.Provider value={date}>
                 <BasicEnergyInfo />
                 <DatePicker handleDate={getDate}/>
                 <MealList />

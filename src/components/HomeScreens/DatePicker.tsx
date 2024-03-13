@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/Ionicons'
 import { COLORS } from "../../themes/COLORS"
 import { useEffect, useState } from "react";
 import { AppText } from "../components/AppText";
-
+import { formatDate } from "../../utils/formDate";
 interface Props {
     handleDate: (date: string) => void
 }
@@ -21,15 +21,7 @@ export const DatePicker = ({handleDate}: Props) => {
 
     const showMode = () => {
         setShow(true);
-      };
-
-    const formatDate = (date: Date) => {
-        const day = String(date.getDate()).padStart(2, '0');
-        const month = String(date.getMonth() + 1).padStart(2, '0');
-        const year = date.getFullYear();
-        
-        return `${day}-${month}-${year}`
-    }     
+      };    
 
     useEffect(() => {handleDate(formatDate(date))}, [date])
 
