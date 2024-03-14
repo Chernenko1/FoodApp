@@ -10,12 +10,11 @@ import { AppText } from "../../components/AppText"
 interface Props {
     title: string,
     kcal: number,
-    maxKcal: number
 }
 
 type Navigation = NativeStackNavigationProp<HomeParamList, 'MealInfo'>
 
-export const Meal = ({title, kcal = 0, maxKcal = 0}: Props) => {
+export const Meal = ({title, kcal = 0}: Props) => {
 
     const {colors} = useTheme()
 
@@ -27,11 +26,10 @@ export const Meal = ({title, kcal = 0, maxKcal = 0}: Props) => {
                 <View style={styles.frameView}>
                     <AppText style={styles.titleText} fontWeight="medium">{title}</AppText>
                     <AppText style = {styles.kcalText}>
-                        <AppText style={[{color: colors.primary}]}>{kcal} </AppText> 
-                        ккал из 
-                        <AppText style={[{color: colors.primary}]}> {maxKcal} </AppText> 
+                        Употреблено 
+                        <AppText style={[{color: colors.primary}]}> {kcal} </AppText> 
                         ккал
-                        </AppText>
+                    </AppText>
                 </View>
             </Pressable>    
             <View style={styles.iconView}>

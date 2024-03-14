@@ -13,17 +13,11 @@ import {CircleProgressBar} from "../../components/Charts/CircleProgressBar"
 export const BasicEnergyInfo = () => {
 
     const {colors} = useTheme()
-    const date = useContext(MealContext)
 
-    const {_id, required_macros} = useAppSelector(state => state.user.user)
-    const {data, refetch} = mealsAPI.useFetchDayMealsQuery({id: _id, date})
+    const {required_macros} = useAppSelector(state => state.user.user)
+    const data = useAppSelector(state => state.meals.meals)
 
-    
     const progress = Math.round(((data?.info.totalCalories ?? 1) * 100) / (data?.info.necessaryCalories ?? 1)) 
-
-    useEffect(() => {
-       refetch()
-    }, [date])
 
     return (
         <SafeAreaView style={[styles.mainView, {backgroundColor: colors.card}]}>
@@ -33,7 +27,7 @@ export const BasicEnergyInfo = () => {
                     
                     <CircleProgressBar progress={progress ? progress : 0.1} />   
                     <View style={styles.progressText}>
-                        <Calories  type="Осталось" count={(data?.info.necessaryCalories ?? 0) - (data?.info.totalCalories ?? 0)}/>
+                        <Calories  type="Осталось" count={(data.info.necessaryCalories ?? 0) - (data?.info.totalCalories ?? 0)}/>
                     </View> 
                 </View>
                 <Calories type="Сожжено" count={536} icon="open"/>
@@ -49,7 +43,7 @@ export const BasicEnergyInfo = () => {
 
 const styles = StyleSheet.create({
     mainView: {
-        justifyContent: 'space-around',
+        rowGap: 20,
         paddingHorizontal: 25,
         paddingVertical: 10,
         borderBottomRightRadius: 40,
