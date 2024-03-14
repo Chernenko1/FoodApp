@@ -2,9 +2,13 @@ import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 import userSlice from "./userSlice";
 
+interface Meal {
+    meals: Meals
+}
 
-const initialState: Meals = {
-    _id: '',
+const initialState: Meal = {
+    meals: {
+        _id: '',
     date: '',
     breakfast: {
         products: [],
@@ -24,6 +28,8 @@ const initialState: Meals = {
     },
     necessaryCalories: 0,
     totalCalories: 0
+    }
+    
 }
 
 export const mealsSlice = createSlice({
@@ -31,7 +37,7 @@ export const mealsSlice = createSlice({
     initialState,
     reducers: {
         setMeals(state, action) {
-            state = action.payload
+            state.meals = action.payload
         }
     }
 })
