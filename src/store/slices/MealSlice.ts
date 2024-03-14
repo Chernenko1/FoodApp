@@ -6,10 +6,22 @@ import userSlice from "./userSlice";
 const initialState: Meals = {
     _id: '',
     date: '',
-    breakfast: [],
-    lunch:  [],
-    dinner: [], 
-    snack:  [],
+    breakfast: {
+        products: [],
+        calories: 0
+    },
+    lunch:  {
+        products: [],
+        calories: 0
+    },
+    dinner: {
+        products: [],
+        calories: 0
+    }, 
+    snack:  {
+        products: [],
+        calories: 0
+    },
     necessaryCalories: 0,
     totalCalories: 0
 }
