@@ -16,13 +16,15 @@ export const Home = () => {
     }
     return (
     // <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <ScrollView contentContainerStyle={styles.mainView}>
+        <View style={styles.mainView}>
             <MealContext.Provider value={date}>
                 <BasicEnergyInfo />
-                <DatePicker handleDate={getDate}/>
-                <MealList />
+                <ScrollView>
+                    <DatePicker handleDate={getDate}/>
+                    <MealList />
+                </ScrollView>
             </MealContext.Provider>
-        </ScrollView>
+        </View>
     // </TouchableWithoutFeedback>
     )
 }
@@ -30,5 +32,6 @@ export const Home = () => {
 const styles = StyleSheet.create({
     mainView: {
         flex:1,
+        backgroundColor: 'red'
     }
 })

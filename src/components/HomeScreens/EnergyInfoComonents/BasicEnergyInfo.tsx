@@ -49,7 +49,6 @@ export const BasicEnergyInfo = () => {
 
 const styles = StyleSheet.create({
     mainView: {
-        flex: 0.3,
         justifyContent: 'space-around',
         paddingHorizontal: 25,
         paddingVertical: 10,

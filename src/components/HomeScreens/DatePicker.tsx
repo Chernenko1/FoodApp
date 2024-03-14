@@ -46,7 +46,8 @@ export const DatePicker = ({handleDate}: Props) => {
 
 const styles = StyleSheet.create({
     mainView: {
-        top: '6%',
+        marginTop: 5,
+        paddingVertical: 5,
         alignItems: 'center',
         justifyContent: 'center'
     },
