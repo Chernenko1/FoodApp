@@ -1,12 +1,8 @@
 import { SafeAreaView, StyleSheet, Text, View } from "react-native"
-import { COLORS } from "../../../themes/COLORS"
 import { Calories } from "./Calories"
 import { CBFU } from "./CBFU"
 import { useTheme } from "@react-navigation/native"
-import { mealsAPI } from "../../../store/services/mealsService"
 import { useAppSelector } from "../../../store/hooks"
-import { useContext, useEffect } from "react"
-import { MealContext } from "../Context/MealContext"
 import {CircleProgressBar} from "../../components/Charts/CircleProgressBar"
 
 
@@ -23,8 +19,7 @@ export const BasicEnergyInfo = () => {
         <SafeAreaView style={[styles.mainView, {backgroundColor: colors.card}]}>
             <View style={styles.caloriesView}>
                 <Calories type="Съедено" count={data?.info.totalCalories ?? 0} icon="open"/>
-                <View style={[styles.progressBarWrapper]}>
-                    
+                <View style={[styles.progressBarWrapper]}>    
                     <CircleProgressBar progress={progress ? progress : 0.1} />   
                     <View style={styles.progressText}>
                         <Calories  type="Осталось" count={(data.info.necessaryCalories ?? 0) - (data?.info.totalCalories ?? 0)}/>
