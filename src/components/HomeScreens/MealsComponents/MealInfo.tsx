@@ -9,30 +9,37 @@ import { ButtonIcon } from "../../components/ButtonIcon"
 import { deleteProducFromMeal, getMealData } from "../../../http/mealAPI"
 import { MealInfoHeader } from "./MealInhoHeader"
 import { useTheme } from "@react-navigation/native"
+import { useAppSelector } from "../../../store/hooks"
 
 type Navigation = NativeStackScreenProps<HomeParamList, 'MealInfo'>
 
 interface IProduct {
-    _id: string
-    quantity: string
-    productId: Product
+    products: [{
+        productId: string;
+        quantity: number;
+    }];
 }
 
 export const MealInfo = ({navigation, route}: Navigation) => {   
-    const [products, setProducts] = useState<IProduct[]>([])
+    const {headerTitle,type} = route.params
+    
+    const [data, setData] = useState()
+    
+    const {_id} = useAppSelector(state => state.meals.meals)
+    // const {products} = useAppSelector(state => state.meals.meals[type])
 
-    const {headerTitle} = route.params
+    // console.log(data)
 
     const {colors} = useTheme()
     
-    const deleteProduct  = (productId: string) => {
-        deleteProducFromMeal({
-            mealId: '65ca22610be656a878bb704e',
-            productId,
-            type: 'breakfast'
-        })
-        getMealData("65ca22610be656a878bb704e", 'breakfast' ).then((data) => setProducts(data)).catch(e => console.log(e))
-    }
+    // const deleteProduct  = (productId: string) => {
+    //     deleteProducFromMeal({
+    //         mealId: '65ca22610be656a878bb704e',
+    //         productId,
+    //         type: 'breakfast'
+    //     })
+    //     getMealData("65ca22610be656a878bb704e", 'breakfast' ).then((data) => setProducts(data)).catch(e => console.log(e))
+    // }
     
     useEffect(() => {
         navigation.setOptions({
@@ -44,23 +51,31 @@ export const MealInfo = ({navigation, route}: Navigation) => {
     }, [])
 
     useEffect(() => {
-        navigation.addListener('focus', () => getMealData("65ca22610be656a878bb704e", 'breakfast' ).then((data) => setProducts(data)).catch(e => console.log(e)))
+        getMealData(_id, type)
+        .then(data => setData(data))
     }, [])
+
+
+    // useEffect(() => {
+    //     navigation.addListener('focus', () => getMealData("65ca22610be656a878bb704e", 'breakfast' ).then((data) => setProducts(data)).catch(e => console.log(e)))
+    // }, [])
+
+    // console.log(data)
 
     return (
         <SafeAreaView style={[styles.mainView, {backgroundColor: colors.background}]}>
-                <FlatList 
+             <FlatList 
                 ListHeaderComponent={<MealInfoHeader />}
-                data={products} 
-                keyExtractor={item => item._id} 
+                data={data} 
+                keyExtractor={(item, ind) => item._id + `${ind}`} 
                 renderItem={({item}) => 
                     <View style = {styles.productView}>
                         <ProductCard
-                            productName={item.productId.name} 
+                            productName={item.product.name} 
                             productQuantity={item.quantity} 
-                            kcal={item.productId.nutrients.calories} 
-                            productId={item._id} 
-                            onPress={() => deleteProduct(item._id)}
+                            kcal={item.product.nutrients.calories} 
+                            productId={item.product._id} 
+                            // onPress={() => deleteProduct(item.product._id)}
                         />
                     </View>
                 }

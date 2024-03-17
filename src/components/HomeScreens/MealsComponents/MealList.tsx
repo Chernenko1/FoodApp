@@ -7,10 +7,10 @@ export const MealList = () => {
 
     return (
         <View style={styles.mainView}>
-            <Meal title="Завтрак" kcal={breakfast.calories} />
-            <Meal title="Обед" kcal={lunch.calories} />
-            <Meal title="Ужин" kcal={dinner.calories} />
-            <Meal title="Перекус" kcal={snack.calories} />
+            <Meal title="Завтрак" kcal={breakfast.calories} type="breakfast"/>
+            <Meal title="Обед" kcal={lunch.calories} type="lunch"/>
+            <Meal title="Ужин" kcal={dinner.calories} type="dinner"/>
+            <Meal title="Перекус" kcal={snack.calories} type="snack"/>
         </View>
     )
 }

@@ -9,12 +9,13 @@ import { AppText } from "../../components/AppText"
 
 interface Props {
     title: string,
+    type: string,
     kcal: number,
 }
 
 type Navigation = NativeStackNavigationProp<HomeParamList, 'MealInfo'>
 
-export const Meal = ({title, kcal = 0}: Props) => {
+export const Meal = ({title, kcal = 0, type}: Props) => {
 
     const {colors} = useTheme()
 
@@ -22,7 +23,7 @@ export const Meal = ({title, kcal = 0}: Props) => {
 
     return (
         <View style={[styles.mainView, {backgroundColor: colors.card}]}>
-            <Pressable onPress={() => navigation.navigate('MealInfo', {headerTitle: title})}>
+            <Pressable onPress={() => navigation.navigate('MealInfo', {headerTitle: title, type})}>
                 <View style={styles.frameView}>
                     <AppText style={styles.titleText} fontWeight="medium">{title}</AppText>
                     <AppText style = {styles.kcalText}>
