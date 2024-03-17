@@ -22,7 +22,8 @@ import { ProductInfo } from "../../components/ProductComponent/ProductInfo";
       backScreen: string,
     },
     MealInfo: {
-      headerTitle: string
+      headerTitle: string,
+      type: string
     }
     ProductInfo: {
       backScreen?: string,
