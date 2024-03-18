@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native"
+import { Pressable, StyleSheet, Text, View } from "react-native"
 import { COLORS } from "../../themes/COLORS"
 import Icon from "react-native-vector-icons/Ionicons"
 import { ButtonIcon } from "../components/ButtonIcon"
@@ -11,24 +11,25 @@ interface Props {
     productName: string,
     kcal: number,
     productQuantity: string,
-    productId: string
-    onPress: () => void
+    productId: string,
+    onCardPress: () => void
+    onIconPress: () => void
 }
 
 
-export const ProductCard = ({productName, productQuantity, kcal, productId, onPress}: Props) => {
+export const ProductCard = ({productName, productQuantity, kcal, productId, onCardPress, onIconPress}: Props) => {
 
     const {colors} = useTheme()
 
     return (
-        <View style={[styles.mainView, {backgroundColor: colors.card}]}>
-            <View>
+        <Pressable style={[styles.mainView, {backgroundColor: colors.card}]} onPress={onCardPress}>
+            <View style={styles.textView}>
                 <AppText style={[styles.productNameText]}  fontWeight="medium">{productName}</AppText>
                 <AppText style={styles.productInfoText}>{productQuantity} г</AppText>
                 <AppText style={styles.productInfoText}>{kcal} ккал</AppText>
             </View>
-            <ButtonIcon name='close-outline' size={30} backgroundColor={COLORS.lightGray} onPress={onPress}/>
-        </View>
+            <ButtonIcon name='close-outline' size={30} backgroundColor={COLORS.lightGray} onPress={onIconPress}/>
+        </Pressable>
     )
 }
 
@@ -42,10 +43,13 @@ const styles = StyleSheet.create({
         borderRadius: 15,
         elevation: 3
     },
+    textView: {
+       alignItems: 'flex-start'
+    },
     productNameText: {
-        fontSize: 18,
+        fontSize: 20,
     },
     productInfoText: {
-        fontSize: 15
+        fontSize: 18
     },
 })
