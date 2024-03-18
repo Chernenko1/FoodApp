@@ -1,13 +1,13 @@
 import { useTheme } from "@react-navigation/native";
-import { StyleProp, Text, TextComponent, TextStyle, View } from "react-native";
+import { StyleProp, Text, TextComponent, TextProps, TextStyle, View } from "react-native";
 
-interface Props {
+interface Props extends TextProps{
     style?: StyleProp<TextStyle>,
     children?: React.ReactNode,
     fontWeight?: 'regular' | 'medium' | 'light'
 }
 
-export const AppText =  ({style, children, fontWeight = 'regular'}: Props) =>{
+export const AppText =  ({style, children, fontWeight = 'regular', ...rest}: Props) =>{
 
     const {colors} = useTheme()
 
@@ -18,6 +18,6 @@ export const AppText =  ({style, children, fontWeight = 'regular'}: Props) =>{
     }
 
     return (
-        <Text style={[{textAlign: 'center', fontFamily: font[fontWeight], color:colors.text}, style]}>{children}</Text>
+        <Text style={[{fontFamily: font[fontWeight], color:colors.text}, style]} {...rest}>{children}</Text>
     )
 }
