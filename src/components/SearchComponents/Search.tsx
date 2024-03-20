@@ -16,12 +16,12 @@ export const Search = ({navigation, route}: NavProps) => {
     const [value, setValue] = useState('')
     const [searchAnswer, setSearchAnswer] = useState<Product[]>([])
 
-    const {backScreen} = route.params
+    const {backScreen, screenParams} = route.params
 
     const {colors} = useTheme()
 
     const nextScreen = (item:Product) => { 
-        navigation.navigate('ProductInfo', {backScreen: backScreen, productData: item})
+        navigation.navigate('ProductInfo', {backScreen: backScreen, productData: item, mealType: screenParams?.mealType as string})
     }
 
     useEffect(() => {

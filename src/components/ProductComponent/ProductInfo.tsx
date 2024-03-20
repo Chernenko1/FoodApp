@@ -18,19 +18,21 @@ type Navigation = NativeStackScreenProps<HomeParamList, 'ProductInfo'>
 export const ProductInfo = ({navigation, route}: Navigation) => {
     
     const {_id} = useAppSelector(state => state.user.user)
-    const {productData,backScreen } = route.params
+    const {productData, backScreen, mealType} = route.params
 
     const [value, setValue] = useState('100')
     const [nutrients, setNutrients] = useState(productData.nutrients)
 
     const {colors} = useTheme()
 
+    console.log(mealType)
+
     const buttonPress = () => {
          addProductToMeal(
             {
                 userId: _id,
                 data: {productId: productData._id, quantity: value},
-                type: 'breakfast',
+                type: mealType,
                 date: '20-03-2024',
             }
         )

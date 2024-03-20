@@ -20,6 +20,9 @@ import { ProductInfo } from "../../components/ProductComponent/ProductInfo";
     StackHome: undefined,
     Search: {
       backScreen: string,
+      screenParams?: {
+        mealType?: string 
+      }
     },
     MealInfo: {
       headerTitle: string,
@@ -27,7 +30,8 @@ import { ProductInfo } from "../../components/ProductComponent/ProductInfo";
     }
     ProductInfo: {
       backScreen?: string,
-      productData: Product
+      productData: Product,
+      mealType: string
     }
   }
 

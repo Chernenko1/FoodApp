@@ -23,23 +23,21 @@ interface IProduct {
 export const MealInfo = ({navigation, route}: Navigation) => {   
     const {headerTitle,type} = route.params
     
-    const [data, setData] = useState()
+    const [products, setProducts] = useState()
     
     const {_id} = useAppSelector(state => state.meals.meals)
     // const {products} = useAppSelector(state => state.meals.meals[type])
 
-    // console.log(data)
-
     const {colors} = useTheme()
     
-    // const deleteProduct  = (productId: string) => {
-    //     deleteProducFromMeal({
-    //         mealId: '65ca22610be656a878bb704e',
-    //         productId,
-    //         type: 'breakfast'
-    //     })
-    //     getMealData("65ca22610be656a878bb704e", 'breakfast' ).then((data) => setProducts(data)).catch(e => console.log(e))
-    // }
+    const deleteProduct  = (productId: string) => {
+        deleteProducFromMeal({
+            mealId: _id,
+            productId,
+            type
+        })
+        getMealData(_id, type ).then((data) => setProducts(data)).catch(e => console.log(e))
+    }
     
     useEffect(() => {
         navigation.setOptions({
@@ -51,22 +49,14 @@ export const MealInfo = ({navigation, route}: Navigation) => {
     }, [])
 
     useEffect(() => {
-        getMealData(_id, type)
-        .then(data => setData(data))
+        navigation.addListener('focus', () => getMealData(_id, type ).then((data) => setProducts(data)).catch(e => console.log(e)))
     }, [])
-
-
-    // useEffect(() => {
-    //     navigation.addListener('focus', () => getMealData("65ca22610be656a878bb704e", 'breakfast' ).then((data) => setProducts(data)).catch(e => console.log(e)))
-    // }, [])
-
-    // console.log(data)
 
     return (
         <SafeAreaView style={[styles.mainView, {backgroundColor: colors.background}]}>
              <FlatList 
                 ListHeaderComponent={<MealInfoHeader />}
-                data={data} 
+                data={products} 
                 keyExtractor={(item, ind) => item._id + `${ind}`} 
                 renderItem={({item}) => 
                     <View style = {styles.productView}>
@@ -75,13 +65,14 @@ export const MealInfo = ({navigation, route}: Navigation) => {
                             productQuantity={item.quantity} 
                             kcal={item.product.nutrients.calories} 
                             productId={item.product._id} 
-                            // onPress={() => deleteProduct(item.product._id)}
+                            onIconPress={() => {}}
+                            onCardPress={() => {}}
                         />
                     </View>
                 }
                 />
                     <View style={styles.addIconView}>
-                        <ButtonIcon name="add-outline" size={40} backgroundColor={COLORS.deepOrange} onPress={() => navigation.navigate('Search', {backScreen: route.name})}/>
+                        <ButtonIcon name="add-outline" size={40} backgroundColor={COLORS.deepOrange} onPress={() => navigation.navigate('Search', {backScreen: route.name, screenParams: {mealType: type} })}/>
                     </View> 
         </SafeAreaView>
     )
