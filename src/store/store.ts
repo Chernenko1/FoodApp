@@ -7,6 +7,7 @@ import recipesReducer from './slices/recipesSlice';
 import favouriteReducer from './slices/favouriteSlice'
 import authReducer from './slices/authSlice'
 import mealsReducer from './slices/MealSlice';
+import appSettingsReducer from './slices/appSettings';
 
 import { mealsAPI } from './services/mealsService';
 
@@ -38,7 +39,12 @@ const authPersistConfig = {
 
 const mealsPersistConfig = {
   key: 'meals',
-   storage: AsyncStorage
+  storage: AsyncStorage
+}
+
+const appPersistConfig = {
+  key: 'app',
+  storage: AsyncStorage
 }
 
 const userPersistReducer = persistReducer (userPersistConfig, userReducer)
@@ -47,6 +53,7 @@ const recipesPersistReducer = persistReducer(recipesPersistConfig, recipesReduce
 const favouritePersistReducer = persistReducer(recipesPersistConfig, favouriteReducer)
 const authPersistReducer = persistReducer(authPersistConfig, authReducer)
 const mealsPersistReducer = persistReducer(mealsPersistConfig, mealsReducer)
+const appPersistReducer = persistReducer(appPersistConfig, appSettingsReducer)
 
 const reducers = combineReducers({
   user: userPersistReducer,
@@ -55,6 +62,7 @@ const reducers = combineReducers({
   favourite: favouritePersistReducer,
   auth: authPersistReducer,
   meals: mealsPersistReducer,
+  app: appPersistReducer,
   [mealsAPI.reducerPath]: mealsAPI.reducer
 });
 
