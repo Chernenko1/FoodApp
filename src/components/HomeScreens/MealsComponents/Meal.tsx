@@ -6,6 +6,7 @@ import { StackNavigationState, useNavigation, useTheme } from "@react-navigation
 import {NativeStackNavigationProp } from "@react-navigation/native-stack/lib/typescript/src/types"
 import { HomeParamList } from "../../../screens/HomeStack"
 import { AppText } from "../../components/AppText"
+import { ButtonIcon } from "../../components/ButtonIcon"
 
 interface Props {
     title: string,
@@ -33,9 +34,11 @@ export const Meal = ({title, kcal = 0, type}: Props) => {
                     </AppText>
                 </View>
             </Pressable>    
-            <View style={styles.iconView}>
-                <Icon name='add-outline' size={35} color='black'/>
-            </View>
+            <ButtonIcon 
+                name="add-outline" 
+                size={40} 
+                backgroundColor={COLORS.lightGray} 
+                onPress={() => navigation.navigate('Search', {backScreen: 'Home', screenParams: {mealType: type} })}/>
         </View>
     )
 }
