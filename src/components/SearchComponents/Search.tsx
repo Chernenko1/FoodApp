@@ -25,7 +25,9 @@ export const Search = ({navigation, route}: NavProps) => {
     }
 
     useEffect(() => {
-        searchProduct(value).then((data: Product[]) => setSearchAnswer(data)).catch(e => console.log(e))
+        if(value) {
+            searchProduct(value).then((data: Product[]) => setSearchAnswer(data)).catch(e => console.log(e))
+        }
     }, [value])
 
     return (
