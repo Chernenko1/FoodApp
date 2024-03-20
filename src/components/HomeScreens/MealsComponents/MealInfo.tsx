@@ -13,20 +13,12 @@ import { useAppSelector } from "../../../store/hooks"
 
 type Navigation = NativeStackScreenProps<HomeParamList, 'MealInfo'>
 
-interface IProduct {
-    products: [{
-        productId: string;
-        quantity: number;
-    }];
-}
-
 export const MealInfo = ({navigation, route}: Navigation) => {   
     const {headerTitle,type} = route.params
     
     const [products, setProducts] = useState()
     
     const {_id} = useAppSelector(state => state.meals.meals)
-    // const {products} = useAppSelector(state => state.meals.meals[type])
 
     const {colors} = useTheme()
     

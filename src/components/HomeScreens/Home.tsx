@@ -7,7 +7,8 @@ import { MealContext } from "./Context/MealContext";
 
 import { formatDate } from "../../utils/formDate";
 import { mealsAPI } from "../../store/services/mealsService";
-import { useAppSelector } from "../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { setAppDate } from "../../store/slices/appSettings";
 
 export const Home = () => {
 
@@ -15,10 +16,13 @@ export const Home = () => {
 
     const {_id}= useAppSelector(state => state.user.user)
 
+    const dispatch = useAppDispatch()
+
     const {refetch} = mealsAPI.useFetchDayMealsQuery({id: _id, date})
 
     const getDate = async (date: string) => {
        setDate(date)
+       dispatch(setAppDate(date))
     }
 
     useEffect(() => {

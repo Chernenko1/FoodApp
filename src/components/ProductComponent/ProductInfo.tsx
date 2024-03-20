@@ -9,8 +9,9 @@ import { Button } from "../components/Button"
 import { addProductToMeal } from "../../http/mealAPI"
 import { useTheme } from "@react-navigation/native"
 import { LineInfoCard } from "../components/Cards/LineInfoCard"
-import { useAppSelector } from "../../store/hooks"
+import { useAppDispatch, useAppSelector } from "../../store/hooks"
 import { getProduct } from "../../http/productAPI"
+import { addToMeal, setMeals } from "../../store/slices/MealSlice"
 
 
 type Navigation = NativeStackScreenProps<HomeParamList, 'ProductInfo'>
@@ -23,9 +24,11 @@ export const ProductInfo = ({navigation, route}: Navigation) => {
     const [value, setValue] = useState('100')
     const [nutrients, setNutrients] = useState(productData.nutrients)
 
+    const {date} = useAppSelector(state => state.app) 
+
     const {colors} = useTheme()
 
-    console.log(mealType)
+    const dispatch = useAppDispatch()
 
     const buttonPress = () => {
          addProductToMeal(
@@ -33,9 +36,9 @@ export const ProductInfo = ({navigation, route}: Navigation) => {
                 userId: _id,
                 data: {productId: productData._id, quantity: value},
                 type: mealType,
-                date: '20-03-2024',
+                date,
             }
-        )
+        ).then(data => dispatch(setMeals(data))).catch(e => console.log(e))
         navigation.navigate(backScreen,{})
     }
 
