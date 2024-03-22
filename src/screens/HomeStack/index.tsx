@@ -31,7 +31,8 @@ import { ProductInfo } from "../../components/ProductComponent/ProductInfo";
     ProductInfo: {
       backScreen?: string,
       productData: Product,
-      mealType: string
+      mealType: string,
+      func: "add" | "update"
     }
   }
 

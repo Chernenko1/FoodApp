@@ -66,19 +66,19 @@ declare interface Meals {
   _id: string,
   date: string,
   breakfast: {
-    products: [{ productId: string, quantity: number}],
+    products: [{ productId: string, quantity: number, _id: string}],
     calories: number
   },
   lunch:  {
-    products: [{ productId: string, quantity: number}],
+    products:  [{ productId: string, quantity: number, _id: string}],
     calories: number
   },
   dinner: {
-    products: [{ productId: string, quantity: number}],
+    products:  [{ productId: string, quantity: number, _id: string}],
     calories: number
   }, 
   snack: {
-    products: [{ productId: string, quantity: number}],
+    products:  [{ productId: string, quantity: number, _id: string}],
     calories: number
   },
   info: {
