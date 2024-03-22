@@ -21,7 +21,7 @@ export const Search = ({navigation, route}: NavProps) => {
     const {colors} = useTheme()
 
     const nextScreen = (item:Product) => { 
-        navigation.navigate('ProductInfo', {backScreen: backScreen, productData: item, mealType: screenParams?.mealType as string})
+        navigation.navigate('ProductInfo', {backScreen: backScreen, productData: item, mealType: screenParams?.mealType as string, func: 'add'})
     }
 
     useEffect(() => {
