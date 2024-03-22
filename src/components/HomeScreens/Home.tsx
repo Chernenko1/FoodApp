@@ -3,7 +3,6 @@ import { View, StyleSheet, ScrollView} from "react-native";
 import { BasicEnergyInfo } from "./EnergyInfoComonents/BasicEnergyInfo";
 import { MealList } from "./MealsComponents/MealList";
 import { DatePicker } from "./DatePicker";
-import { MealContext } from "./Context/MealContext";
 
 import { formatDate } from "../../utils/formDate";
 import { mealsAPI } from "../../store/services/mealsService";
@@ -32,13 +31,11 @@ export const Home = () => {
     return (
     // <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.mainView}>
-            <MealContext.Provider value={date}>
                 <BasicEnergyInfo />
                 <ScrollView>
                     <DatePicker handleDate={getDate}/>
                     <MealList />
                 </ScrollView>
-            </MealContext.Provider>
         </View>
     // </TouchableWithoutFeedback>
     )
