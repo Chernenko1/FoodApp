@@ -41,6 +41,7 @@ import { setMeals } from "../slices/MealSlice";
                 method: 'PUT',
                 body: {mealId, _id, type, quantity}
             }), 
+            invalidatesTags:  _ => ['Meals']
         }),
         addProductToMeal: builder.mutation<Meals, {userId: string, date: string, type: string, data: {productId: string, quantity: string}}>({
             query:({userId,date,data, type}) => ({
@@ -48,6 +49,7 @@ import { setMeals } from "../slices/MealSlice";
                 method: 'POST',
                 body: {userId,date,data, type}
             }), 
+            invalidatesTags:  _ => ['Meals']
         })
     })
  })

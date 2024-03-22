@@ -38,7 +38,7 @@ export const Meal = ({title, kcal = 0, type}: Props) => {
                 name="add-outline" 
                 size={40} 
                 backgroundColor={COLORS.lightGray} 
-                onPress={() => navigation.navigate('Search', {backScreen: 'Home', screenParams: {mealType: type} })}/>
+                onPress={() => navigation.navigate('Search', {backScreen: 'StackHome', screenParams: {mealType: type} })}/>
         </View>
     )
 }

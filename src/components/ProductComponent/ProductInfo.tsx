@@ -33,8 +33,9 @@ export const ProductInfo = ({navigation, route}: Navigation) => {
     const {colors} = useTheme()
 
     const addProduct = () => {
+        console.log(1)
         useAddProductToMeal({userId, data: {productId: productData._id, quantity: value}, date, type: mealType})
-        .then(_ => navigation.navigate(backScreen,{})).catch(e => console.log(e))
+        .then(_ => {navigation.navigate(backScreen,{}), console.log(2)}).catch(e => console.log(e))
     }
 
     console.log(2, mealType)
