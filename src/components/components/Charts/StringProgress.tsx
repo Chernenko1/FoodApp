@@ -1,14 +1,13 @@
-import { useEffect, useState } from "react";
-import { StyleSheet, View } from "react-native";
-import { COLORS } from "../../../themes/COLORS";
-import { AppText } from "../AppText";
+import {useEffect, useState} from 'react';
+import {StyleSheet, View} from 'react-native';
+import {AppText} from '../AppText';
 
 interface Props {
-    progress: number,
-    children?: React.ReactNode
+  progress: number;
+  children?: React.ReactNode;
 }
 
-export const StringProgress = ({progress, children}:Props) => {
+export const StringProgress = ({progress}: Props) => {
   const [strokeDashoffset, setStrokeDashoffset] = useState(0);
   const radius = 50; // Радиус круга
 
@@ -19,21 +18,21 @@ export const StringProgress = ({progress, children}:Props) => {
     const newOffset = circumference - (progress / 100) * circumference;
     setStrokeDashoffset(newOffset);
   }, [progress]);
-  
-    return (
-      <View style={styles.container}>
+
+  return (
+    <View style={styles.container}>
       <View style={styles.progressBar}>
         <View
           style={[
             styles.progressCircle,
-            {  strokeDasharray: 2 * Math.PI * radius },
+            {strokeDasharray: 2 * Math.PI * radius},
           ]}
         />
       </View>
-      <Text style={styles.progressText}>{progress}%</Text>
+      <AppText style={styles.progressText}>{progress}%</AppText>
     </View>
-    );
-}
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -55,12 +54,11 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     borderWidth: 2,
     borderColor: '#007AFF',
-    transform: [{ rotate: '-90deg' }],
+    transform: [{rotate: '-90deg'}],
   },
   progressText: {
     marginTop: 10,
     fontSize: 16,
     fontWeight: 'bold',
   },
-  });
-  
+});

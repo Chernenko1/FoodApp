@@ -1,9 +1,7 @@
-import axios from "axios";
-import Config from "react-native-config";
-
-console.log(Config.URL)
+import axios from 'axios';
+import Config from 'react-native-config';
 
 export const $host = axios.create({
-    baseURL: Config.URL,
-    // headers: {"Content-Type": "multipart/form-data"}
-})
+  baseURL: Config.URL,
+  // headers: {"Content-Type": "multipart/form-data"}
+});
