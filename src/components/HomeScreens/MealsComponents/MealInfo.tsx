@@ -6,7 +6,6 @@ import {COLORS} from '../../../themes/COLORS';
 import {ProductCard} from '../../ProductComponent/ProductCard';
 import {ButtonIcon} from '../../components/ButtonIcon';
 import {getMealData} from '../../../http/mealAPI';
-import {MealInfoHeader} from './MealInfoHeader';
 import {useTheme} from '@react-navigation/native';
 import {useAppSelector} from '../../../store/hooks';
 import {mealsAPI} from '../../../store/services/mealsService';
@@ -54,7 +53,6 @@ export const MealInfo = ({navigation, route}: Navigation) => {
     <SafeAreaView
       style={[styles.mainView, {backgroundColor: colors.background}]}>
       <FlatList
-        ListHeaderComponent={<MealInfoHeader />}
         data={products}
         keyExtractor={(item, ind) => item._id + `${ind}`}
         renderItem={({item}) => (
