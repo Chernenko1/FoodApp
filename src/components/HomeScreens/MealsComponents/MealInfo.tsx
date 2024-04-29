@@ -6,7 +6,7 @@ import {COLORS} from '../../../themes/COLORS';
 import {ProductCard} from '../../ProductComponent/ProductCard';
 import {ButtonIcon} from '../../components/ButtonIcon';
 import {getMealData} from '../../../http/mealAPI';
-import {MealInfoHeader} from './MealInhoHeader';
+import {MealInfoHeader} from './MealInfoHeader';
 import {useTheme} from '@react-navigation/native';
 import {useAppSelector} from '../../../store/hooks';
 import {mealsAPI} from '../../../store/services/mealsService';
