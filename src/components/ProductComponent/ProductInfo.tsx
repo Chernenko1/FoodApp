@@ -41,7 +41,7 @@ export const ProductInfo = ({navigation, route}: Navigation) => {
       type: mealType,
     })
       .then(_ => {
-        navigation.navigate('MealInfo', {mealType});
+        navigation.pop(2);
       })
       .catch(e => console.log(e));
   };
@@ -53,13 +53,13 @@ export const ProductInfo = ({navigation, route}: Navigation) => {
       type: mealType,
       quantity: value,
     })
-      .then(_ => navigation.navigate('MealInfo', {mealType}))
+      .then(_ => navigation.goBack())
       .catch(e => console.log(e));
   };
 
   const deleteProduct = () => {
     useDeleteProductInMeal({mealId, id: productData.cardId, type: mealType})
-      .then(_ => navigation.navigate('MealInfo', {mealType}))
+      .then(_ => navigation.goBack())
       .catch(e => console.log(e));
   };
 
@@ -92,7 +92,7 @@ export const ProductInfo = ({navigation, route}: Navigation) => {
         {func == 'add' ? (
           <View style={{}}>
             <Button
-              title="Сохранить"
+              title="Добавить"
               color={COLORS.orange}
               textColor={COLORS.white}
               onPress={addProduct}
