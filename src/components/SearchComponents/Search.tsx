@@ -19,6 +19,7 @@ import {HomeParamList} from '../../screens/HomeStack';
 import {Pressable} from 'react-native';
 import {AppText} from '../components/AppText';
 import {useTheme} from '@react-navigation/native';
+import {ProductNotFound} from './ProductNotFound';
 
 type NavProps = NativeStackScreenProps<HomeParamList, 'Search'>;
 
@@ -74,6 +75,7 @@ export const Search = ({navigation, route}: NavProps) => {
             ))}
           </View>
         </TouchableWithoutFeedback>
+        <ProductNotFound />
       </KeyboardAvoidingView>
     </SafeAreaView>
   );
