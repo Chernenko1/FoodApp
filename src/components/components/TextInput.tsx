@@ -22,10 +22,10 @@ export const InputText = ({
   const {colors} = useTheme();
 
   const validationColor = !touched
-    ? COLORS.black
+    ? COLORS.orange
     : error
     ? '#FF5A5F'
-    : COLORS.orange;
+    : COLORS.red;
 
   return (
     <View style={[styles.mainView, {borderColor: validationColor, height}]}>
