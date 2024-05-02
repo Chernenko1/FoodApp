@@ -10,7 +10,7 @@ export const getProduct = async (id: string, quantity: string) => {
   return data;
 };
 
-export const addProduct = async (product: Product) => {
+export const createProduct = async (product: Product) => {
   const {data} = await $host.post(`api/product`, product);
   return data;
 };
