@@ -4,8 +4,10 @@ import {StyleSheet, View} from 'react-native';
 import * as Yup from 'yup';
 
 import {ProductCreateContext} from './ProductCreateContext';
-import {AppText} from '../../../common/AppText';
-import {InputText} from '../../../common/Inputs/TextInput';
+import {AppTextInput} from 'components/common/Inputs/AppTextInput';
+import {InputField} from './InputField';
+import {ShakeCard} from 'components/common/Cards/ShakeCard';
+import {AppText} from 'components/common/AppText';
 
 type Nutrients = {
   calories: string | number;
@@ -31,25 +33,39 @@ export const ProductServing = ({setProductServing}: IProductServing) => {
   const {quantity, nutrients} = useContext(ProductCreateContext);
 
   const NutrientsSchema = Yup.object().shape({
-    protein: Yup.number().min(0).max(quantity).required('Протеин'),
-    carbohydrates: Yup.number().min(0).max(quantity).required('Протеин'),
-    fat: Yup.number().min(0).max(quantity).required('Протеин'),
-    water: Yup.number().min(0).max(quantity).required('Протеин'),
-    dietaryFiber: Yup.number().min(0).max(quantity).required('Протеин'),
+    protein: Yup.number()
+      .min(0)
+      .max(quantity, 'Не может быть больше веса продукта')
+      .required('Не может быть пустым'),
+    carbohydrates: Yup.number()
+      .min(0)
+      .max(quantity, 'Не может быть больше веса продукта')
+      .required('Не может быть пустым'),
+    fat: Yup.number()
+      .min(0)
+      .max(quantity, 'Не может быть больше веса продукта')
+      .required('Не может быть пустым'),
+    water: Yup.number()
+      .min(0)
+      .max(quantity, 'Не может быть больше веса продукта')
+      .required('Не может быть пустым'),
+    dietaryFiber: Yup.number()
+      .min(0)
+      .max(quantity, 'Не может быть больше веса продукта')
+      .required('Не может быть пустым'),
   });
 
-  const {handleChange, handleBlur, handleSubmit, values, errors, touched} =
-    useFormik({
-      validationSchema: NutrientsSchema,
-      initialValues: {
-        protein: String(nutrients.protein),
-        fat: String(nutrients.fat),
-        carbohydrates: String(nutrients.carbohydrates),
-        water: String(nutrients.water),
-        dietaryFiber: String(nutrients.dietaryFiber),
-      },
-      onSubmit: values => setProductServing({...values, calories: '100'}),
-    });
+  const {handleChange, handleSubmit, values, errors} = useFormik({
+    validationSchema: NutrientsSchema,
+    initialValues: {
+      protein: String(nutrients.protein),
+      fat: String(nutrients.fat),
+      carbohydrates: String(nutrients.carbohydrates),
+      water: String(nutrients.water),
+      dietaryFiber: String(nutrients.dietaryFiber),
+    },
+    onSubmit: values => setProductServing({...values, calories: '100'}),
+  });
 
   useEffect(() => {
     handleSubmit();
@@ -57,70 +73,74 @@ export const ProductServing = ({setProductServing}: IProductServing) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.inputContainer}>
-        <AppText style={styles.inputTitle}>Введите количество белков: </AppText>
-        <InputText
-          value={values.protein}
-          onChangeText={handleChange('protein')}
-          keyboardType="numeric"
-          touched={touched.protein}
-          onBlur={handleBlur('protein')}
-          error={errors.protein}
-          style={styles.input}
-        />
-      </View>
-      <View style={styles.inputContainer}>
-        <AppText style={styles.inputTitle}>Введите количество жиров: </AppText>
-        <InputText
-          value={values.fat}
-          onChangeText={handleChange('fat')}
-          keyboardType="numeric"
-          touched={touched.fat}
-          onBlur={handleBlur('fat')}
-          error={errors.fat}
-          style={styles.input}
-        />
-      </View>
-      <View style={styles.inputContainer}>
-        <AppText style={styles.inputTitle}>
-          Введите количество углеводов:
-        </AppText>
-        <InputText
-          value={values.carbohydrates}
-          onChangeText={handleChange('carbohydrates')}
-          keyboardType="numeric"
-          touched={touched.carbohydrates}
-          onBlur={handleBlur('carbohydrates')}
-          error={errors.carbohydrates}
-          style={styles.input}
-        />
-      </View>
-      <View style={styles.inputContainer}>
-        <AppText style={styles.inputTitle}>Введите количество воды: </AppText>
-        <InputText
-          value={values.water}
-          onChangeText={handleChange('water')}
-          keyboardType="numeric"
-          touched={touched.water}
-          onBlur={handleBlur('water')}
-          error={errors.water}
-          style={styles.input}
-        />
-      </View>
-      <View style={styles.inputContainer}>
-        <AppText style={styles.inputTitle}>
-          Введите количество клетчатки:{' '}
-        </AppText>
-        <InputText
-          value={values.dietaryFiber}
-          onChangeText={handleChange('dietaryFiber')}
-          keyboardType="numeric"
-          touched={touched.dietaryFiber}
-          onBlur={handleBlur('dietaryFiber')}
-          error={errors.dietaryFiber}
-          style={styles.input}
-        />
-      </View>
+      <ShakeCard
+        shake={!!errors.protein}
+        style={!!errors.protein && styles.errorContainer}>
+        <InputField title="Введите количество белков: ">
+          <AppTextInput
+            value={values.protein}
+            onChangeText={handleChange('protein')}
+            keyboardType="numeric"
+          />
+        </InputField>
+      </ShakeCard>
+      {!!errors.protein && (
+        <AppText style={styles.errorText}>{errors.protein}</AppText>
+      )}
+      <ShakeCard
+        shake={!!errors.fat}
+        style={!!errors.fat && styles.errorContainer}>
+        <InputField title="Введите количество жиров: ">
+          <AppTextInput
+            value={values.fat}
+            onChangeText={handleChange('fat')}
+            keyboardType="numeric"
+          />
+        </InputField>
+      </ShakeCard>
+      {!!errors.fat && <AppText style={styles.errorText}>{errors.fat}</AppText>}
+      <ShakeCard
+        shake={!!errors.carbohydrates}
+        style={!!errors.carbohydrates && styles.errorContainer}>
+        <InputField title="Введите количество углеводов:">
+          <AppTextInput
+            value={values.carbohydrates}
+            onChangeText={handleChange('carbohydrates')}
+            keyboardType="numeric"
+          />
+        </InputField>
+      </ShakeCard>
+      {!!errors.carbohydrates && (
+        <AppText style={styles.errorText}>{errors.carbohydrates}</AppText>
+      )}
+      <ShakeCard
+        shake={!!errors.water}
+        style={!!errors.water && styles.errorContainer}>
+        <InputField title="Введите количество воды:">
+          <AppTextInput
+            value={values.water}
+            onChangeText={handleChange('water')}
+            keyboardType="numeric"
+          />
+        </InputField>
+      </ShakeCard>
+      {!!errors.water && (
+        <AppText style={styles.errorText}>{errors.water}</AppText>
+      )}
+      <ShakeCard
+        shake={!!errors.dietaryFiber}
+        style={!!errors.dietaryFiber && styles.errorContainer}>
+        <InputField title="Введите количество клетчатки:">
+          <AppTextInput
+            value={values.dietaryFiber}
+            onChangeText={handleChange('dietaryFiber')}
+            keyboardType="numeric"
+          />
+        </InputField>
+      </ShakeCard>
+      {!!errors.dietaryFiber && (
+        <AppText style={styles.errorText}>{errors.dietaryFiber}</AppText>
+      )}
     </View>
   );
 };
@@ -131,24 +151,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     rowGap: 10,
   },
-  input: {
-    borderBottomWidth: 1,
-    width: 50,
-    textAlign: 'center',
-  },
-  inputTitle: {
-    fontSize: 20,
-    fontFamily: 'Rubik-Regular',
-    flexWrap: 'wrap',
-  },
-  inputContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: 10,
-    paddingVertical: 15,
+  errorContainer: {
     borderRadius: 10,
-    elevation: 3,
-    backgroundColor: 'white',
+    borderWidth: 2,
+    borderColor: 'red',
+  },
+  errorText: {
+    color: 'red',
+    fontFamily: 'Rubik-Regular',
+    fontSize: 20,
   },
 });

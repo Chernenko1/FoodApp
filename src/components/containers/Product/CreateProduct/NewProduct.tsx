@@ -1,16 +1,16 @@
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {useNavigation} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
 import {Pressable, View} from 'react-native';
+
+import {TextButton} from 'components/common/Buttons/TextButton';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {createProduct} from 'services/apis/productAPI';
+import {COLORS} from 'themes/COLORS';
 import {BasicInfo} from './BasicInfo';
 import {ProductCreateContext} from './ProductCreateContext';
 import {ProductMinerals} from './ProductMinerals';
 import {ProductServing} from './ProductServing';
 import {ProductVitamins} from './ProductVitamins';
-import {createProduct} from '../../../../services/apis/productAPI';
-import {TextButton} from '../../../common/Buttons/TextButton';
-import {COLORS} from '../../../../themes/COLORS';
-import {useNavigation} from '@react-navigation/native';
 
 export const NewProduct = () => {
   const [product, setProduct] = useState<Product>({
@@ -57,20 +57,24 @@ export const NewProduct = () => {
     },
   });
   const [screenCount, setScreenCount] = useState(1);
+  const [validate, setValidate] = useState(false);
 
   const navigation = useNavigation();
 
   function nextScreen() {
-    setScreenCount(prev => {
-      if (prev !== 4) {
-        return prev + 1;
-      } else {
-        createProduct(product)
-          .then(data => console.log(data))
-          .catch(error => console.log(error));
-        return prev;
-      }
-    });
+    if (validate) {
+      setScreenCount(prev => {
+        if (prev !== 4) {
+          setValidate(false);
+          return prev + 1;
+        } else {
+          createProduct(product)
+            .then(data => console.log(data))
+            .catch(error => console.log(error));
+          return prev;
+        }
+      });
+    }
   }
 
   function previosScreen() {
@@ -108,6 +112,10 @@ export const NewProduct = () => {
       headerRight: () => (
         <TextButton
           title={screenCount !== 4 ? 'далее' : 'сохранить'}
+          style={{
+            fontSize: 20,
+            color: validate ? COLORS.deepOrange : COLORS.gray,
+          }}
           onPress={nextScreen}
         />
       ),
@@ -118,7 +126,7 @@ export const NewProduct = () => {
       ),
       headerTitle: 'Добавление нового продукта',
     });
-  }, [navigation]);
+  }, [navigation, validate]);
 
   useEffect(() => {
     if (screenCount === 0) {
@@ -127,7 +135,7 @@ export const NewProduct = () => {
   }, [screenCount]);
 
   const SCREENS: Record<number, React.JSX.Element> = {
-    1: <BasicInfo setBasicInfo={setBasicInfo} />,
+    1: <BasicInfo setBasicInfo={setBasicInfo} setIsValid={setValidate} />,
     2: <ProductServing setProductServing={setProductServing} />,
     3: <ProductVitamins setProductVitamins={setProductVitamins} />,
     4: <ProductMinerals setProductMinerals={setProductMinerals} />,

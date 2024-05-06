@@ -1,37 +1,43 @@
 import {useTheme} from '@react-navigation/native';
-import {useFormik} from 'formik';
-import {useContext, useEffect} from 'react';
+import {Field, Formik, useFormik} from 'formik';
+import React, {useContext, useEffect, useRef} from 'react';
 import {StyleSheet, View} from 'react-native';
 import * as Yup from 'yup';
 
 import {AppText} from '../../../common/AppText';
-import {InputText} from '../../../common/Inputs/TextInput';
 import {ProductCreateContext} from './ProductCreateContext';
+import {AppTextInput} from 'components/common/Inputs/AppTextInput';
 
 interface IBasicInfo {
   setBasicInfo: (name: string) => void;
+  setIsValid: (isValid: boolean) => void;
 }
 
-export const BasicInfo = ({setBasicInfo}: IBasicInfo) => {
+export const BasicInfo = ({setBasicInfo, setIsValid}: IBasicInfo) => {
   const context = useContext(ProductCreateContext);
 
   const BasicInfoSchema = Yup.object().shape({
-    name: Yup.string().min(1).max(100).required('Имя не может быть пустым'),
+    name: Yup.string().min(1).max(100).required('Поле не может быть пустым'),
     quantity: Yup.number().required(),
   });
 
-  const {handleChange, handleBlur, handleSubmit, values, errors, touched} =
-    useFormik({
-      validationSchema: BasicInfoSchema,
-      initialValues: {name: context.name, quantity: 100},
-      onSubmit: values => setBasicInfo(values.name),
-    });
+  const {handleChange, handleSubmit, values, errors, isValid} = useFormik({
+    validationSchema: BasicInfoSchema,
+    initialValues: {name: context.name, quantity: 100},
+    onSubmit: values => {
+      setBasicInfo(values.name);
+    },
+  });
 
   const {colors} = useTheme();
 
   useEffect(() => {
     handleSubmit();
   }, [values]);
+
+  useEffect(() => {
+    setIsValid(isValid);
+  }, [isValid]);
 
   return (
     <View style={[styles.container, {backgroundColor: colors.background}]}>
@@ -40,24 +46,23 @@ export const BasicInfo = ({setBasicInfo}: IBasicInfo) => {
           <AppText style={styles.inputTitle}>
             Введите название продукта:
           </AppText>
-          <InputText
+          <AppTextInput
             value={values.name}
             onChangeText={handleChange('name')}
-            onBlur={handleBlur('name')}
-            error={errors.name}
-            touched={touched.name}
-            multiline={true}
-            style={styles.input}
+            error={!!errors.name}
+            errorMessage={errors.name as string}
           />
         </View>
+
         <View style={styles.inputContainerRow}>
           <AppText style={styles.inputTitle}>
             Укажите единицу измерения:
           </AppText>
           <AppText>граммы</AppText>
         </View>
+
         <View style={styles.inputContainerRow}>
-          <AppText style={styles.inputTitle}>Введите вес продукта: </AppText>
+          <AppText style={styles.inputTitle}>Введите вес продукта:</AppText>
           <AppText>100</AppText>
         </View>
       </View>
