@@ -2,9 +2,9 @@ import {useNavigation, useTheme} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack/lib/typescript/src/types';
 import {Pressable, StyleSheet, View} from 'react-native';
 
-import {COLORS} from '../../../../themes/COLORS';
-import {AppText} from '../../../common/AppText';
-import {ButtonIcon} from '../../../common/Buttons/ButtonIcon';
+import {COLORS} from 'themes/COLORS';
+import {AppText} from 'components/common/AppText';
+import {ButtonIcon} from 'components/common/Buttons/ButtonIcon';
 
 interface Props {
   title: string;

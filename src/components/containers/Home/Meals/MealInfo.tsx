@@ -1,13 +1,14 @@
+import {useTheme} from '@react-navigation/native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {useEffect, useState} from 'react';
 import {FlatList, SafeAreaView, StyleSheet, View} from 'react-native';
-import {useAppSelector} from '../../../../store/hooks';
-import {useTheme} from '@react-navigation/native';
-import {mealsAPI} from '../../../../store/services/mealsService';
-import {COLORS} from '../../../../themes/COLORS';
-import {getMealData} from '../../../../services/apis/mealAPI';
-import {ProductCard} from '../../Product/ProductCard';
-import {ButtonIcon} from '../../../common/Buttons/ButtonIcon';
+import {useAppSelector} from 'store/hooks';
+
+import {ButtonIcon} from 'components/common/Buttons/ButtonIcon';
+import {ProductCard} from 'components/containers/Product/ProductCard';
+import {getMealData} from 'services/apis/mealAPI';
+import {mealsAPI} from 'store/services/mealsService';
+import {COLORS} from 'themes/COLORS';
 
 type Navigation = NativeStackScreenProps<HomeParamList, 'MealInfo'>;
 
