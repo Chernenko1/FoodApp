@@ -1,11 +1,11 @@
-import React from "react";
-import { BottomNavigation } from "./BottomNavigation";
-import { StartStackNavigation } from "./AuthStackNavigation";
-import { useAppSelector } from "../store/hooks";
+import React from 'react';
+import {useAppSelector} from '../store/hooks';
 
-  export const AppNavigator = () => {
+import {BottomNavigation} from './BottomNavigation';
+import {StartStackNavigation} from './Stacks/AuthStackNavigation';
 
-    const {isAuth} = useAppSelector(state => state.auth)
+export const AppNavigator = () => {
+  const {isAuth} = useAppSelector(state => state.auth);
 
-    return isAuth ? <BottomNavigation /> : <StartStackNavigation />
-  }
+  return isAuth ? <BottomNavigation /> : <StartStackNavigation />;
+};

@@ -1,27 +1,23 @@
 import React from 'react';
 import {
-    BottomTabNavigationOptions,
-    createBottomTabNavigator,
-  } from '@react-navigation/bottom-tabs';
-import Icon from 'react-native-vector-icons/Ionicons'
+  BottomTabNavigationOptions,
+  createBottomTabNavigator,
+} from '@react-navigation/bottom-tabs';
 
-import { HomeParamList, HomeStack } from '../screens/HomeStack';
-import { CreationParamList, CreationStack } from '../screens/CreationStack';
-import { FavouriteParamList, FavouriteStack } from '../screens/FavouriteStack';
-import { ProfileParamList, ProfileStack } from '../screens/ProfileStack';
-import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
+import {HomeStack} from './Stacks/HomeStack';
+import {ProfileStack} from './Stacks/ProfileStack';
+
+import Icon from 'react-native-vector-icons/Ionicons';
 
 export type RootTabParamList = {
-    Home: HomeParamList
-    Creation: CreationParamList
-    Favourite: FavouriteParamList
-    Profile: ProfileParamList
-  }
+  Home: HomeParamList;
+  Profile: ProfileParamList;
+};
 
-const TabStack = createBottomTabNavigator<RootTabParamList>()
+const TabStack = createBottomTabNavigator<RootTabParamList>();
 
 const tabOption: BottomTabNavigationOptions = {
-  tabBarActiveTintColor: "#FF9800",
+  tabBarActiveTintColor: '#FF9800',
   tabBarStyle: {
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
@@ -30,30 +26,39 @@ const tabOption: BottomTabNavigationOptions = {
     position: 'absolute',
   },
   tabBarShowLabel: false,
-  tabBarHideOnKeyboard: true
-}
+  tabBarHideOnKeyboard: true,
+};
 export const BottomNavigation = () => {
-
-return (
-  <TabStack.Navigator screenOptions={tabOption}>
-    <TabStack.Screen name={'Home'} component={HomeStack} options={({route}) => (
-      {
-        tabBarIcon: ({focused, color, size}): any => 
-        (
-        <Icon name={focused ? 'home' : 'home-outline'} size={focused ? 29 : 24} color={color}/>
-        ), 
-        headerShown: false, 
-    })}/>
-    <TabStack.Screen name={'Favourite'} component={FavouriteStack} options={{tabBarIcon: ({focused,  size, color}): any => (
-      <Icon name={focused ? 'heart' : 'heart-outline'} size={focused ? 29 : 24} color={color}/>
-    ), headerShown: false}}/>
-    <TabStack.Screen name={'Creation'} component={CreationStack} options={{tabBarIcon: ({focused,  size, color}): any => (
-      <Icon name={focused ? 'document-text' : 'document-text-outline'} size={focused ? 29 : 24} color={color}/>
-    ), headerShown: false}}/>
-    <TabStack.Screen name={'Profile'} component={ProfileStack} options={{tabBarIcon: ({focused,  size, color}): any => (
-      <Icon name={focused ? 'person' : 'person-outline'} size={focused ? 29 : 24} color={color}/>
-    ), headerShown: false}}/>
-</TabStack.Navigator>
-)
-
-}
+  return (
+    <TabStack.Navigator screenOptions={tabOption}>
+      <TabStack.Screen
+        name={'Home'}
+        component={HomeStack}
+        options={({route}) => ({
+          tabBarIcon: ({focused, color, size}): any => (
+            <Icon
+              name={focused ? 'home' : 'home-outline'}
+              size={focused ? 29 : 24}
+              color={color}
+            />
+          ),
+          headerShown: false,
+        })}
+      />
+      <TabStack.Screen
+        name={'Profile'}
+        component={ProfileStack}
+        options={{
+          tabBarIcon: ({focused, size, color}): any => (
+            <Icon
+              name={focused ? 'person' : 'person-outline'}
+              size={focused ? 29 : 24}
+              color={color}
+            />
+          ),
+          headerShown: false,
+        }}
+      />
+    </TabStack.Navigator>
+  );
+};
