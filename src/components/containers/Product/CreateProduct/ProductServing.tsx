@@ -34,23 +34,23 @@ export const ProductServing = ({setProductServing}: IProductServing) => {
 
   const NutrientsSchema = Yup.object().shape({
     protein: Yup.number()
-      .min(0)
+      .min(0, 'Не может быть меньше нуля')
       .max(quantity, 'Не может быть больше веса продукта')
       .required('Не может быть пустым'),
     carbohydrates: Yup.number()
-      .min(0)
+      .min(0, 'Не может быть меньше нуля')
       .max(quantity, 'Не может быть больше веса продукта')
       .required('Не может быть пустым'),
     fat: Yup.number()
-      .min(0)
+      .min(0, 'Не может быть меньше нуля')
       .max(quantity, 'Не может быть больше веса продукта')
       .required('Не может быть пустым'),
     water: Yup.number()
-      .min(0)
+      .min(0, 'Не может быть меньше нуля')
       .max(quantity, 'Не может быть больше веса продукта')
       .required('Не может быть пустым'),
     dietaryFiber: Yup.number()
-      .min(0)
+      .min(0, 'Не может быть меньше нуля')
       .max(quantity, 'Не может быть больше веса продукта')
       .required('Не может быть пустым'),
   });
