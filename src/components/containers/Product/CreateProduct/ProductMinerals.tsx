@@ -1,17 +1,24 @@
-import {useTheme} from '@react-navigation/native';
 import {useFormik} from 'formik';
 import {useContext, useEffect} from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
 import * as Yup from 'yup';
+
 import {ProductCreateContext} from './ProductCreateContext';
-import {InputText} from '../../../common/Inputs/TextInput';
 import {AppText} from '../../../common/AppText';
+import {useTheme} from '@react-navigation/native';
+import {AppTextInput} from 'components/common/Inputs/AppTextInput';
+import {ShakeCard} from 'components/common/Cards/ShakeCard';
+import {InputField} from './InputField';
 
 interface IProductMinerals {
   setProductMinerals: (minerals: Minerals) => void;
+  setIsValid: (isValid: boolean) => void;
 }
 
-export const ProductMinerals = ({setProductMinerals}: IProductMinerals) => {
+export const ProductMinerals = ({
+  setProductMinerals,
+  setIsValid,
+}: IProductMinerals) => {
   const {minerals, quantity} = useContext(ProductCreateContext);
 
   const Minerals = Yup.object().shape({
@@ -31,187 +38,199 @@ export const ProductMinerals = ({setProductMinerals}: IProductMinerals) => {
     Mo: Yup.number().min(0).max(quantity).required('Минерал'),
   });
 
-  const {handleChange, handleBlur, handleSubmit, values, errors, touched} =
-    useFormik({
-      validationSchema: Minerals,
-      initialValues: minerals,
-      onSubmit: (values: Minerals) => setProductMinerals(values),
-    });
+  const {handleChange, handleSubmit, values, errors, isValid} = useFormik({
+    validationSchema: Minerals,
+    initialValues: minerals,
+    onSubmit: values => setProductMinerals(values),
+  });
 
   useEffect(() => {
     handleSubmit();
   }, [values]);
 
+  useEffect(() => {
+    setIsValid(isValid);
+  }, [isValid]);
+
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <View style={styles.inputContainer}>
-        <AppText style={styles.inputTitle}>Mn: </AppText>
-        <InputText
-          value={values.Mn}
-          onChangeText={handleChange('Mn')}
-          keyboardType="numeric"
-          touched={touched.Mn}
-          onBlur={handleBlur('Mn')}
-          error={errors.Mn}
-          style={styles.input}
-        />
-      </View>
-      <View style={styles.inputContainer}>
-        <AppText style={styles.inputTitle}>Fe: </AppText>
-        <InputText
-          value={values.Fe}
-          onChangeText={handleChange('Fe')}
-          keyboardType="numeric"
-          touched={touched.Fe}
-          onBlur={handleBlur('Fe')}
-          error={errors.Fe}
-          style={styles.input}
-        />
-      </View>
-      <View style={styles.inputContainer}>
-        <AppText style={styles.inputTitle}>"NaCL(соль)": </AppText>
-        <InputText
-          value={values.NaCL}
-          onChangeText={handleChange('NaCL')}
-          keyboardType="numeric"
-          touched={touched.NaCL}
-          onBlur={handleBlur('')}
-          error={errors.NaCL}
-          style={styles.input}
-        />
-      </View>
-      <View style={styles.inputContainer}>
-        <AppText style={styles.inputTitle}>Mg: </AppText>
-        <InputText
-          value={values.Mg}
-          onChangeText={handleChange('Mg')}
-          keyboardType="numeric"
-          touched={touched.Mg}
-          onBlur={handleBlur('Mg')}
-          error={errors.Mg}
-          style={styles.input}
-        />
-      </View>
-      <View style={styles.inputContainer}>
-        <AppText style={styles.inputTitle}>P: </AppText>
-        <InputText
-          value={values.P}
-          onChangeText={handleChange('P')}
-          keyboardType="numeric"
-          touched={touched.P}
-          onBlur={handleBlur('P')}
-          error={errors.P}
-          style={styles.input}
-        />
-      </View>
-      <View style={styles.inputContainer}>
-        <AppText style={styles.inputTitle}>Ca: </AppText>
-        <InputText
-          value={values.Ca}
-          onChangeText={handleChange('Ca')}
-          keyboardType="numeric"
-          touched={touched.Ca}
-          onBlur={handleBlur('Ca')}
-          error={errors.Ca}
-          style={styles.input}
-        />
-      </View>
-      <View style={styles.inputContainer}>
-        <AppText style={styles.inputTitle}>Na: </AppText>
-        <InputText
-          value={values.Na}
-          onChangeText={handleChange('Na')}
-          keyboardType="numeric"
-          touched={touched.Na}
-          onBlur={handleBlur('Na')}
-          error={errors.Na}
-          style={styles.input}
-        />
-      </View>
-      <View style={styles.inputContainer}>
-        <AppText style={styles.inputTitle}>Zn: </AppText>
-        <InputText
-          value={values.Zn}
-          onChangeText={handleChange('Zn')}
-          keyboardType="numeric"
-          touched={touched.Zn}
-          onBlur={handleBlur('Zn')}
-          error={errors.Zn}
-          style={styles.input}
-        />
-      </View>
-      <View style={styles.inputContainer}>
-        <AppText style={styles.inputTitle}>Cu: </AppText>
-        <InputText
-          value={values.Cu}
-          onChangeText={handleChange('Cu')}
-          keyboardType="numeric"
-          touched={touched.Cu}
-          onBlur={handleBlur('Cu')}
-          error={errors.Cu}
-          style={styles.input}
-        />
-      </View>
-      <View style={styles.inputContainer}>
-        <AppText style={styles.inputTitle}>I: </AppText>
-        <InputText
-          value={values.I}
-          onChangeText={handleChange('I')}
-          keyboardType="numeric"
-          touched={touched.I}
-          onBlur={handleBlur('I')}
-          error={errors.I}
-          style={styles.input}
-        />
-      </View>
-      <View style={styles.inputContainer}>
-        <AppText style={styles.inputTitle}>Se: </AppText>
-        <InputText
-          value={values.Se}
-          onChangeText={handleChange('Se')}
-          keyboardType="numeric"
-          touched={touched.Se}
-          onBlur={handleBlur('Se')}
-          error={errors.Se}
-          style={styles.input}
-        />
-      </View>
-      <View style={styles.inputContainer}>
-        <AppText style={styles.inputTitle}>Cr: </AppText>
-        <InputText
-          value={values.Cr}
-          onChangeText={handleChange('Cr')}
-          keyboardType="numeric"
-          touched={touched.Cr}
-          onBlur={handleBlur('Cr')}
-          error={errors.Cr}
-          style={styles.input}
-        />
-      </View>
-      <View style={styles.inputContainer}>
-        <AppText style={styles.inputTitle}>K: </AppText>
-        <InputText
-          value={values.K}
-          onChangeText={handleChange('K')}
-          keyboardType="numeric"
-          touched={touched.K}
-          onBlur={handleBlur('K')}
-          error={errors.K}
-          style={styles.input}
-        />
-      </View>
-      <View style={styles.inputContainer}>
-        <AppText style={styles.inputTitle}>Mo: </AppText>
-        <InputText
-          value={values.Mo}
-          onChangeText={handleChange('Mo')}
-          keyboardType="numeric"
-          touched={touched.Mo}
-          onBlur={handleBlur('Mo')}
-          error={errors.Mo}
-          style={styles.input}
-        />
-      </View>
+      <ShakeCard
+        shake={!!errors.Mn}
+        style={!!errors.Mn && styles.errorContainer}>
+        <InputField title="Витамин Mn:">
+          <AppTextInput
+            value={values.Mn}
+            onChangeText={handleChange('Mn')}
+            keyboardType="numeric"
+          />
+        </InputField>
+      </ShakeCard>
+      {!!errors.Mn && <AppText style={styles.errorText}>{errors.Mn}</AppText>}
+
+      <ShakeCard
+        shake={!!errors.Fe}
+        style={!!errors.Fe && styles.errorContainer}>
+        <InputField title="Витамин Fe:">
+          <AppTextInput
+            value={values.Fe}
+            onChangeText={handleChange('Fe')}
+            keyboardType="numeric"
+          />
+        </InputField>
+      </ShakeCard>
+      {!!errors.Fe && <AppText style={styles.errorText}>{errors.Fe}</AppText>}
+
+      <ShakeCard
+        shake={!!errors.NaCL}
+        style={!!errors.NaCL && styles.errorContainer}>
+        <InputField title="Витамин NaCl:">
+          <AppTextInput
+            value={values.NaCL}
+            onChangeText={handleChange('NaCL')}
+            keyboardType="numeric"
+          />
+        </InputField>
+      </ShakeCard>
+      {!!errors.NaCL && (
+        <AppText style={styles.errorText}>{errors.NaCL}</AppText>
+      )}
+
+      <ShakeCard
+        shake={!!errors.Mg}
+        style={!!errors.Mg && styles.errorContainer}>
+        <InputField title="Витамин Mg:">
+          <AppTextInput
+            value={values.Mg}
+            onChangeText={handleChange('Mg')}
+            keyboardType="numeric"
+          />
+        </InputField>
+      </ShakeCard>
+      {!!errors.Mg && <AppText style={styles.errorText}>{errors.Mg}</AppText>}
+
+      <ShakeCard shake={!!errors.P} style={!!errors.P && styles.errorContainer}>
+        <InputField title="Витамин P:">
+          <AppTextInput
+            value={values.P}
+            onChangeText={handleChange('P')}
+            keyboardType="numeric"
+          />
+        </InputField>
+      </ShakeCard>
+      {!!errors.P && <AppText style={styles.errorText}>{errors.P}</AppText>}
+
+      <ShakeCard
+        shake={!!errors.Ca}
+        style={!!errors.Ca && styles.errorContainer}>
+        <InputField title="Витамин Ca:">
+          <AppTextInput
+            value={values.Ca}
+            onChangeText={handleChange('Ca')}
+            keyboardType="numeric"
+          />
+        </InputField>
+      </ShakeCard>
+      {!!errors.Ca && <AppText style={styles.errorText}>{errors.Ca}</AppText>}
+
+      <ShakeCard
+        shake={!!errors.Na}
+        style={!!errors.Na && styles.errorContainer}>
+        <InputField title="Витамин Na:">
+          <AppTextInput
+            value={values.Na}
+            onChangeText={handleChange('Na')}
+            keyboardType="numeric"
+          />
+        </InputField>
+      </ShakeCard>
+      {!!errors.Na && <AppText style={styles.errorText}>{errors.Na}</AppText>}
+
+      <ShakeCard
+        shake={!!errors.Zn}
+        style={!!errors.Zn && styles.errorContainer}>
+        <InputField title="Витамин Zn:">
+          <AppTextInput
+            value={values.Zn}
+            onChangeText={handleChange('Zn')}
+            keyboardType="numeric"
+          />
+        </InputField>
+      </ShakeCard>
+      {!!errors.Zn && <AppText style={styles.errorText}>{errors.Zn}</AppText>}
+
+      <ShakeCard
+        shake={!!errors.Cu}
+        style={!!errors.Cu && styles.errorContainer}>
+        <InputField title="Витамин Cu:">
+          <AppTextInput
+            value={values.Cu}
+            onChangeText={handleChange('Cu')}
+            keyboardType="numeric"
+          />
+        </InputField>
+      </ShakeCard>
+      {!!errors.Cu && <AppText style={styles.errorText}>{errors.Cu}</AppText>}
+
+      <ShakeCard shake={!!errors.I} style={!!errors.I && styles.errorContainer}>
+        <InputField title="Витамин I:">
+          <AppTextInput
+            value={values.I}
+            onChangeText={handleChange('I')}
+            keyboardType="numeric"
+          />
+        </InputField>
+      </ShakeCard>
+      {!!errors.I && <AppText style={styles.errorText}>{errors.I}</AppText>}
+
+      <ShakeCard
+        shake={!!errors.Se}
+        style={!!errors.Se && styles.errorContainer}>
+        <InputField title="Витамин Se:">
+          <AppTextInput
+            value={values.Se}
+            onChangeText={handleChange('Se')}
+            keyboardType="numeric"
+          />
+        </InputField>
+      </ShakeCard>
+      {!!errors.Se && <AppText style={styles.errorText}>{errors.Se}</AppText>}
+
+      <ShakeCard
+        shake={!!errors.Cr}
+        style={!!errors.Cr && styles.errorContainer}>
+        <InputField title="Витамин Cr:">
+          <AppTextInput
+            value={values.Cr}
+            onChangeText={handleChange('Cr')}
+            keyboardType="numeric"
+          />
+        </InputField>
+      </ShakeCard>
+      {!!errors.Cr && <AppText style={styles.errorText}>{errors.Cr}</AppText>}
+
+      <ShakeCard shake={!!errors.K} style={!!errors.K && styles.errorContainer}>
+        <InputField title="Витамин K:">
+          <AppTextInput
+            value={values.K}
+            onChangeText={handleChange('K')}
+            keyboardType="numeric"
+          />
+        </InputField>
+      </ShakeCard>
+      {!!errors.K && <AppText style={styles.errorText}>{errors.K}</AppText>}
+
+      <ShakeCard
+        shake={!!errors.Mo}
+        style={!!errors.Mo && styles.errorContainer}>
+        <InputField title="Витамин Mn:">
+          <AppTextInput
+            value={values.Mo}
+            onChangeText={handleChange('Mo')}
+            keyboardType="numeric"
+          />
+        </InputField>
+      </ShakeCard>
+      {!!errors.Mo && <AppText style={styles.errorText}>{errors.Mo}</AppText>}
     </ScrollView>
   );
 };
@@ -223,24 +242,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     rowGap: 10,
   },
-  input: {
-    borderBottomWidth: 1,
-    width: 50,
-    textAlign: 'center',
-  },
-  inputTitle: {
-    fontSize: 20,
-    fontFamily: 'Rubik-Regular',
-    flexWrap: 'wrap',
-  },
-  inputContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: 10,
-    paddingVertical: 15,
+  errorContainer: {
     borderRadius: 10,
-    elevation: 3,
-    backgroundColor: 'white',
+    borderWidth: 2,
+    borderColor: 'red',
+  },
+  errorText: {
+    color: 'red',
+    fontFamily: 'Rubik-Regular',
+    fontSize: 20,
   },
 });

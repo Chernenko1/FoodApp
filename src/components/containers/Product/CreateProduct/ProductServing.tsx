@@ -9,27 +9,15 @@ import {InputField} from './InputField';
 import {ShakeCard} from 'components/common/Cards/ShakeCard';
 import {AppText} from 'components/common/AppText';
 
-type Nutrients = {
-  calories: string | number;
-  protein: string | number;
-  fat: string | number;
-  carbohydrates: string | number;
-  water: string | number;
-  dietaryFiber: string | number;
-};
-
 interface IProductServing {
-  setProductServing: ({
-    calories,
-    carbohydrates,
-    fat,
-    protein,
-    water,
-    dietaryFiber,
-  }: Nutrients) => void;
+  setProductServing: (nutrients: Nutrients) => void;
+  setIsValid: (isValid: boolean) => void;
 }
 
-export const ProductServing = ({setProductServing}: IProductServing) => {
+export const ProductServing = ({
+  setProductServing,
+  setIsValid,
+}: IProductServing) => {
   const {quantity, nutrients} = useContext(ProductCreateContext);
 
   const NutrientsSchema = Yup.object().shape({
@@ -55,24 +43,36 @@ export const ProductServing = ({setProductServing}: IProductServing) => {
       .required('Не может быть пустым'),
   });
 
-  const {handleChange, handleSubmit, values, errors} = useFormik({
+  const {handleChange, handleSubmit, values, errors, isValid} = useFormik({
     validationSchema: NutrientsSchema,
-    initialValues: {
-      protein: String(nutrients.protein),
-      fat: String(nutrients.fat),
-      carbohydrates: String(nutrients.carbohydrates),
-      water: String(nutrients.water),
-      dietaryFiber: String(nutrients.dietaryFiber),
-    },
-    onSubmit: values => setProductServing({...values, calories: '100'}),
+    initialValues: nutrients,
+    onSubmit: values => setProductServing(values),
   });
 
   useEffect(() => {
     handleSubmit();
   }, [values]);
 
+  useEffect(() => {
+    setIsValid(isValid);
+  }, [isValid]);
+
   return (
     <View style={styles.container}>
+      <ShakeCard
+        shake={!!errors.calories}
+        style={!!errors.calories && styles.errorContainer}>
+        <InputField title="Введите количество калорий: " ms="ккал">
+          <AppTextInput
+            value={values.calories}
+            onChangeText={handleChange('protein')}
+            keyboardType="numeric"
+          />
+        </InputField>
+      </ShakeCard>
+      {!!errors.calories && (
+        <AppText style={styles.errorText}>{errors.calories}</AppText>
+      )}
       <ShakeCard
         shake={!!errors.protein}
         style={!!errors.protein && styles.errorContainer}>
