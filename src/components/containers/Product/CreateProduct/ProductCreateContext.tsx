@@ -4,12 +4,12 @@ export const ProductCreateContext = createContext({
   name: '',
   quantity: 100,
   nutrients: {
-    calories: 0,
-    protein: 0,
-    fat: 0,
-    carbohydrates: 0,
-    water: 0,
-    dietaryFiber: 0,
+    calories: '0',
+    protein: '0',
+    fat: '0',
+    carbohydrates: '0',
+    water: '0',
+    dietaryFiber: '0',
   },
   vitamins: {
     B1: '0',
