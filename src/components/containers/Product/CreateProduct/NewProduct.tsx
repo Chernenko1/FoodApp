@@ -1,6 +1,6 @@
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useTheme} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
-import {Pressable, View} from 'react-native';
+import {Pressable, StyleSheet, View} from 'react-native';
 
 import {TextButton} from 'components/common/Buttons/TextButton';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -11,6 +11,8 @@ import {ProductCreateContext} from './ProductCreateContext';
 import {ProductMinerals} from './ProductMinerals';
 import {ProductServing} from './ProductServing';
 import {ProductVitamins} from './ProductVitamins';
+import {AppText} from 'components/common/AppText';
+import {UpLoadProduct} from './UpLoadProduct';
 
 export const NewProduct = () => {
   const [product, setProduct] = useState<Product>({
@@ -59,20 +61,14 @@ export const NewProduct = () => {
   const [screenCount, setScreenCount] = useState(1);
   const [validate, setValidate] = useState(false);
 
+  const {colors} = useTheme();
   const navigation = useNavigation();
 
   function nextScreen() {
     if (validate) {
       setScreenCount(prev => {
-        if (prev !== 4) {
-          setValidate(false);
-          return prev + 1;
-        } else {
-          createProduct(product)
-            .then(data => console.log(data))
-            .catch(error => console.log(error));
-          return prev;
-        }
+        setValidate(false);
+        return prev + 1;
       });
     }
   }
@@ -108,25 +104,29 @@ export const NewProduct = () => {
   }
 
   useEffect(() => {
+    console.log(screenCount);
     navigation.setOptions({
-      headerRight: () => (
-        <TextButton
-          title={screenCount !== 4 ? 'далее' : 'сохранить'}
-          style={{
-            fontSize: 20,
-            color: validate ? COLORS.deepOrange : COLORS.gray,
-          }}
-          onPress={nextScreen}
-        />
-      ),
-      headerLeft: () => (
-        <Pressable onPress={previosScreen}>
-          <Icon name="arrow-back-outline" size={24} color={COLORS.black} />
-        </Pressable>
-      ),
-      headerTitle: 'Добавление нового продукта',
+      header: () =>
+        screenCount < 5 && (
+          <View style={[styles.header, {backgroundColor: colors.card}]}>
+            <Pressable onPress={previosScreen}>
+              <Icon name="arrow-back-outline" size={30} color={COLORS.black} />
+            </Pressable>
+            <AppText style={styles.headerText}>
+              'Добавление нового продукта'
+            </AppText>
+            <TextButton
+              title={screenCount !== 4 ? 'далее' : 'сохранить'}
+              style={{
+                fontSize: 20,
+                color: validate ? COLORS.deepOrange : COLORS.gray,
+              }}
+              onPress={nextScreen}
+            />
+          </View>
+        ),
     });
-  }, [navigation, validate]);
+  }, [navigation, validate, screenCount]);
 
   useEffect(() => {
     if (screenCount === 0) {
@@ -136,13 +136,47 @@ export const NewProduct = () => {
 
   const SCREENS: Record<number, React.JSX.Element> = {
     1: <BasicInfo setBasicInfo={setBasicInfo} setIsValid={setValidate} />,
-    2: <ProductServing setProductServing={setProductServing} />,
-    3: <ProductVitamins setProductVitamins={setProductVitamins} />,
-    4: <ProductMinerals setProductMinerals={setProductMinerals} />,
+    2: (
+      <ProductServing
+        setProductServing={setProductServing}
+        setIsValid={setValidate}
+      />
+    ),
+    3: (
+      <ProductVitamins
+        setProductVitamins={setProductVitamins}
+        setIsValid={setValidate}
+      />
+    ),
+    4: (
+      <ProductMinerals
+        setProductMinerals={setProductMinerals}
+        setIsValid={setValidate}
+      />
+    ),
+    5: <UpLoadProduct />,
   };
+
   return (
     <ProductCreateContext.Provider value={product}>
-      <View>{SCREENS[screenCount]}</View>
+      <View style={{flex: 1}}>{SCREENS[screenCount]}</View>
     </ProductCreateContext.Provider>
   );
 };
+
+const styles = StyleSheet.create({
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 15,
+    paddingVertical: 5,
+    height: 65,
+  },
+  headerText: {
+    fontFamily: 'Rubik-Regular',
+    width: '65%',
+    textAlign: 'center',
+    fontSize: 20,
+  },
+});
