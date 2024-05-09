@@ -1,20 +1,25 @@
 import {AppText} from 'components/common/AppText';
-import {StyleSheet, View} from 'react-native';
-import {Search} from '../Search/Search';
+import {ScrollView, StyleSheet, View} from 'react-native';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {PopularRecipeCategories} from './PopularRecipeCategories';
 import {PopularRecipes} from './PopularRecipes';
 import {SearchInput} from 'components/common/SearchInput';
 
 export const Recipes = () => {
+  const inset = useSafeAreaInsets();
   return (
-    <View style={styles.container}>
+    <ScrollView
+      contentContainerStyle={[
+        styles.container,
+        {paddingTop: inset.top, paddingBottom: 60},
+      ]}>
       <AppText style={styles.headerText} fontWeight="bold">
         Рецепты
       </AppText>
       <SearchInput />
       <PopularRecipeCategories />
       <PopularRecipes />
-    </View>
+    </ScrollView>
   );
 };
 
