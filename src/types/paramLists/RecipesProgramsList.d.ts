@@ -1,0 +1,3 @@
+type RecipesParamList = {
+  RecipesStack: undefined;
+};

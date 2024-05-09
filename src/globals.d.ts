@@ -15,11 +15,6 @@ declare interface Recipe {
   rating: number;
 }
 
-declare interface RecipeCategories {
-  _id: string;
-  name: string;
-}
-
 declare interface User {
   _id: string;
   username: string;
