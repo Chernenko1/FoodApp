@@ -1,7 +1,12 @@
 import {$host} from './index';
 
-export const fetchRecipe = async () => {
+export const fetchRecipes = async () => {
   const {data} = await $host.get('api/recipe');
+  return data;
+};
+
+export const fetchRecipe = async (id: string) => {
+  const {data} = await $host.get(`api/recipe/${id}`);
   return data;
 };
 
