@@ -4,7 +4,7 @@ import {COLORS} from '../../../themes/COLORS';
 
 interface Props {
   title: string;
-  onPress: () => void;
+  onPress?: () => void;
   color?: string;
   textColor?: string;
   size?: number;
@@ -15,9 +15,9 @@ interface Props {
 export const Button = ({
   title,
   onPress,
-  color,
+  color = COLORS.orange,
   textColor,
-  size,
+  size = 18,
   style,
   disabled = false,
 }: Props) => {
@@ -30,9 +30,7 @@ export const Button = ({
       ]}
       onPress={onPress}
       disabled={disabled}>
-      <AppText style={[{color: textColor, fontSize: size ?? 18}]}>
-        {title}
-      </AppText>
+      <AppText style={[{color: textColor, fontSize: size}]}>{title}</AppText>
     </Pressable>
   );
 };
