@@ -4,26 +4,32 @@ import {StyleProp, Text, TextProps, TextStyle} from 'react-native';
 interface Props extends TextProps {
   style?: StyleProp<TextStyle>;
   children?: React.ReactNode;
-  fontWeight?: 'regular' | 'medium' | 'light';
+  fontWeight?: 'regular' | 'medium' | 'light' | 'bold';
+  size?: number;
 }
 
 export const AppText = ({
   style,
   children,
+  size = 20,
   fontWeight = 'regular',
   ...rest
 }: Props) => {
   const {colors} = useTheme();
 
   const font = {
-    regular: 'Rubik-Regular',
-    medium: 'Rubik-Medium',
-    light: 'Rubik-Light',
+    regular: 'Nunito-Regular',
+    medium: 'Nunito-Medium',
+    bold: 'Nunito-Bold',
+    light: 'Nunito-Light',
   };
 
   return (
     <Text
-      style={[{fontFamily: font[fontWeight], color: colors.text}, style]}
+      style={[
+        {fontFamily: font[fontWeight], color: colors.text, fontSize: size},
+        style,
+      ]}
       {...rest}>
       {children}
     </Text>
