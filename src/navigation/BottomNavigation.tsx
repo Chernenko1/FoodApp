@@ -8,10 +8,12 @@ import {HomeStack} from './Stacks/HomeStack';
 import {ProfileStack} from './Stacks/ProfileStack';
 
 import Icon from 'react-native-vector-icons/Ionicons';
+import {RecipesStack} from './Stacks/RecipesStack';
 
 export type RootTabParamList = {
   Home: HomeParamList;
   Profile: ProfileParamList;
+  Recipes: RecipesParamList;
 };
 
 const TabStack = createBottomTabNavigator<RootTabParamList>();
@@ -28,36 +30,38 @@ const tabOption: BottomTabNavigationOptions = {
   tabBarShowLabel: false,
   tabBarHideOnKeyboard: true,
 };
+
+const tabButton = (activeIcon: string, inActiveIcon: string) => {
+  const tabButtomOption: BottomTabNavigationOptions = {
+    tabBarIcon: ({focused, color}): any => (
+      <Icon
+        name={focused ? activeIcon : inActiveIcon}
+        size={focused ? 29 : 24}
+        color={color}
+      />
+    ),
+    headerShown: false,
+  };
+  return tabButtomOption;
+};
+
 export const BottomNavigation = () => {
   return (
     <TabStack.Navigator screenOptions={tabOption}>
       <TabStack.Screen
         name={'Home'}
         component={HomeStack}
-        options={({route}) => ({
-          tabBarIcon: ({focused, color, size}): any => (
-            <Icon
-              name={focused ? 'home' : 'home-outline'}
-              size={focused ? 29 : 24}
-              color={color}
-            />
-          ),
-          headerShown: false,
-        })}
+        options={tabButton('home', 'home-outline')}
       />
       <TabStack.Screen
         name={'Profile'}
         component={ProfileStack}
-        options={{
-          tabBarIcon: ({focused, size, color}): any => (
-            <Icon
-              name={focused ? 'person' : 'person-outline'}
-              size={focused ? 29 : 24}
-              color={color}
-            />
-          ),
-          headerShown: false,
-        }}
+        options={tabButton('person', 'person-outline')}
+      />
+      <TabStack.Screen
+        name="Recipes"
+        component={RecipesStack}
+        options={tabButton('book', 'book-outline')}
       />
     </TabStack.Navigator>
   );
