@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     elevation: 4,
   },
   popularView: {
-    rowGap: 10,
+    rowGap: 20,
   },
   popularHeader: {
     flexDirection: 'row',
