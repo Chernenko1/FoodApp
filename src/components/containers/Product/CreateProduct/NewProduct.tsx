@@ -104,7 +104,6 @@ export const NewProduct = () => {
   }
 
   useEffect(() => {
-    console.log(screenCount);
     navigation.setOptions({
       header: () =>
         screenCount < 5 && (
