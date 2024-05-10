@@ -10,6 +10,7 @@ import {Search} from '../../components/containers/Search/Search';
 import {MealInfo} from '../../components/containers/Home/Meals/MealInfo';
 import {ProductInfo} from '../../components/containers/Product/ProductInfo';
 import {NewProduct} from '../../components/containers/Product/CreateProduct/NewProduct';
+import {FoodCard} from 'components/common/Cards/FoodCard/FoodCard';
 
 const nativeStackOption: NativeStackNavigationOptions = {
   headerShown: true,
@@ -34,6 +35,7 @@ export const HomeStack = () => {
       <Stack.Screen name="MealInfo" component={MealInfo} />
       <Stack.Screen name="ProductInfo" component={ProductInfo} />
       <Stack.Screen name="ProductCreate" component={NewProduct} />
+      <Stack.Screen name="FoodCard" component={FoodCard} />
     </Stack.Navigator>
   );
 };
