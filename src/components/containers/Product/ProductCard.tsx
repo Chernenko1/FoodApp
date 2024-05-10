@@ -8,7 +8,7 @@ import {ButtonIcon} from '../../common/Buttons/ButtonIcon';
 interface Props {
   productName: string;
   kcal: number | string;
-  productQuantity: string;
+  productQuantity: number;
   onCardPress: () => void;
   onIconPress: () => void;
 }

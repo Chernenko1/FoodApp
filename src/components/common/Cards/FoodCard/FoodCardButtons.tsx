@@ -10,6 +10,7 @@ interface IFoodCardButtons {
   mealType: MealType;
   id: string;
   weight: number;
+  micmacNutrients: MicMacNutrients;
 }
 
 export const FoodCardButtons = ({
@@ -17,6 +18,7 @@ export const FoodCardButtons = ({
   mealType,
   id,
   weight,
+  micmacNutrients,
 }: IFoodCardButtons) => {
   const date = useAppSelector(state => state.app.date);
   const {_id} = useAppSelector(state => state.user.user);
@@ -26,8 +28,10 @@ export const FoodCardButtons = ({
       date,
       type: mealType,
       userId: _id,
-      data: {id, weight},
-    }).catch(e => console.log(e));
+      data: {id, weight, nutrients: micmacNutrients},
+    })
+      .then(_ => console.log('up'))
+      .catch(e => console.log(e));
   }
 
   return (
