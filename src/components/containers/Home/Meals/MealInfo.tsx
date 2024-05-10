@@ -14,8 +14,9 @@ type Navigation = NativeStackScreenProps<HomeParamList, 'MealInfo'>;
 
 interface IProduct {
   _id: string;
-  quantity: string;
-  product: Product;
+  weight: number;
+  calories: number;
+  name: string;
 }
 
 export const MealInfo = ({navigation, route}: Navigation) => {
@@ -27,6 +28,18 @@ export const MealInfo = ({navigation, route}: Navigation) => {
   const [useDeleteProductInMeal] = mealsAPI.useDeleteProductInMealMutation();
 
   const {colors} = useTheme();
+
+  const deleteProduct = (cardId: string) => {
+    useDeleteProductInMeal({mealId: _id, id: cardId, type: mealType});
+  };
+
+  function navigateToFoodCard(
+    name: string,
+    weight: number,
+    micmacNutrients: MicMacNutrients,
+  ) {
+    navigation.navigate('FoodCard', {name, weight, _id, micmacNutrients});
+  }
 
   useEffect(() => {
     navigation.setOptions({
@@ -45,10 +58,6 @@ export const MealInfo = ({navigation, route}: Navigation) => {
     );
   }, []);
 
-  const deleteProduct = (cardId: string) => {
-    useDeleteProductInMeal({mealId: _id, id: cardId, type: mealType});
-  };
-
   return (
     <SafeAreaView
       style={[styles.mainView, {backgroundColor: colors.background}]}>
@@ -58,21 +67,11 @@ export const MealInfo = ({navigation, route}: Navigation) => {
         renderItem={({item}) => (
           <View style={styles.productView}>
             <ProductCard
-              productName={item.product.name}
-              productQuantity={item.quantity}
-              kcal={item.product.nutrients.calories}
+              productName={item.name}
+              productQuantity={item.weight}
+              kcal={item.calories}
               onIconPress={() => deleteProduct(item._id)}
-              onCardPress={() => {
-                navigation.navigate('ProductInfo', {
-                  mealType,
-                  func: 'update',
-                  productData: {
-                    ...item.product,
-                    quantity: item.quantity,
-                    cardId: item._id,
-                  } as ProductInfo,
-                });
-              }}
+              // onCardPress={() => navigateToFoodCard(item.name, item.weight, {})}
             />
           </View>
         )}
