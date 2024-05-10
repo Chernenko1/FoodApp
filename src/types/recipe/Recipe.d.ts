@@ -7,18 +7,20 @@ interface Recipes {
   image: string;
   service: number;
   ingredients: {
-    productId: {
+    id: {
       name: string;
       id: string;
     };
-    quantity: string;
+    weight: string;
   }[];
   instruction: string[];
-  category: string[];
+  category: {id: string; name: string}[];
   rating: number;
 }
 
 interface Recipe {
   recipe: Recipes;
   nutrients: Nutrients;
+  vitamins: Vitamins;
+  minerals: Minerals;
 }

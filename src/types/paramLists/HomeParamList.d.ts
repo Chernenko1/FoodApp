@@ -16,4 +16,14 @@ type HomeParamList = {
     func: 'add' | 'update';
   };
   ProductCreate: undefined;
+  FoodCard: {
+    _id: string;
+    name: string;
+    micmacNutrients: {
+      nutrients: Nutrients;
+      vitamins: Vitamins;
+      minerals: Minerals;
+    };
+    weight: number;
+  };
 };

@@ -6,7 +6,11 @@ type RecipesParamList = {
   FoodCard: {
     _id: string;
     name: string;
-    nutrients: Nutrients;
+    micmacNutrients: {
+      nutrients: Nutrients;
+      vitamins: Vitamins;
+      minerals: Minerals;
+    };
     weight: number;
   };
 };
