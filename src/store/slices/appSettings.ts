@@ -3,11 +3,11 @@ import {RootState} from '../store';
 import {formatDate} from '../../utils/formDate';
 
 interface IAppSettings {
-  date: Date;
+  date: string;
 }
 
 const initialState: IAppSettings = {
-  date: new Date(),
+  date: formatDate(new Date()),
 };
 
 export const appSettingsSlice = createSlice({
