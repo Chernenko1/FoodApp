@@ -4,8 +4,8 @@ import {DashedLine} from '../DashedLine';
 import {COLORS} from '../../../themes/COLORS';
 
 interface ICardProps {
-  nameText: string;
-  infoText: string;
+  nameText: string | number;
+  infoText: string | number;
 }
 
 export const LineInfoCard = ({nameText, infoText}: ICardProps) => {
