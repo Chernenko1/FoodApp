@@ -1,19 +1,19 @@
-import {ScrollView, StyleSheet, View} from 'react-native';
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
-
-import {AppText} from '../../AppText';
-import {KBFUInfo} from '../../KBFUInfo';
-import {AppTextInput} from '../../Inputs/AppTextInput';
 import {useTheme} from '@react-navigation/native';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {useState} from 'react';
+import {ScrollView, StyleSheet, View} from 'react-native';
+
 import {calculateNutritionalValue} from 'utils/calculateNutritionalValue';
-import {Button} from '../../Buttons/Button';
+import {AppText} from '../../AppText';
+import {AppTextInput} from '../../Inputs/AppTextInput';
+import {KBFUCard} from '../KBFUCard';
 import {FoodCardButtons} from './FoodCardButtons';
 
 type Navigation = NativeStackScreenProps<RecipesParamList, 'FoodCard'>;
 
 export const FoodCard = ({navigation, route}: Navigation) => {
-  const {nutrients, weight, _id, name} = route.params;
+  const {micmacNutrients, weight, _id, name} = route.params;
+  const {nutrients, vitamins, minerals} = micmacNutrients;
   const [value, setValue] = useState(String(weight));
 
   const {colors} = useTheme();
@@ -40,23 +40,10 @@ export const FoodCard = ({navigation, route}: Navigation) => {
         mealType="breakfast"
         id={_id}
         weight={weight}
+        micmacNutrients={micmacNutrients}
       />
-
-      <KBFUInfo
-        calories={nutrients.calories}
-        protein={calculateNutritionalValue(weight, value, nutrients.protein)}
-        fat={calculateNutritionalValue(weight, value, nutrients.fat)}
-        carbohydrates={calculateNutritionalValue(
-          weight,
-          value,
-          nutrients.carbohydrates,
-        )}
-        dietaryFiber={calculateNutritionalValue(
-          weight,
-          value,
-          nutrients.dietaryFiber,
-        )}
-        water={calculateNutritionalValue(weight, value, nutrients.water)}
+      <KBFUCard
+        nutrients={calculateNutritionalValue(nutrients, weight, value)}
       />
     </ScrollView>
   );

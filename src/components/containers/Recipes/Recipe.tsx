@@ -4,11 +4,12 @@ import {Image, ScrollView, StyleSheet, View} from 'react-native';
 import {AppText} from 'components/common/AppText';
 import {fetchRecipe} from 'services/apis/recipeAPI';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {KBFUInfo} from 'components/common/KBFUInfo';
+import {KBFUCard} from 'components/common/Cards/KBFUCard';
 import {RecipeIngredients} from './RecipeIngredients';
 import {RecipeInstruction} from './RecipeInstruction';
 import {RecipeServing} from './RecipeServing';
 import {Button} from 'components/common/Buttons/Button';
+import {DropdownCard} from 'components/common/Cards/DropdownCard';
 
 type Navigation = NativeStackScreenProps<RecipesParamList, 'Recipe'>;
 
@@ -22,12 +23,16 @@ export const Recipe = ({navigation, route}: Navigation) => {
   }, []);
 
   function navigateToFoodCard(
-    nutrients: Nutrients,
+    micmacNutrients: {
+      nutrients: Nutrients;
+      minerals: Minerals;
+      vitamins: Vitamins;
+    },
     weight: number,
     _id: string,
     name: string,
   ) {
-    navigation.navigate('FoodCard', {nutrients, weight, _id, name});
+    navigation.navigate('FoodCard', {micmacNutrients, weight, _id, name});
   }
 
   return (
@@ -53,28 +58,17 @@ export const Recipe = ({navigation, route}: Navigation) => {
           </View>
 
           <View style={styles.stepView}>
-            <KBFUInfo
-              protein={recipe.nutrients.protein}
-              calories={recipe.nutrients.calories}
-              carbohydrates={recipe.nutrients.carbohydrates}
-              dietaryFiber={recipe.nutrients.dietaryFiber}
-              fat={recipe.nutrients.fat}
-              water={recipe.nutrients.water}
-            />
-          </View>
+            <DropdownCard title="Пищевая ценность">
+              <KBFUCard nutrients={recipe.nutrients} />
+            </DropdownCard>
 
-          <View style={styles.stepView}>
-            <AppText fontWeight="bold" size={30}>
-              Ингредиенты
-            </AppText>
-            <RecipeIngredients ingredients={recipe.recipe.ingredients} />
-          </View>
+            <DropdownCard title="Ингредиенты">
+              <RecipeIngredients ingredients={recipe.recipe.ingredients} />
+            </DropdownCard>
 
-          <View style={styles.stepView}>
-            <AppText fontWeight="bold" size={30}>
-              Способ приготовления
-            </AppText>
-            <RecipeInstruction instruction={recipe.recipe.instruction} />
+            <DropdownCard title="Способ приготовления">
+              <RecipeInstruction instruction={recipe.recipe.instruction} />
+            </DropdownCard>
           </View>
 
           <View style={styles.stepView}>
@@ -82,7 +76,11 @@ export const Recipe = ({navigation, route}: Navigation) => {
               title="Добавить"
               onPress={() =>
                 navigateToFoodCard(
-                  recipe.nutrients,
+                  {
+                    nutrients: recipe.nutrients,
+                    minerals: recipe.minerals,
+                    vitamins: recipe.vitamins,
+                  },
                   recipe.recipe.weight,
                   recipe.recipe._id,
                   recipe.recipe.name,
