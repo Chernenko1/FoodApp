@@ -6,11 +6,11 @@ import {COLORS} from 'themes/COLORS';
 
 interface IRecipeIngredients {
   ingredients: {
-    productId: {
+    id: {
       name: string;
       id: string;
     };
-    quantity: string;
+    weight: string;
   }[];
 }
 
@@ -23,9 +23,9 @@ export const RecipeIngredients = ({ingredients}: IRecipeIngredients) => {
           style={[styles.productView, {backgroundColor: colors.card}]}
           key={index}>
           <LineInfoCard
-            nameText={item.productId.name}
-            infoText={item.quantity}
-            key={item.productId.id}
+            nameText={item.id.name}
+            infoText={item.weight}
+            key={item.id.id}
           />
         </Pressable>
       ))}
