@@ -22,17 +22,13 @@ export const Recipe = ({navigation, route}: Navigation) => {
       .catch(e => console.log(e));
   }, []);
 
-  function navigateToFoodCard(
-    micmacNutrients: {
-      nutrients: Nutrients;
-      minerals: Minerals;
-      vitamins: Vitamins;
-    },
-    weight: number,
-    _id: string,
-    name: string,
-  ) {
-    navigation.navigate('FoodCard', {micmacNutrients, weight, _id, name});
+  function navigateToFoodCard(id: string) {
+    navigation.navigate('FoodCard', {
+      fetchFunc: fetchRecipe,
+      mealType: 'dinner',
+      action: 'add',
+      id,
+    });
   }
 
   return (
@@ -46,14 +42,14 @@ export const Recipe = ({navigation, route}: Navigation) => {
         <View style={styles.innerContainer}>
           <View style={styles.mainView}>
             <AppText style={styles.headerText} fontWeight="bold" size={30}>
-              {recipe.recipe.name}
+              {recipe.name}
             </AppText>
-            <AppText numberOfLines={2}>{recipe.recipe.description}</AppText>
+            <AppText numberOfLines={2}>{recipe.description}</AppText>
 
             <RecipeServing
-              cookTime={recipe.recipe.cookTime}
-              service={recipe.recipe.service}
-              weight={recipe.recipe.weight}
+              cookTime={recipe.cookTime}
+              service={recipe.service}
+              weight={recipe.weight}
             />
           </View>
 
@@ -63,29 +59,18 @@ export const Recipe = ({navigation, route}: Navigation) => {
             </DropdownCard>
 
             <DropdownCard title="Ингредиенты">
-              <RecipeIngredients ingredients={recipe.recipe.ingredients} />
+              <RecipeIngredients ingredients={recipe.ingredients} />
             </DropdownCard>
 
             <DropdownCard title="Способ приготовления">
-              <RecipeInstruction instruction={recipe.recipe.instruction} />
+              <RecipeInstruction instruction={recipe.instruction} />
             </DropdownCard>
           </View>
 
           <View style={styles.stepView}>
             <Button
-              title="Добавить"
-              onPress={() =>
-                navigateToFoodCard(
-                  {
-                    nutrients: recipe.nutrients,
-                    minerals: recipe.minerals,
-                    vitamins: recipe.vitamins,
-                  },
-                  recipe.recipe.weight,
-                  recipe.recipe._id,
-                  recipe.recipe.name,
-                )
-              }
+              title="Изменить вес рецепта"
+              onPress={() => navigateToFoodCard(recipe._id)}
             />
           </View>
         </View>
