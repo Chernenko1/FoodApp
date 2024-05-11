@@ -1,6 +1,7 @@
 interface upLoadObject {
   userId: string;
   date: string;
-  type: MealType;
-  data: {id: string; weight: number; nutrients: MicMacNutrients};
+  mealType: MealType;
+  productType: 'food' | 'recipe';
+  data: {id: string; weight: number; nutrients: Nutrients};
 }

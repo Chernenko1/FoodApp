@@ -1,4 +1,4 @@
-interface Recipes {
+interface Recipe {
   _id: string;
   name: string;
   description: string;
@@ -16,10 +16,6 @@ interface Recipes {
   instruction: string[];
   category: {id: string; name: string}[];
   rating: number;
-}
-
-interface Recipe {
-  recipe: Recipes;
   nutrients: Nutrients;
   vitamins: Vitamins;
   minerals: Minerals;

@@ -8,14 +8,10 @@ interface Food {}
 interface Product {
   _id?: string;
   name: string;
-  quantity: string | number;
+  weight: string | number;
   nutrients: Nutrients;
   vitamins: Vitamins;
   minerals: Minerals;
 }
 
-interface MicMacNutrients {
-  nutrients: Nutrients;
-  vitamins: Vitamins;
-  minerals: Minerals;
-}
+interface FNutrients extends Nutrients, Vitamins, Minerals {}

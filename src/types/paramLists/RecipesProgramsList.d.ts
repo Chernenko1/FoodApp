@@ -4,13 +4,9 @@ type RecipesParamList = {
     _id: string;
   };
   FoodCard: {
-    _id: string;
-    name: string;
-    micmacNutrients: {
-      nutrients: Nutrients;
-      vitamins: Vitamins;
-      minerals: Minerals;
-    };
-    weight: number;
+    id: string;
+    mealType: MealType;
+    action: 'add' | 'update';
+    fetchFunc: (id: string) => Promise<any>;
   };
 };
