@@ -12,7 +12,6 @@ export const mealsAPI = createApi({
       async onQueryStarted({}, {queryFulfilled, dispatch}) {
         try {
           const {data} = await queryFulfilled;
-          // console.log(data.dinner.products)
           dispatch(setMeals(data));
         } catch (error) {
           console.log(error);
