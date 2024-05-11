@@ -4,7 +4,7 @@ import {
 } from '@react-navigation/native-stack';
 import React from 'react';
 
-import {FoodCard} from 'components/common/Cards/FoodCard/FoodCard';
+import {FoodCard} from 'components/containers/Food/FoodCard';
 import {Recipe} from 'components/containers/Recipes/Recipe';
 import {Recipes} from 'components/containers/Recipes/Recipes';
 

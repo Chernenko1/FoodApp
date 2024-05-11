@@ -5,12 +5,12 @@ import {
   NativeStackNavigationOptions,
 } from '@react-navigation/native-stack';
 
-import {Home} from '../../components/containers/Home/Home';
-import {Search} from '../../components/containers/Search/Search';
-import {MealInfo} from '../../components/containers/Home/Meals/MealInfo';
-import {ProductInfo} from '../../components/containers/Product/ProductInfo';
-import {NewProduct} from '../../components/containers/Product/CreateProduct/NewProduct';
-import {FoodCard} from 'components/common/Cards/FoodCard/FoodCard';
+import {Home} from 'components/containers/Home/Home';
+import {Search} from 'components/containers/Search/Search';
+import {MealInfo} from 'components/containers/Home/Meals/MealInfo';
+import {ProductInfo} from 'components/containers/Product/ProductInfo';
+import {NewProduct} from 'components/containers/Product/CreateProduct/NewProduct';
+import {FoodCard} from 'components/containers/Food/FoodCard';
 
 const nativeStackOption: NativeStackNavigationOptions = {
   headerShown: true,
