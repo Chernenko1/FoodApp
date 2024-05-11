@@ -8,7 +8,7 @@ export function calculateNutritionalValue(
   for (let key in nutrients) {
     //@ts-ignore
     answer[key] = (+nutrients[key] / +initialWeight) * +currentWeight;
-    answer[key] = answer[key].toFixed(1);
+    answer[key] = +answer[key].toFixed(1);
   }
   return answer;
 }
