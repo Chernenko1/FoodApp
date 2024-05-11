@@ -10,6 +10,8 @@ export const RemainingCaloriesRing = () => {
   const progress = Math.round(
     ((data.info.totalCalories ?? 1) * 100) / (data.info.necessaryCalories ?? 1),
   );
+  const remainingCalories =
+    (data.info.necessaryCalories ?? 0) - (data?.info.totalCalories ?? 0);
 
   return (
     <View style={styles.caloriesView}>
@@ -19,14 +21,13 @@ export const RemainingCaloriesRing = () => {
         icon="open"
       />
       <View style={[styles.progressBarWrapper]}>
-        <CircleProgressBar progress={progress ? progress : 0.1} />
+        <CircleProgressBar
+          progress={progress ? (progress > 100 ? 100 : progress) : 0.1}
+        />
         <View style={styles.progressText}>
           <Calories
             type="Осталось"
-            count={
-              (data.info.necessaryCalories ?? 0) -
-              (data?.info.totalCalories ?? 0)
-            }
+            count={remainingCalories > 0 ? remainingCalories : 0}
           />
         </View>
       </View>
