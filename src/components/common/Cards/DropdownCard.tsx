@@ -7,6 +7,7 @@ import {ButtonIcon} from '../Buttons/ButtonIcon';
 
 interface IDropdownCard {
   title: string;
+  startPosition?: boolean;
   iconSize?: number;
   children: React.ReactNode;
   style?: StyleProp<ViewStyle>;
@@ -15,10 +16,11 @@ interface IDropdownCard {
 export const DropdownCard = ({
   title,
   iconSize = 24,
+  startPosition = false,
   children,
   style,
 }: IDropdownCard) => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(startPosition);
 
   function isOpen() {
     setOpen(!open);
