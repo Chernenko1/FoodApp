@@ -23,11 +23,10 @@ export const Recipe = ({navigation, route}: Navigation) => {
   }, []);
 
   function navigateToFoodCard(id: string) {
-    navigation.navigate('FoodCard', {
-      fetchFunc: fetchRecipe,
-      mealType: 'dinner',
-      action: 'add',
+    navigation.navigate('FoodAdd', {
       id,
+      mealType: 'dinner',
+      productType: 'recipe',
     });
   }
 
