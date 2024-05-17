@@ -1,6 +1,6 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 import Config from 'react-native-config';
-import {setMeals} from '../slices/MealSlice';
+import {setMeals, updateMealAfterDeletion} from '../slices/MealSlice';
 
 export const mealsAPI = createApi({
   reducerPath: 'mealsApi',
@@ -20,18 +20,48 @@ export const mealsAPI = createApi({
       providesTags: result => ['Meals'],
     }),
     deleteProductInMeal: builder.mutation<
-      Meals,
-      {mealId: string; id: string; type: string}
+      {
+        message: string;
+        data: {
+          info: MealInfo;
+          meal: Meal;
+          mealType: MealType;
+        };
+      },
+      {
+        mealId: string;
+        objectId: string;
+        mealType: MealType;
+        productType: ProductType;
+        data: {
+          nutrients: Nutrients;
+          vitamins: Vitamins;
+          minerals: Minerals;
+        };
+      }
     >({
-      query: ({mealId, id, type}) => ({
+      query: ({
+        mealId,
+        objectId,
+        mealType,
+        productType,
+        data: {nutrients, vitamins, minerals},
+      }) => ({
         url: '/meals',
         method: 'DELETE',
-        body: {mealId, id, type},
+        body: {
+          mealId,
+          objectId,
+          mealType,
+          productType,
+          data: {nutrients, vitamins, minerals},
+        },
       }),
       async onQueryStarted({}, {queryFulfilled, dispatch}) {
         try {
           const {data} = await queryFulfilled;
-          dispatch(setMeals(data));
+          //@ts-ignore
+          dispatch(updateMealAfterDeletion(data.data));
         } catch (error) {
           console.log(error);
         }
