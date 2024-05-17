@@ -9,9 +9,11 @@ interface upLoadObject {
 interface delObject {
   data: {
     nutrients: Nutrients;
-    weight: number;
+    vitamins: Vitamins;
+    minerals: Minerals;
   };
-  mealProductId: string;
+  objectId: string;
   mealId: string;
   mealType: MealType;
+  productType: ProductType;
 }

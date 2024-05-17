@@ -1,41 +1,43 @@
 type Nutrients = {
-  calories: string | number;
-  protein: string | number;
-  fat: string | number;
-  carbohydrates: string | number;
-  water: string | number;
-  dietaryFiber: string | number;
+  calories: number;
+  protein: number;
+  fat: number;
+  carbohydrates: number;
+  water: number;
+  dietaryFiber: number;
 };
 
 type Vitamins = {
-  B1: string | number;
-  B2: string | number;
-  B3: string | number;
-  B5: string | number;
-  B6: string | number;
-  B7: string | number;
-  B9: string | number;
-  B12: string | number;
-  C: string | number;
-  A: string | number;
-  D: string | number;
-  E: string | number;
-  K: string | number;
+  B1: number;
+  B2: number;
+  B3: number;
+  B5: number;
+  B6: number;
+  B7: number;
+  B9: number;
+  B12: number;
+  C: number;
+  A: number;
+  D: number;
+  E: number;
+  K: number;
 };
 
 type Minerals = {
-  Mn: string | number;
-  Fe: string | number;
-  NaCL: string | number;
-  Mg: string | number;
-  P: string | number;
-  Ca: string | number;
-  Na: string | number;
-  Zn: string | number;
-  Cu: string | number;
-  I: string | number;
-  Se: string | number;
-  Cr: string | number;
-  K: string | number;
-  Mo: string | number;
+  Mn: number;
+  Fe: number;
+  NaCL: number;
+  Mg: number;
+  P: number;
+  Ca: number;
+  Na: number;
+  Zn: number;
+  Cu: number;
+  I: number;
+  Se: number;
+  Cr: number;
+  K: number;
+  Mo: number;
 };
+
+type ProductType = 'food' | 'recipe';

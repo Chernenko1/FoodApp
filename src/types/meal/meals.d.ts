@@ -1,65 +1,34 @@
 type MealType = 'breakfast' | 'dinner' | 'lunch' | 'snack';
 
-declare interface Meals {
+interface MealInfo {
+  necessaryCalories: number;
+  totalCalories: number;
+  nutrients: Nutrients;
+  vitamins: Vitamins;
+  minerals: Minerals;
+}
+
+interface Meal {
+  products: MealProduct[];
+  recipes: MealProduct[];
+  calories: number;
+}
+
+interface MealProduct {
+  _id: string;
+  objectId: string;
+  weight: number;
+  name: string;
+  nutrients: Nutrients;
+  minerals: Minerals;
+  vitamins: Vitamins;
+}
+interface Meals {
   _id: string;
   date: string;
-  breakfast: {
-    products: [
-      {
-        id: string;
-        weight: number;
-        name: string;
-        type: 'food' | 'recipe';
-        calories: string;
-        _id: string;
-      },
-    ];
-    calories: number;
-  };
-  lunch: {
-    products: [
-      {
-        id: string;
-        weight: number;
-        name: string;
-        type: 'food' | 'recipe';
-        calories: string;
-        _id: string;
-      },
-    ];
-    calories: number;
-  };
-  dinner: {
-    products: [
-      {
-        id: string;
-        weight: number;
-        name: string;
-        type: 'food' | 'recipe';
-        calories: string;
-        _id: string;
-      },
-    ];
-    calories: number;
-  };
-  snack: {
-    products: [
-      {
-        id: string;
-        weight: number;
-        name: string;
-        type: 'food' | 'recipe';
-        calories: string;
-        _id: string;
-      },
-    ];
-    calories: number;
-  };
-  info: {
-    necessaryCalories: number;
-    totalCalories: number;
-    fat: number;
-    protein: number;
-    carbohydrates: number;
-  };
+  breakfast: Meal;
+  lunch: Meal;
+  dinner: Meal;
+  snack: Meal;
+  info: MealInfo;
 }
