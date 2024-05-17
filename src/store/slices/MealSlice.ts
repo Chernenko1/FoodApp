@@ -85,16 +85,91 @@ export const mealsSlice = createSlice({
     },
     updateMealAfterDeletion(
       state,
+      action: PayloadAction<{
+        info: MealInfo;
+        mealType: MealType;
+        objectId: string;
+        calories: number;
+        productType: ProductType;
+      }>,
+    ) {
+      const {info, mealType, objectId, calories, productType} = action.payload;
+      state.meals.info = info;
+      state.meals[mealType].calories = calories;
+      if (productType === 'food') {
+        state.meals[mealType].products = state.meals[mealType].products.filter(
+          item => item.objectId !== objectId,
+        );
+      } else if (productType === 'recipe') {
+        state.meals[mealType].recipes = state.meals[mealType].recipes.filter(
+          item => item.objectId !== objectId,
+        );
+      }
+    },
+
+    updateMealAfterAdding(
+      state,
       action: PayloadAction<{info: MealInfo; mealType: MealType; meal: Meal}>,
     ) {
       state.meals.info = action.payload.info;
       //@ts-ignore
       state.meals[action.payload.mealType] = action.payload.meal;
     },
+
+    updateMealAfterUpdating(
+      state,
+      action: PayloadAction<{
+        info: MealInfo;
+        mealType: MealType;
+        objectId: string;
+        calories: number;
+        productType: ProductType;
+        data: {
+          nutrients: Nutrients;
+          vitamins: Vitamins;
+          minerals: Minerals;
+          weight: number;
+        };
+      }>,
+    ) {
+      const {info, mealType, objectId, calories, productType, data} =
+        action.payload;
+      state.meals.info = info;
+      state.meals[mealType].calories = calories;
+
+      if (productType === 'food') {
+        state.meals[mealType].products = state.meals[mealType].products.map(
+          item => {
+            if (item.objectId === objectId) {
+              item = {...item, ...data};
+              return item;
+            } else {
+              return item;
+            }
+          },
+        );
+      } else if (productType === 'recipe') {
+        state.meals[mealType].products = state.meals[mealType].products.map(
+          item => {
+            if (item.objectId === objectId) {
+              item = {...item, ...data};
+              return item;
+            } else {
+              return item;
+            }
+          },
+        );
+      }
+    },
   },
 });
 
-export const {setMeals, updateMealAfterDeletion} = mealsSlice.actions;
+export const {
+  setMeals,
+  updateMealAfterDeletion,
+  updateMealAfterAdding,
+  updateMealAfterUpdating,
+} = mealsSlice.actions;
 
 export const selectMeals = (state: RootState) => state.meals;
 
