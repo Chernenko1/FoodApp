@@ -1,45 +1,45 @@
+import {useTheme} from '@react-navigation/native';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import React, {useEffect, useState} from 'react';
 import {
   Dimensions,
   Keyboard,
   KeyboardAvoidingView,
+  Pressable,
   SafeAreaView,
   StyleSheet,
   TextInput,
   TouchableWithoutFeedback,
   View,
-  Pressable,
 } from 'react-native';
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {useTheme} from '@react-navigation/native';
 
+import {AppText} from 'components/common/AppText';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {getProduct} from 'services/apis/productAPI';
+import {searchProduct} from 'services/apis/searchAPI';
 import {ProductNotFound} from './ProductNotFound';
-import {searchProduct} from '../../../services/apis/productAPI';
-import {AppText} from '../../common/AppText';
 
 type NavProps = NativeStackScreenProps<HomeParamList, 'Search'>;
 
 export const Search = ({navigation, route}: NavProps) => {
   const [value, setValue] = useState('');
-  const [searchAnswer, setSearchAnswer] = useState<ProductInfo[]>([]);
+  const [searchAnswer, setSearchAnswer] = useState<SearchAnswer[]>([]);
 
-  const {screenParams} = route.params;
+  const {mealType} = route.params;
 
   const {colors} = useTheme();
 
-  const nextScreen = (item: ProductInfo) => {
-    navigation.navigate('ProductInfo', {
-      productData: item,
-      mealType: screenParams?.mealType as MealType,
-      func: 'add',
+  const nextScreen = (id: string) => {
+    navigation.navigate('FoodAdd', {
+      id,
+      mealType,
+      productType: 'food',
     });
   };
-
   useEffect(() => {
     if (value) {
       searchProduct(value)
-        .then((data: ProductInfo[]) => setSearchAnswer(data))
+        .then((data: SearchAnswer[]) => setSearchAnswer(data))
         .catch(e => console.log(e));
     }
   }, [value]);
@@ -64,7 +64,7 @@ export const Search = ({navigation, route}: NavProps) => {
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
           <View style={styles.containerAnswer}>
             {searchAnswer.map(item => (
-              <Pressable key={item._id} onPress={() => nextScreen(item)}>
+              <Pressable key={item._id} onPress={() => nextScreen(item._id)}>
                 <View style={styles.containerText}>
                   <AppText style={styles.text}>{item.name}</AppText>
                 </View>
