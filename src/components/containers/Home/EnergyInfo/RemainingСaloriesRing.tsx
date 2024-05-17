@@ -5,21 +5,17 @@ import {CircleProgressBar} from '../../../common/Charts/CircleProgressBar';
 import {Calories} from './Calories';
 
 export const RemainingCaloriesRing = () => {
-  const data = useAppSelector(state => state.meals.meals);
+  const info = useAppSelector(state => state.meals.meals.info);
 
   const progress = Math.round(
-    ((data.info.totalCalories ?? 1) * 100) / (data.info.necessaryCalories ?? 1),
+    ((info.totalCalories ?? 1) * 100) / (info.necessaryCalories ?? 1),
   );
   const remainingCalories =
-    (data.info.necessaryCalories ?? 0) - (data?.info.totalCalories ?? 0);
+    (info.necessaryCalories ?? 0) - (info.totalCalories ?? 0);
 
   return (
     <View style={styles.caloriesView}>
-      <Calories
-        type="Съедено"
-        count={data?.info.totalCalories ?? 0}
-        icon="open"
-      />
+      <Calories type="Съедено" count={info.totalCalories ?? 0} icon="open" />
       <View style={[styles.progressBarWrapper]}>
         <CircleProgressBar
           progress={progress ? (progress > 100 ? 100 : progress) : 0.1}
