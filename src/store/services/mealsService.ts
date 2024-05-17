@@ -1,6 +1,11 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 import Config from 'react-native-config';
-import {setMeals, updateMealAfterDeletion} from '../slices/MealSlice';
+import {
+  setMeals,
+  updateMealAfterAdding,
+  updateMealAfterDeletion,
+  updateMealAfterUpdating,
+} from '../slices/MealSlice';
 
 export const mealsAPI = createApi({
   reducerPath: 'mealsApi',
@@ -24,8 +29,10 @@ export const mealsAPI = createApi({
         message: string;
         data: {
           info: MealInfo;
-          meal: Meal;
+          calories: number;
+          objectId: string;
           mealType: MealType;
+          productType: ProductType;
         };
       },
       {
@@ -60,38 +67,100 @@ export const mealsAPI = createApi({
       async onQueryStarted({}, {queryFulfilled, dispatch}) {
         try {
           const {data} = await queryFulfilled;
-          //@ts-ignore
           dispatch(updateMealAfterDeletion(data.data));
         } catch (error) {
           console.log(error);
         }
       },
     }),
+
     updateProductInMeal: builder.mutation<
-      Meals,
-      {mealId: string; _id: string; type: string; quantity: string}
+      {
+        message: string;
+        data: {
+          info: MealInfo;
+          calories: number;
+        };
+      },
+      {
+        mealId: string;
+        objectId: string;
+        mealType: MealType;
+        productType: ProductType;
+        data: {
+          nutrients: Nutrients;
+          vitamins: Vitamins;
+          minerals: Minerals;
+          weight: number;
+        };
+      }
     >({
-      query: ({mealId, _id, type, quantity}) => ({
+      query: ({mealId, data, mealType, objectId, productType}) => ({
         url: '/meals/product',
         method: 'PUT',
-        body: {mealId, _id, type, quantity},
+        body: {mealId, data, mealType, objectId, productType},
       }),
+      async onQueryStarted(
+        {data: meal, objectId, mealType, productType},
+        {queryFulfilled, dispatch},
+      ) {
+        try {
+          const {data} = await queryFulfilled;
+          dispatch(
+            updateMealAfterUpdating({
+              calories: data.data.calories,
+              data: meal,
+              info: data.data.info,
+              mealType,
+              objectId,
+              productType,
+            }),
+          );
+        } catch (error) {
+          console.log(error);
+        }
+      },
       invalidatesTags: _ => ['Meals'],
     }),
+
     addProductToMeal: builder.mutation<
-      Meals,
+      {
+        message: string;
+        data: {
+          info: MealInfo;
+          meal: Meal;
+          mealType: MealType;
+        };
+      },
       {
         userId: string;
         date: string;
-        type: string;
-        data: {productId: string; quantity: string};
+        mealType: MealType;
+        productType: ProductType;
+        data: {
+          weight: number;
+          id: string;
+          name: string;
+          nutrients: Nutrients;
+          vitamins: Vitamins;
+          minerals: Minerals;
+        };
       }
     >({
-      query: ({userId, date, data, type}) => ({
+      query: ({userId, date, data, mealType, productType}) => ({
         url: '/meals',
         method: 'POST',
-        body: {userId, date, data, type},
+        body: {userId, date, data, mealType, productType},
       }),
+      async onQueryStarted({}, {queryFulfilled, dispatch}) {
+        try {
+          const {data} = await queryFulfilled;
+          //@ts-ignore
+          dispatch(updateMealAfterAdding(data.data));
+        } catch (error) {
+          console.log(error);
+        }
+      },
       invalidatesTags: _ => ['Meals'],
     }),
   }),
