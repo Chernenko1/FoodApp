@@ -8,27 +8,24 @@ export const BasicEnergyInfo = () => {
   const {colors} = useTheme();
 
   const {required_macros} = useAppSelector(state => state.user.user);
-  const data = useAppSelector(state => state.meals.meals);
-
+  const {carbohydrates, fat, protein} = useAppSelector(
+    state => state.meals.meals.info.nutrients,
+  );
   return (
     <SafeAreaView style={[styles.mainView, {backgroundColor: colors.card}]}>
       <RemainingCaloriesRing />
       <View style={styles.cbfuView}>
         <CBFU
-          count={data?.info.carbohydrates ?? 0}
+          count={carbohydrates ?? 0}
           maxCount={required_macros.carbohydrates}
           title="Углеводы"
         />
         <CBFU
-          count={data?.info.protein ?? 0}
+          count={protein ?? 0}
           maxCount={required_macros.protein}
           title="Белки"
         />
-        <CBFU
-          count={data?.info.fat ?? 0}
-          maxCount={required_macros.fat}
-          title="Жиры"
-        />
+        <CBFU count={fat ?? 0} maxCount={required_macros.fat} title="Жиры" />
       </View>
     </SafeAreaView>
   );
