@@ -5,40 +5,46 @@ import {FlatList, SafeAreaView, StyleSheet, View} from 'react-native';
 import {useAppSelector} from 'store/hooks';
 
 import {ButtonIcon} from 'components/common/Buttons/ButtonIcon';
+import {DropdownCard} from 'components/common/Cards/DropdownCard';
 import {ProductCard} from 'components/containers/Product/ProductCard';
-import {getMealData} from 'services/apis/mealAPI';
-import {mealsAPI} from 'store/services/mealsService';
+import {useDeleteProductInMealMutation} from 'store/services/mealsService';
 import {COLORS} from 'themes/COLORS';
 
 type Navigation = NativeStackScreenProps<HomeParamList, 'MealInfo'>;
 
-interface IProduct {
-  _id: string;
-  weight: number;
-  calories: number;
-  name: string;
-}
-
 export const MealInfo = ({navigation, route}: Navigation) => {
   const {headerTitle, mealType} = route.params;
 
-  const [products, setProducts] = useState<IProduct[]>();
-
-  const {_id} = useAppSelector(state => state.meals.meals);
-  const [useDeleteProductInMeal] = mealsAPI.useDeleteProductInMealMutation();
+  const meals = useAppSelector(state => state.meals.meals);
+  const [deleteProduct] = useDeleteProductInMealMutation();
 
   const {colors} = useTheme();
 
-  const deleteProduct = (cardId: string) => {
-    useDeleteProductInMeal({mealId: _id, id: cardId, type: mealType});
-  };
+  function handleDeleteButton(
+    objectId: string,
+    productType: ProductType,
+    nutrients: Nutrients,
+    vitamins: Vitamins,
+    minerals: Minerals,
+  ) {
+    deleteProduct({
+      mealId: meals._id,
+      objectId,
+      mealType: mealType,
+      productType,
+      data: {
+        nutrients,
+        minerals,
+        vitamins,
+      },
+    });
+  }
 
   function navigateToFoodCard(
-    name: string,
-    weight: number,
-    micmacNutrients: MicMacNutrients,
+    product: MealProduct,
+    productType: 'food' | 'recipe',
   ) {
-    navigation.navigate('FoodCard', {name, weight, _id, micmacNutrients});
+    navigation.navigate('FoodChange', {mealType, productType, product});
   }
 
   useEffect(() => {
@@ -50,32 +56,59 @@ export const MealInfo = ({navigation, route}: Navigation) => {
     });
   }, []);
 
-  useEffect(() => {
-    navigation.addListener('focus', () =>
-      getMealData(_id, mealType)
-        .then(data => setProducts(data))
-        .catch(e => console.log(e)),
-    );
-  }, []);
-
   return (
     <SafeAreaView
       style={[styles.mainView, {backgroundColor: colors.background}]}>
-      <FlatList
-        data={products}
-        keyExtractor={(item, ind) => item._id + `${ind}`}
-        renderItem={({item}) => (
-          <View style={styles.productView}>
-            <ProductCard
-              productName={item.name}
-              productQuantity={item.weight}
-              kcal={item.calories}
-              onIconPress={() => deleteProduct(item._id)}
-              // onCardPress={() => navigateToFoodCard(item.name, item.weight, {})}
-            />
-          </View>
-        )}
-      />
+      <DropdownCard title="Продукты" startPosition={true}>
+        <FlatList
+          data={meals[mealType].products}
+          keyExtractor={(item, ind) => item._id + `${ind}`}
+          renderItem={({item}) => (
+            <View style={styles.productView}>
+              <ProductCard
+                productName={item.name}
+                productQuantity={item.weight}
+                kcal={item.calories}
+                onIconPress={() =>
+                  handleDeleteButton(
+                    item.objectId,
+                    'food',
+                    item.nutrients,
+                    item.vitamins,
+                    item.minerals,
+                  )
+                }
+                onCardPress={() => navigateToFoodCard(item, 'food')}
+              />
+            </View>
+          )}
+        />
+      </DropdownCard>
+      <DropdownCard title="Рецепты" startPosition={true}>
+        <FlatList
+          data={meals[mealType].recipes}
+          keyExtractor={(item, ind) => item._id + `${ind}`}
+          renderItem={({item}) => (
+            <View style={styles.productView}>
+              <ProductCard
+                productName={item.name}
+                productQuantity={item.weight}
+                kcal={item.nutrients.calories}
+                onIconPress={() =>
+                  handleDeleteButton(
+                    item.objectId,
+                    'recipe',
+                    item.nutrients,
+                    item.vitamins,
+                    item.minerals,
+                  )
+                }
+                onCardPress={() => navigateToFoodCard(item, 'recipe')}
+              />
+            </View>
+          )}
+        />
+      </DropdownCard>
       <View style={styles.addIconView}>
         <ButtonIcon
           name="add-outline"
@@ -84,7 +117,7 @@ export const MealInfo = ({navigation, route}: Navigation) => {
           onPress={() =>
             navigation.navigate('Search', {
               backScreen: route.name,
-              screenParams: {mealType},
+              mealType: mealType,
             })
           }
         />
