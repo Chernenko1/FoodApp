@@ -11,6 +11,8 @@ import {MealInfo} from 'components/containers/Home/Meals/MealInfo';
 import {ProductInfo} from 'components/containers/Product/ProductInfo';
 import {NewProduct} from 'components/containers/Product/CreateProduct/NewProduct';
 import {FoodCard} from 'components/containers/Food/FoodCard';
+import {FoodAddCard} from 'components/containers/Food/FoodAddCard';
+import {FoodChangeCard} from 'components/containers/Food/FoodChangeCard';
 
 const nativeStackOption: NativeStackNavigationOptions = {
   headerShown: true,
@@ -33,9 +35,9 @@ export const HomeStack = () => {
         options={{headerShown: false}}
       />
       <Stack.Screen name="MealInfo" component={MealInfo} />
-      <Stack.Screen name="ProductInfo" component={ProductInfo} />
       <Stack.Screen name="ProductCreate" component={NewProduct} />
-      <Stack.Screen name="FoodCard" component={FoodCard} />
+      <Stack.Screen name="FoodAdd" component={FoodAddCard} />
+      <Stack.Screen name="FoodChange" component={FoodChangeCard} />
     </Stack.Navigator>
   );
 };
