@@ -5,8 +5,8 @@ export const searchProduct = async (text: string) => {
   return data;
 };
 
-export const getProduct = async (id: string, quantity: string) => {
-  let {data} = await $host.get(`api/product/${id}/${quantity}`);
+export const getProduct = async (id: string) => {
+  let {data} = await $host.get(`api/product/${id}`);
   return data;
 };
 
