@@ -7,6 +7,5 @@ type RecipesParamList = {
     id: string;
     mealType: MealType;
     productType: ProductType;
-    action: 'add' | 'update';
   };
 };

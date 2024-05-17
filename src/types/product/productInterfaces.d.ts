@@ -8,7 +8,7 @@ interface Food {}
 interface Product {
   _id?: string;
   name: string;
-  weight: string | number;
+  weight: number;
   nutrients: Nutrients;
   vitamins: Vitamins;
   minerals: Minerals;

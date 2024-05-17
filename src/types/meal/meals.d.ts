@@ -17,6 +17,7 @@ interface Meal {
 interface MealProduct {
   _id: string;
   objectId: string;
+  calories: number;
   weight: number;
   name: string;
   nutrients: Nutrients;

@@ -13,13 +13,9 @@ type HomeParamList = {
     id: string;
     mealType: MealType;
     productType: ProductType;
-    action: 'add' | 'update';
   };
   FoodChange: {
-    mealProductId: string;
-    productId: string;
-    weight: number;
-    action: 'add' | 'update';
+    product: MealProduct;
     productType: ProductType;
     mealType: MealType;
   };
