@@ -1,5 +1,5 @@
 export function calculateNutritionalValue(
-  nutrients: Nutrients,
+  nutrients: Nutrients | Vitamins | Minerals,
   initialWeight: string | number,
   currentWeight: string | number,
 ) {
