@@ -3,10 +3,10 @@ type RecipesParamList = {
   Recipe: {
     _id: string;
   };
-  FoodCard: {
+  FoodAdd: {
     id: string;
     mealType: MealType;
+    productType: ProductType;
     action: 'add' | 'update';
-    fetchFunc: (id: string) => Promise<any>;
   };
 };

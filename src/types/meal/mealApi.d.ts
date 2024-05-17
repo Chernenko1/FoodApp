@@ -2,6 +2,16 @@ interface upLoadObject {
   userId: string;
   date: string;
   mealType: MealType;
-  productType: 'food' | 'recipe';
-  data: {id: string; weight: number; nutrients: Nutrients};
+  productType: ProductType;
+  data: {id: string; weight: number; name: string; nutrients: Nutrients};
+}
+
+interface delObject {
+  data: {
+    nutrients: Nutrients;
+    weight: number;
+  };
+  mealProductId: string;
+  mealId: string;
+  mealType: MealType;
 }

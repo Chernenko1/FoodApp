@@ -2,24 +2,25 @@ type HomeParamList = {
   StackHome: undefined;
   Search: {
     backScreen: string;
-    screenParams?: {
-      mealType?: MealType;
-    };
+    mealType: MealType;
   };
   MealInfo: {
     headerTitle?: string;
     mealType: MealType;
   };
-  ProductInfo: {
-    productData: ProductInfo;
-    mealType: MealType;
-    func: 'add' | 'update';
-  };
   ProductCreate: undefined;
-  FoodCard: {
+  FoodAdd: {
     id: string;
     mealType: MealType;
+    productType: ProductType;
     action: 'add' | 'update';
-    fetchFunc: (id: string) => Promise<any>;
+  };
+  FoodChange: {
+    mealProductId: string;
+    productId: string;
+    weight: number;
+    action: 'add' | 'update';
+    productType: ProductType;
+    mealType: MealType;
   };
 };
