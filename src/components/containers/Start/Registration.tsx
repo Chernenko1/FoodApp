@@ -57,12 +57,6 @@ export const Registration = ({route}: Navigation) => {
       });
   }
 
-  // console.log(route.params)
-
-  // useEffect(() => {
-  //     navigation.setOptions({headerTitle: "Авторизация"})
-  // }, [navigation])
-
   return (
     <View style={styles.mainView}>
       <View style={styles.inputView}>
@@ -96,7 +90,7 @@ export const Registration = ({route}: Navigation) => {
       <View style={{alignItems: 'center'}}>
         <Button
           style={{width: '100%'}}
-          title="Авторизироваться"
+          title="Зарегистрироваться"
           color={COLORS.orange}
           textColor={COLORS.black}
           onPress={handleSubmit}
