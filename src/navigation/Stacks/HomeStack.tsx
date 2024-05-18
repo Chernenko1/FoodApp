@@ -8,9 +8,7 @@ import {
 import {Home} from 'components/containers/Home/Home';
 import {Search} from 'components/containers/Search/Search';
 import {MealInfo} from 'components/containers/Home/Meals/MealInfo';
-import {ProductInfo} from 'components/containers/Product/ProductInfo';
 import {NewProduct} from 'components/containers/Product/CreateProduct/NewProduct';
-import {FoodCard} from 'components/containers/Food/FoodCard';
 import {FoodAddCard} from 'components/containers/Food/FoodAddCard';
 import {FoodChangeCard} from 'components/containers/Food/FoodChangeCard';
 
