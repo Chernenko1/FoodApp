@@ -11,7 +11,7 @@ import {COLORS} from 'themes/COLORS';
 type Navigation = NativeStackNavigationProp<RecipesParamList, 'RecipesStack'>;
 
 export const PopularRecipes = () => {
-  const [recipes, setRecipes] = useState<Recipes[]>();
+  const [recipes, setRecipes] = useState<Recipe[]>();
 
   const navigation = useNavigation<Navigation>();
 
