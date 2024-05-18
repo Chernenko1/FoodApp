@@ -1,8 +1,8 @@
 type HomeParamList = {
   StackHome: undefined;
   Search: {
-    backScreen: string;
     mealType: MealType;
+    productType: ProductType;
   };
   MealInfo: {
     headerTitle?: string;
