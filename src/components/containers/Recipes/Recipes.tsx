@@ -4,9 +4,21 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {PopularRecipeCategories} from './PopularRecipeCategories';
 import {PopularRecipes} from './PopularRecipes';
 import {SearchInput} from 'components/common/SearchInput';
+import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack/lib/typescript/src/types';
+
+type Navigation = NativeStackNavigationProp<RecipesParamList, 'Search'>;
 
 export const Recipes = () => {
   const inset = useSafeAreaInsets();
+
+  const navigation = useNavigation<Navigation>();
+
+  function navigateToSearch() {
+    navigation.navigate('Search', {
+      productType: 'recipe',
+    });
+  }
   return (
     <ScrollView
       contentContainerStyle={[
@@ -16,7 +28,7 @@ export const Recipes = () => {
       <AppText style={styles.headerText} fontWeight="bold">
         Рецепты
       </AppText>
-      <SearchInput />
+      <SearchInput onPress={navigateToSearch} />
       <PopularRecipeCategories />
       <PopularRecipes />
     </ScrollView>
