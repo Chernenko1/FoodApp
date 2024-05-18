@@ -72,7 +72,7 @@ export const Search = ({navigation, route}: NavProps) => {
             ))}
           </View>
         </TouchableWithoutFeedback>
-        <ProductNotFound />
+        <ProductNotFound productType={productType} />
       </KeyboardAvoidingView>
     </SafeAreaView>
   );
