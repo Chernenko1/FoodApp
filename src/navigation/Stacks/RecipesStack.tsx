@@ -7,6 +7,7 @@ import React from 'react';
 import {Recipe} from 'components/containers/Recipes/Recipe';
 import {Recipes} from 'components/containers/Recipes/Recipes';
 import {FoodAddCard} from 'components/containers/Food/FoodAddCard';
+import {Search} from 'components/containers/Search/Search';
 
 const nativeStackOption: NativeStackNavigationOptions = {
   headerShown: true,
@@ -27,6 +28,11 @@ export const RecipesStack = () => {
         name="Recipe"
         component={Recipe}
         options={{headerShown: true, headerShadowVisible: true}}
+      />
+      <Stack.Screen
+        name="Search"
+        component={Search}
+        options={{headerShown: false}}
       />
       <Stack.Screen name="FoodAdd" component={FoodAddCard} />
     </Stack.Navigator>
