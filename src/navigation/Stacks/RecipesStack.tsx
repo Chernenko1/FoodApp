@@ -8,10 +8,12 @@ import {Recipe} from 'components/containers/Recipes/Recipe';
 import {Recipes} from 'components/containers/Recipes/Recipes';
 import {FoodAddCard} from 'components/containers/Food/FoodAddCard';
 import {Search} from 'components/containers/Search/Search';
+import {NewRecipe} from 'components/containers/Recipes/RecipeCreate/NewRecipe';
+import {FoodForRecipeCard} from 'components/containers/Food/FoodForRecipe';
+import {SearchProductForRecipe} from 'components/containers/Recipes/RecipeCreate/SearchProductForRecipe';
 
 const nativeStackOption: NativeStackNavigationOptions = {
-  headerShown: true,
-  headerShadowVisible: true,
+  headerShown: false,
 };
 
 const Stack = createNativeStackNavigator<RecipesParamList>();
@@ -22,7 +24,7 @@ export const RecipesStack = () => {
       <Stack.Screen
         name="RecipesStack"
         component={Recipes}
-        options={{headerShown: false}}
+        options={nativeStackOption}
       />
       <Stack.Screen
         name="Recipe"
@@ -32,9 +34,20 @@ export const RecipesStack = () => {
       <Stack.Screen
         name="Search"
         component={Search}
-        options={{headerShown: false}}
+        options={nativeStackOption}
+      />
+      <Stack.Screen
+        name="RecipeCreate"
+        component={NewRecipe}
+        options={{headerShown: true}}
       />
       <Stack.Screen name="FoodAdd" component={FoodAddCard} />
+      <Stack.Screen name="ProductAdd" component={FoodForRecipeCard} />
+      <Stack.Screen
+        name="SearchProductForRecipe"
+        component={SearchProductForRecipe}
+        options={nativeStackOption}
+      />
     </Stack.Navigator>
   );
 };
