@@ -56,7 +56,7 @@ export const UpLoadProduct = () => {
         <View>
           <AppText style={styles.additionalTitle}>
             Похоже произошла ошибка, проверьте ваше подключение к сети и
-            повторите попытку, если ошибка не ищезла -
+            повторите попытку, если ошибка не исчезла -
             <AppText style={[styles.additionalTitle, {color: COLORS.orange}]}>
               сообщете нам
             </AppText>
