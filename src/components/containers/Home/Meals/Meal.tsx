@@ -19,6 +19,13 @@ export const Meal = ({title, kcal = 0, mealType}: Props) => {
 
   const navigation = useNavigation<Navigation>();
 
+  function navigateToSearch() {
+    navigation.navigate('Search', {
+      mealType,
+      productType: 'food',
+    });
+  }
+
   return (
     <View style={[styles.mainView, {backgroundColor: colors.card}]}>
       <Pressable
@@ -40,12 +47,7 @@ export const Meal = ({title, kcal = 0, mealType}: Props) => {
         name="add-outline"
         size={40}
         backgroundColor={COLORS.lightGray}
-        onPress={() =>
-          navigation.navigate('Search', {
-            backScreen: 'StackHome',
-            screenParams: {mealType},
-          })
-        }
+        onPress={navigateToSearch}
       />
     </View>
   );
