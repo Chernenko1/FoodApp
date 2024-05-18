@@ -18,60 +18,60 @@ export const ProductVitamins = ({
   setProductVitamins,
   setIsValid,
 }: IProductVitamins) => {
-  const {quantity, vitamins} = useContext(ProductCreateContext);
+  const {weight, vitamins} = useContext(ProductCreateContext);
 
   const VitaminsSchema = Yup.object().shape({
     B1: Yup.number()
       .min(0, 'Не может быть меньше нуля')
-      .max(quantity, 'Не может быть больше веса продукта')
+      .max(weight, 'Не может быть больше веса продукта')
       .required('Не может быть пустым'),
     B3: Yup.number()
       .min(0, 'Не может быть меньше нуля')
-      .max(quantity, 'Не может быть больше веса продукта')
+      .max(weight, 'Не может быть больше веса продукта')
       .required('Не может быть пустым'),
     B2: Yup.number()
       .min(0, 'Не может быть меньше нуля')
-      .max(quantity, 'Не может быть больше веса продукта')
+      .max(weight, 'Не может быть больше веса продукта')
       .required('Не может быть пустым'),
     B5: Yup.number()
       .min(0, 'Не может быть меньше нуля')
-      .max(quantity, 'Не может быть больше веса продукта')
+      .max(weight, 'Не может быть больше веса продукта')
       .required('Не может быть пустым'),
     B6: Yup.number()
       .min(0, 'Не может быть меньше нуля')
-      .max(quantity, 'Не может быть больше веса продукта')
+      .max(weight, 'Не может быть больше веса продукта')
       .required('Не может быть пустым'),
     B7: Yup.number()
       .min(0, 'Не может быть меньше нуля')
-      .max(quantity, 'Не может быть больше веса продукта')
+      .max(weight, 'Не может быть больше веса продукта')
       .required('Не может быть пустым'),
     B9: Yup.number()
       .min(0, 'Не может быть меньше нуля')
-      .max(quantity, 'Не может быть больше веса продукта')
+      .max(weight, 'Не может быть больше веса продукта')
       .required('Не может быть пустым'),
     B12: Yup.number()
       .min(0, 'Не может быть меньше нуля')
-      .max(quantity, 'Не может быть больше веса продукта')
+      .max(weight, 'Не может быть больше веса продукта')
       .required('Не может быть пустым'),
     C: Yup.number()
       .min(0, 'Не может быть меньше нуля')
-      .max(quantity, 'Не может быть больше веса продукта')
+      .max(weight, 'Не может быть больше веса продукта')
       .required('Не может быть пустым'),
     A: Yup.number()
       .min(0, 'Не может быть меньше нуля')
-      .max(quantity, 'Не может быть больше веса продукта')
+      .max(weight, 'Не может быть больше веса продукта')
       .required('Не может быть пустым'),
     D: Yup.number()
       .min(0, 'Не может быть меньше нуля')
-      .max(quantity, 'Не может быть больше веса продукта')
+      .max(weight, 'Не может быть больше веса продукта')
       .required('Не может быть пустым'),
     E: Yup.number()
       .min(0, 'Не может быть меньше нуля')
-      .max(quantity, 'Не может быть больше веса продукта')
+      .max(weight, 'Не может быть больше веса продукта')
       .required('Не может быть пустым'),
     K: Yup.number()
       .min(0, 'Не может быть меньше нуля')
-      .max(quantity, 'Не может быть больше веса продукта')
+      .max(weight, 'Не может быть больше веса продукта')
       .required('Не может быть пустым'),
   });
 

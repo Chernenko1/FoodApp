@@ -19,23 +19,65 @@ export const ProductMinerals = ({
   setProductMinerals,
   setIsValid,
 }: IProductMinerals) => {
-  const {minerals, quantity} = useContext(ProductCreateContext);
+  const {minerals, weight} = useContext(ProductCreateContext);
 
   const Minerals = Yup.object().shape({
-    Mn: Yup.number().min(0).max(quantity).required('Минерал'),
-    NaCL: Yup.number().min(0).max(quantity).required('Минерал'),
-    Fe: Yup.number().min(0).max(quantity).required('Минерал'),
-    Mg: Yup.number().min(0).max(quantity).required('Минерал'),
-    P: Yup.number().min(0).max(quantity).required('Минерал'),
-    Ca: Yup.number().min(0).max(quantity).required('Минерал'),
-    Na: Yup.number().min(0).max(quantity).required('Минерал'),
-    Zn: Yup.number().min(0).max(quantity).required('Минерал'),
-    Cu: Yup.number().min(0).max(quantity).required('Минерал'),
-    I: Yup.number().min(0).max(quantity).required('Минерал'),
-    Se: Yup.number().min(0).max(quantity).required('Минерал'),
-    Cr: Yup.number().min(0).max(quantity).required('Минерал'),
-    K: Yup.number().min(0).max(quantity).required('Минерал'),
-    Mo: Yup.number().min(0).max(quantity).required('Минерал'),
+    Mn: Yup.number()
+      .min(0, 'Не может быть меньше нуля')
+      .max(weight, 'Не может быть больше веса продукта')
+      .required('Не может быть пустым'),
+    NaCL: Yup.number()
+      .min(0, 'Не может быть меньше нуля')
+      .max(weight, 'Не может быть больше веса продукта')
+      .required('Не может быть пустым'),
+    Fe: Yup.number()
+      .min(0, 'Не может быть меньше нуля')
+      .max(weight, 'Не может быть больше веса продукта')
+      .required('Не может быть пустым'),
+    Mg: Yup.number()
+      .min(0, 'Не может быть меньше нуля')
+      .max(weight, 'Не может быть больше веса продукта')
+      .required('Не может быть пустым'),
+    P: Yup.number()
+      .min(0, 'Не может быть меньше нуля')
+      .max(weight, 'Не может быть больше веса продукта')
+      .required('Не может быть пустым'),
+    Ca: Yup.number()
+      .min(0, 'Не может быть меньше нуля')
+      .max(weight, 'Не может быть больше веса продукта')
+      .required('Не может быть пустым'),
+    Na: Yup.number()
+      .min(0, 'Не может быть меньше нуля')
+      .max(weight, 'Не может быть больше веса продукта')
+      .required('Не может быть пустым'),
+    Zn: Yup.number()
+      .min(0, 'Не может быть меньше нуля')
+      .max(weight, 'Не может быть больше веса продукта')
+      .required('Не может быть пустым'),
+    Cu: Yup.number()
+      .min(0, 'Не может быть меньше нуля')
+      .max(weight, 'Не может быть больше веса продукта')
+      .required('Не может быть пустым'),
+    I: Yup.number()
+      .min(0, 'Не может быть меньше нуля')
+      .max(weight, 'Не может быть больше веса продукта')
+      .required('Не может быть пустым'),
+    Se: Yup.number()
+      .min(0, 'Не может быть меньше нуля')
+      .max(weight, 'Не может быть больше веса продукта')
+      .required('Не может быть пустым'),
+    Cr: Yup.number()
+      .min(0, 'Не может быть меньше нуля')
+      .max(weight, 'Не может быть больше веса продукта')
+      .required('Не может быть пустым'),
+    K: Yup.number()
+      .min(0, 'Не может быть меньше нуля')
+      .max(weight, 'Не может быть больше веса продукта')
+      .required('Не может быть пустым'),
+    Mo: Yup.number()
+      .min(0, 'Не может быть меньше нуля')
+      .max(weight, 'Не может быть больше веса продукта')
+      .required('Не может быть пустым'),
   });
 
   const {handleChange, handleSubmit, values, errors, isValid} = useFormik({

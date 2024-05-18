@@ -4,7 +4,6 @@ import {Pressable, StyleSheet, View} from 'react-native';
 
 import {TextButton} from 'components/common/Buttons/TextButton';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {createProduct} from 'services/apis/productAPI';
 import {COLORS} from 'themes/COLORS';
 import {BasicInfo} from './BasicInfo';
 import {ProductCreateContext} from './ProductCreateContext';
@@ -17,7 +16,7 @@ import {UpLoadProduct} from './UpLoadProduct';
 export const NewProduct = () => {
   const [product, setProduct] = useState<Product>({
     name: '',
-    quantity: 100,
+    weight: 100,
     nutrients: {
       calories: '0',
       protein: '0',
@@ -77,8 +76,8 @@ export const NewProduct = () => {
     setScreenCount(prev => prev - 1);
   }
 
-  function setBasicInfo(name: string) {
-    setProduct({...product, name});
+  function setBasicInfo(name: string, weight: number) {
+    setProduct({...product, name, weight});
   }
 
   function setProductServing({

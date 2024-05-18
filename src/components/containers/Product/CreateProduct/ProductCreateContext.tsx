@@ -2,7 +2,7 @@ import {createContext} from 'react';
 
 export const ProductCreateContext = createContext({
   name: '',
-  quantity: 100,
+  weight: 100,
   nutrients: {
     calories: '0',
     protein: '0',

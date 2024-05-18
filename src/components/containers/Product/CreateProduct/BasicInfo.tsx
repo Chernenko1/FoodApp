@@ -1,6 +1,6 @@
 import {useTheme} from '@react-navigation/native';
-import {Field, Formik, useFormik} from 'formik';
-import React, {useContext, useEffect, useRef} from 'react';
+import {useFormik} from 'formik';
+import React, {useContext, useEffect} from 'react';
 import {StyleSheet, View} from 'react-native';
 import * as Yup from 'yup';
 
@@ -9,7 +9,7 @@ import {ProductCreateContext} from './ProductCreateContext';
 import {AppTextInput} from 'components/common/Inputs/AppTextInput';
 
 interface IBasicInfo {
-  setBasicInfo: (name: string) => void;
+  setBasicInfo: (name: string, weight: number) => void;
   setIsValid: (isValid: boolean) => void;
 }
 
@@ -18,14 +18,14 @@ export const BasicInfo = ({setBasicInfo, setIsValid}: IBasicInfo) => {
 
   const BasicInfoSchema = Yup.object().shape({
     name: Yup.string().min(1).max(100).required('Поле не может быть пустым'),
-    quantity: Yup.number().required(),
+    weight: Yup.number().required(),
   });
 
   const {handleChange, handleSubmit, values, errors, isValid} = useFormik({
     validationSchema: BasicInfoSchema,
-    initialValues: {name: context.name, quantity: 100},
+    initialValues: {name: context.name, weight: context.weight},
     onSubmit: values => {
-      setBasicInfo(values.name);
+      setBasicInfo(values.name, +values.weight);
     },
   });
 
@@ -63,7 +63,12 @@ export const BasicInfo = ({setBasicInfo, setIsValid}: IBasicInfo) => {
 
         <View style={styles.inputContainerRow}>
           <AppText style={styles.inputTitle}>Введите вес продукта:</AppText>
-          <AppText>100</AppText>
+          <AppTextInput
+            value={String(values.weight)}
+            onChangeText={handleChange('weight')}
+            error={!!errors.weight}
+            errorMessage={errors.weight as string}
+          />
         </View>
       </View>
     </View>
