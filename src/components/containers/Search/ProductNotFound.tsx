@@ -7,17 +7,24 @@ import {useNavigation} from '@react-navigation/native';
 import {COLORS} from '../../../themes/COLORS';
 import {AppText} from '../../common/AppText';
 
-type Navigation = NativeStackNavigationProp<HomeParamList, 'ProductCreate'>;
-
+type FoodNavigation = NativeStackNavigationProp<HomeParamList, 'ProductCreate'>;
+type RecipeNavigation = NativeStackNavigationProp<
+  RecipesParamList,
+  'RecipeCreate'
+>;
 interface IProsuctNotFound {
   productType: ProductType;
 }
 
 export const ProductNotFound = ({productType}: IProsuctNotFound) => {
-  const navigation = useNavigation<Navigation>();
+  const navigation = useNavigation<RecipeNavigation | FoodNavigation>();
 
   function navigateToProductCreating() {
-    navigation.navigate('ProductCreate');
+    if (productType === 'food') {
+      navigation.navigate('ProductCreate');
+    } else if (productType === 'recipe') {
+      navigation.navigate('RecipeCreate', {});
+    }
   }
 
   return (
