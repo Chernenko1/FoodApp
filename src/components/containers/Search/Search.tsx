@@ -25,7 +25,7 @@ export const Search = ({navigation, route}: NavProps) => {
   const [value, setValue] = useState('');
   const [searchAnswer, setSearchAnswer] = useState<SearchAnswer[]>([]);
 
-  const {mealType} = route.params;
+  const {mealType, productType} = route.params;
 
   const {colors} = useTheme();
 
@@ -33,12 +33,12 @@ export const Search = ({navigation, route}: NavProps) => {
     navigation.navigate('FoodAdd', {
       id,
       mealType,
-      productType: 'food',
+      productType,
     });
   };
   useEffect(() => {
     if (value) {
-      searchProduct(value)
+      searchProduct(value, productType)
         .then((data: SearchAnswer[]) => setSearchAnswer(data))
         .catch(e => console.log(e));
     }
