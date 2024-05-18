@@ -12,6 +12,8 @@ import {fetchRecipe} from 'services/apis/recipeAPI';
 import {mealsAPI} from 'store/services/mealsService';
 import {calculateNutritionalValue} from 'utils/calculateNutritionalValue';
 import {FoodCardButtons} from './FoodCardButtons';
+import {SafeAreaView} from 'react-native-safe-area-context';
+import {MealTypesModal} from 'components/common/Modals/MealTypesModal';
 
 type Navigation =
   | NativeStackScreenProps<RecipesParamList, 'FoodAdd'>
@@ -19,6 +21,9 @@ type Navigation =
 
 export const FoodAddCard = ({navigation, route}: Navigation) => {
   const {id, mealType, productType} = route.params;
+
+  const [typeOfMeal, setTypeOfMeal] = useState<MealType | undefined>(mealType);
+  const [modalOpen, setModalOpen] = useState(false);
   const [product, setProduct] = useState<Product>();
   const [disabled, setDisabled] = useState(false);
   const [value, setValue] = useState('');
@@ -31,28 +36,32 @@ export const FoodAddCard = ({navigation, route}: Navigation) => {
   const {colors} = useTheme();
 
   function handleButtonAdd() {
-    setDisabled(true);
-    addToMeal({
-      date,
-      mealType,
-      productType,
-      userId,
-      data: {
-        id,
-        weight: +value,
-        name: product?.name as string,
-        nutrients,
-        vitamins,
-        minerals,
-      },
-    })
-      .then(_ => {
-        navigation.pop(2);
+    if (typeOfMeal !== undefined) {
+      setDisabled(true);
+      addToMeal({
+        date,
+        mealType: typeOfMeal,
+        productType,
+        userId,
+        data: {
+          id,
+          weight: +value,
+          name: product?.name as string,
+          nutrients,
+          vitamins,
+          minerals,
+        },
       })
-      .catch(e => {
-        console.log('Card', e);
-        setDisabled(false);
-      });
+        .then(_ => {
+          navigation.pop(2);
+        })
+        .catch(e => {
+          console.log('Card', e);
+          setDisabled(false);
+        });
+    } else {
+      setModalOpen(true);
+    }
   }
 
   const nutrients =
@@ -85,33 +94,41 @@ export const FoodAddCard = ({navigation, route}: Navigation) => {
 
   if (product) {
     return (
-      <ScrollView contentContainerStyle={styles.container}>
-        <AppText fontWeight="bold" size={24}>
-          {product.name}
-        </AppText>
+      <SafeAreaView>
+        <ScrollView contentContainerStyle={styles.container}>
+          <AppText fontWeight="bold" size={24}>
+            {product.name}
+          </AppText>
 
-        <View style={[styles.inputContainer, {backgroundColor: colors.card}]}>
-          <View style={styles.inputView}>
-            <AppText>Вес: </AppText>
-            <AppTextInput
-              value={value}
-              onChangeText={text => setValue(text)}
-              keyboardType="numeric"
-            />
-          </View>
-          <View style={styles.inputView}>
-            <AppText>Единица измерений: </AppText>
-            <AppText>граммы</AppText>
-          </View>
-        </View>
+          <View style={[styles.inputContainer, {backgroundColor: colors.card}]}>
+            <View style={styles.inputView}>
+              <AppText>Вес: </AppText>
+              <AppTextInput
+                value={value}
+                onChangeText={text => setValue(text)}
+                keyboardType="numeric"
+              />
+            </View>
 
-        <FoodCardButtons
-          action="add"
-          onPressAdd={handleButtonAdd}
-          disabled={disabled}
+            <View style={styles.inputView}>
+              <AppText>Единица измерений: </AppText>
+              <AppText>граммы</AppText>
+            </View>
+          </View>
+
+          <FoodCardButtons
+            action="add"
+            onPressAdd={handleButtonAdd}
+            disabled={disabled}
+          />
+          <KBFUCard nutrients={nutrients} />
+        </ScrollView>
+        <MealTypesModal
+          closeModal={() => setModalOpen(false)}
+          visible={modalOpen}
+          onSavePress={setTypeOfMeal}
         />
-        <KBFUCard nutrients={nutrients} />
-      </ScrollView>
+      </SafeAreaView>
     );
   } else {
     <View style={styles.container}>
