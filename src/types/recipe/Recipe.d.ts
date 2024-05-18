@@ -2,7 +2,7 @@ interface Recipe {
   _id: string;
   name: string;
   description: string;
-  cookTime: string;
+  cookTime: number;
   weight: number;
   image: string;
   service: number;
