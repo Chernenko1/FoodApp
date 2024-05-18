@@ -9,7 +9,11 @@ import {AppText} from '../../common/AppText';
 
 type Navigation = NativeStackNavigationProp<HomeParamList, 'ProductCreate'>;
 
-export const ProductNotFound = () => {
+interface IProsuctNotFound {
+  productType: ProductType;
+}
+
+export const ProductNotFound = ({productType}: IProsuctNotFound) => {
   const navigation = useNavigation<Navigation>();
 
   function navigateToProductCreating() {
@@ -22,7 +26,9 @@ export const ProductNotFound = () => {
         Нет нужного продукта? Добавьте свой
       </AppText>
       <Pressable style={styles.button} onPress={navigateToProductCreating}>
-        <AppText style={styles.buttonText}>Добавить продукт</AppText>
+        <AppText style={styles.buttonText}>
+          Добавить новый {productType}
+        </AppText>
         <Icon name="add-outline" size={20} color={COLORS.deepOrange} />
       </Pressable>
     </View>
