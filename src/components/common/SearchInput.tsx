@@ -5,15 +5,19 @@ import {AppText} from './AppText';
 import {useTheme} from '@react-navigation/native';
 
 interface IInputSearch {
+  placeholder?: string;
   onPress?: () => void;
 }
 
-export const SearchInput = ({onPress}: IInputSearch) => {
+export const SearchInput = ({
+  onPress,
+  placeholder = 'Введите текст',
+}: IInputSearch) => {
   const {colors} = useTheme();
   return (
     <Pressable style={styles.searchContainer} onPress={onPress}>
       <Icon name="search" size={20} color={colors.text} />
-      <AppText>Поиск рецептов</AppText>
+      <AppText>{placeholder}</AppText>
     </Pressable>
   );
 };
