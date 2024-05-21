@@ -1,14 +1,16 @@
 import {Pressable, StyleProp, StyleSheet, ViewStyle} from 'react-native';
 import {AppText} from '../AppText';
 import {COLORS} from '../../../themes/COLORS';
+import {ReactNode, useState} from 'react';
 
 interface Props {
-  title: string;
+  title?: string;
   onPress?: () => void;
   color?: string;
   textColor?: string;
   size?: number;
   style?: StyleProp<ViewStyle>;
+  children: ReactNode;
   disabled?: boolean;
 }
 
@@ -19,8 +21,11 @@ export const Button = ({
   textColor,
   size = 18,
   style,
+  children,
   disabled = false,
 }: Props) => {
+  const [pressIn, setPressIn] = useState(false);
+
   return (
     <Pressable
       style={[
@@ -29,8 +34,17 @@ export const Button = ({
         style,
       ]}
       onPress={onPress}
+      onPressIn={() => setPressIn(true)}
+      onPressOut={() => setPressIn(false)}
       disabled={disabled}>
-      <AppText style={[{color: textColor, fontSize: size}]}>{title}</AppText>
+      <AppText
+        style={[
+          {fontSize: size},
+          {color: pressIn ? COLORS.lightGray : textColor},
+        ]}>
+        {title}
+      </AppText>
+      {children}
     </Pressable>
   );
 };
