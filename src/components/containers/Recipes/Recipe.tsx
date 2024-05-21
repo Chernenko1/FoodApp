@@ -25,7 +25,6 @@ export const Recipe = ({navigation, route}: Navigation) => {
   function navigateToFoodCard(id: string) {
     navigation.navigate('FoodAdd', {
       id,
-      mealType: 'dinner',
       productType: 'recipe',
     });
   }
