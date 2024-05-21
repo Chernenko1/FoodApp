@@ -6,14 +6,16 @@ import {
 
 import {HomeStack} from './Stacks/HomeStack';
 import {ProfileStack} from './Stacks/ProfileStack';
+import {RecipesStack} from './Stacks/RecipesStack';
+import {FriendsStack} from './Stacks/FriendsStack';
 
 import Icon from 'react-native-vector-icons/Ionicons';
-import {RecipesStack} from './Stacks/RecipesStack';
 
 export type RootTabParamList = {
   Home: HomeParamList;
   Profile: ProfileParamList;
   Recipes: RecipesParamList;
+  Friends: FriendsParamList;
 };
 
 const TabStack = createBottomTabNavigator<RootTabParamList>();
@@ -48,6 +50,11 @@ const tabButton = (activeIcon: string, inActiveIcon: string) => {
 export const BottomNavigation = () => {
   return (
     <TabStack.Navigator screenOptions={tabOption}>
+      <TabStack.Screen
+        name={'Friends'}
+        component={FriendsStack}
+        options={tabButton('person', 'person-outline')}
+      />
       <TabStack.Screen
         name={'Home'}
         component={HomeStack}
