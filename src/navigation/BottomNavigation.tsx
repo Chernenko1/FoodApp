@@ -49,7 +49,7 @@ const tabButton = (activeIcon: string, inActiveIcon: string) => {
 
 export const BottomNavigation = () => {
   return (
-    <TabStack.Navigator screenOptions={tabOption}>
+    <TabStack.Navigator screenOptions={tabOption} initialRouteName="Home">
       <TabStack.Screen
         name={'Friends'}
         component={FriendsStack}
