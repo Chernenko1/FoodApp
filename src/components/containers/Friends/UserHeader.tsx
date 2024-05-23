@@ -1,10 +1,10 @@
-import {AppText} from 'components/common/AppText';
 import {Image, Pressable, StyleSheet, View} from 'react-native';
-import {COLORS} from 'themes/COLORS';
+
+import {AppText} from 'components/common/AppText';
 
 interface IUserHeader {
   username: string;
-  friends: Friends[];
+  friends: UserFriends[];
   onPress: () => void;
 }
 
@@ -38,7 +38,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingBottom: 10,
     borderBottomWidth: 1,
-    borderColor: COLORS.orange,
   },
   userHeaderInner: {},
   headerFriendsView: {
