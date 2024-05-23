@@ -1,17 +1,23 @@
-import {StyleSheet, View} from 'react-native';
-import {UserHeader} from './UserHeader';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {useEffect, useState} from 'react';
-import {userApi} from 'services/apis/userAPI';
+import {StyleSheet, View} from 'react-native';
 import {useAppSelector} from 'store/hooks';
+
 import {AppText} from 'components/common/AppText';
-import {UserWeightStatistic} from '../UserStatistics/UserWeightStatistic';
 import {friendsRequestMessage} from 'constants/friendsRequestMessage';
+import {friendsApi} from 'services/apis/friendsAPI';
+import {userApi} from 'services/apis/userAPI';
+import {UserWeightStatistic} from '../UserStatistics/UserWeightStatistic';
+import {FriendButton} from './FriendButton';
+import {UserHeader} from './UserHeader';
 
 type Navigation = NativeStackScreenProps<FriendsParamList, 'FriendPage'>;
 
+interface RequestUser extends User {
+  friends: Friends;
+}
 interface Request {
-  user: User;
+  user: RequestUser;
   message:
     | 'USER_HIDE_DATA_FROM_ALL_USERS'
     | 'USER_HIDE_DATA_FROM_UNFRIENDS'
@@ -19,19 +25,53 @@ interface Request {
 }
 
 export const FriendPage = ({navigation, route}: Navigation) => {
-  const [user, setUser] = useState<Request>();
+  const [data, setData] = useState<Request>();
 
   const {id} = route.params;
   const {_id} = useAppSelector(state => state.user.user);
 
   const {loading, error, getFriendData} = userApi();
+  const {deleteFromFriends, addToFriends, deleteFriendReq, acceptFriendReq} =
+    friendsApi();
 
   function navigateToFriendsList() {
-    navigation.push('FriendsList', {friends: user?.user.friends as Friends[]});
+    navigation.navigate('FriendsList', {
+      friends: data?.user.friends.friends as UserFriends[],
+    });
+  }
+
+  function deleteFriend() {
+    deleteFromFriends(_id, data?.user._id as string)
+      .then(_ => console.log(_))
+      .catch(e => console.log(e));
+    getData();
+  }
+
+  function addFriend() {
+    addToFriends(_id, data?.user._id as string);
+    getData();
+  }
+
+  function deleteRequest() {
+    deleteFriendReq(data?.user._id as string, _id)
+      .then(_ => console.log(1))
+      .catch(e => console.log(e));
+    getData();
+  }
+
+  function acceptRequest() {
+    acceptFriendReq(_id, data?.user._id as string)
+      .then(_ => console.log(1))
+      .catch(e => console.log(e));
+    getData();
+  }
+
+  function getData() {
+    getFriendData(_id, id).then(data => setData(data));
   }
 
   useEffect(() => {
-    getFriendData(_id, id).then(data => setUser(data));
+    getData();
   }, [navigation]);
 
   if (loading) {
@@ -52,23 +92,31 @@ export const FriendPage = ({navigation, route}: Navigation) => {
     );
   }
 
-  if (user && !loading && !error) {
+  if (data && !loading && !error) {
     return (
       <View style={styles.mainContainer}>
         <UserHeader
-          friends={user.user.friends}
-          username={user.user.username}
+          friends={data.user.friends.friends}
+          username={data.user.username}
           onPress={navigateToFriendsList}
         />
-
-        {user.message === 'ALL_USER_DATA' ? (
+        <FriendButton
+          friends={data.user.friends}
+          _id={_id}
+          friendId={data.user._id}
+          acceptRequest={acceptRequest}
+          addFriend={addFriend}
+          deleteFriend={deleteFriend}
+          deleteRequest={deleteRequest}
+        />
+        {data.message === 'ALL_USER_DATA' ? (
           <UserWeightStatistic
-            currentWeight={user.user.target_details.currentWeight}
-            startWeigth={user.user.target_details.startWeight}
-            targetWeight={user.user.target_details.targetWeight}
+            currentWeight={data.user.target_details.currentWeight}
+            startWeigth={data.user.target_details.startWeight}
+            targetWeight={data.user.target_details.targetWeight}
           />
         ) : (
-          <AppText>{friendsRequestMessage[user.message]}</AppText>
+          <AppText>{friendsRequestMessage[data.message]}</AppText>
         )}
       </View>
     );
