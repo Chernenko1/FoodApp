@@ -27,5 +27,13 @@ interface User {
 
 interface Friends {
   username: string;
+  friends: UserFriends[];
+  userRequests: string[];
+  userResponses: string[];
   _id: string;
+}
+
+interface UserFriends {
+  _id: string;
+  username: string;
 }

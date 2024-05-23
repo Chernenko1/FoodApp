@@ -1,5 +1,7 @@
 type FriendsParamList = {
   MainPage: undefined;
-  FriendsList: {friends: Friends[]};
+  FriendsList: {friends: UserFriends[]};
+  FriendRequests: {_id: string};
   FriendPage: {id: string};
+  SearchUsers: undefined;
 };
