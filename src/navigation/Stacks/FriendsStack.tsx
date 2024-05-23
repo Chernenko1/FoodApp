@@ -7,6 +7,8 @@ import {
 import {MainPage} from 'components/containers/Friends/MainPage';
 import {FriendsList} from 'components/containers/Friends/FriendsList';
 import {FriendPage} from 'components/containers/Friends/FriendPage';
+import {UserSearch} from 'components/containers/Search/UserSearch';
+import {FriendRequests} from 'components/containers/Friends/FriendRequests';
 
 const nativeStackOption: NativeStackNavigationOptions = {
   headerShown: false,
@@ -21,6 +23,12 @@ export const FriendsStack = () => {
       <Stack.Screen name="MainPage" component={MainPage} />
       <Stack.Screen name="FriendsList" component={FriendsList} />
       <Stack.Screen name="FriendPage" component={FriendPage} />
+      <Stack.Screen name="SearchUsers" component={UserSearch} />
+      <Stack.Screen
+        name="FriendRequests"
+        component={FriendRequests}
+        options={{headerShown: true, headerTitle: 'Заявки в друзья'}}
+      />
     </Stack.Navigator>
   );
 };
