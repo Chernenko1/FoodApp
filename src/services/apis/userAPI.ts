@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import {$host} from '.';
-import axios, {AxiosResponse} from 'axios';
+import axios from 'axios';
 
 export const updateUserDetails = async (details: {
   id: string;
@@ -27,22 +27,30 @@ export const updateUserCaloriesUsingBFU = async (id: string, bfu: {}) => {
 
 export function userApi() {
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<String | unknown>(null);
+  const [error, setError] = useState<String | null>(null);
 
   async function getUserFriends(id: string) {
     setLoading(true);
+    setError(null);
     try {
-      const {data} = await $host.get(`api/user/friends/${id}`);
+      const {data} = await $host.get(`api/friends/${id}`);
       setLoading(false);
       return data;
     } catch (error) {
       setLoading(false);
-      setError(error);
+      if (axios.isAxiosError(error)) {
+        setError(error.response?.data.message);
+        return error.message;
+      } else {
+        return 'An unexpected error occurred';
+      }
     }
   }
 
   async function getFriendData(id: string, targetId: string) {
     setLoading(true);
+    setError(null);
+
     try {
       const {data} = await $host.get(
         `api/user/profile/?targetId=${targetId}&id=${id}`,
@@ -52,15 +60,30 @@ export function userApi() {
     } catch (error) {
       setLoading(false);
       if (axios.isAxiosError(error)) {
-        console.log('error message: ', error.message);
-        setError(error);
+        setError(error.response?.data.message);
         return error.message;
       } else {
-        console.log('unexpected error: ', error);
         return 'An unexpected error occurred';
       }
     }
   }
 
-  return {loading, error, getUserFriends, getFriendData};
+  async function searchUsers(username: string) {
+    setLoading(false);
+    setError(null);
+    try {
+      const {data} = await $host.get(`api/search/?name=${username}`);
+      setLoading(false);
+      return data;
+    } catch (error) {
+      setLoading(false);
+      if (axios.isAxiosError(error)) {
+        setError(error.response?.data.message);
+      } else {
+        return 'An unexpected error occurred';
+      }
+    }
+  }
+
+  return {loading, error, getUserFriends, getFriendData, searchUsers};
 }
