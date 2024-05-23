@@ -10,7 +10,7 @@ interface Props {
   textColor?: string;
   size?: number;
   style?: StyleProp<ViewStyle>;
-  children: ReactNode;
+  children?: ReactNode;
   disabled?: boolean;
 }
 
@@ -38,10 +38,8 @@ export const Button = ({
       onPressOut={() => setPressIn(false)}
       disabled={disabled}>
       <AppText
-        style={[
-          {fontSize: size},
-          {color: pressIn ? COLORS.lightGray : textColor},
-        ]}>
+        size={size}
+        style={[{color: pressIn ? COLORS.lightGray : textColor}, style]}>
         {title}
       </AppText>
       {children}
