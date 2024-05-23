@@ -16,9 +16,16 @@ export const FriendsList = ({navigation, route}: Navigation) => {
     navigation.push('FriendPage', {id});
   }
 
+  function navigateToSearch() {
+    navigation.navigate('SearchUsers');
+  }
+
   return (
     <View style={styles.mainContainer}>
-      <SearchInput placeholder="Поиск пользователей" />
+      <SearchInput
+        placeholder="Поиск пользователей"
+        onPress={navigateToSearch}
+      />
       <AppText style={styles.headerText} fontWeight="bold" size={38}>
         Друзья:
       </AppText>
