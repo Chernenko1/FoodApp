@@ -9,8 +9,17 @@ import {UserWeightStatistic} from '../UserStatistics/UserWeightStatistic';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {useNavigation} from '@react-navigation/native';
 import {UserHeader} from './UserHeader';
+import {MainHeader} from './MainHeader';
 
 type Navigation = NativeStackNavigationProp<FriendsParamList, 'MainPage'>;
+
+interface ResponseFriends {
+  _id: string;
+  friends: {
+    _id: string;
+    username: string;
+  }[];
+}
 
 export const MainPage = () => {
   const [friends, setFriends] = useState<Friends[]>([]);
@@ -26,17 +35,23 @@ export const MainPage = () => {
     navigation.navigate('FriendsList', {friends});
   }
 
+  function navigateToFriendRequests() {
+    navigation.navigate('FriendRequests', {_id});
+  }
+
   useEffect(() => {
-    getUserFriends(_id).then((data: {friends: Friends[]}) =>
+    getUserFriends(_id).then((data: ResponseFriends) =>
       setFriends(data.friends),
     );
   }, []);
 
   return (
     <View style={styles.mainContainer}>
-      <UserHeader
+      <MainHeader
         friends={friends}
-        onPress={navigateToFriendsList}
+        friendsReq={1}
+        onFriendsListPress={navigateToFriendsList}
+        onFriendRequestsPress={navigateToFriendRequests}
         username={username}
       />
       <UserWeightStatistic
