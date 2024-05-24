@@ -19,6 +19,9 @@ export const UserWeightStatistic = ({
 
   return (
     <View style={styles.mainView}>
+      <AppText style={styles.headerText} fontWeight="medium" size={30}>
+        Вес
+      </AppText>
       <View style={styles.weightView}>
         <View style={styles.weightInfo}>
           <AppText>Начальный вес: {startWeigth}кг</AppText>
@@ -44,6 +47,7 @@ export const UserWeightStatistic = ({
 const styles = StyleSheet.create({
   mainView: {
     marginTop: 10,
+    marginBottom: 10,
   },
   weightView: {
     flexDirection: 'row',
@@ -59,5 +63,8 @@ const styles = StyleSheet.create({
     top: 40,
     right: 60,
     alignItems: 'center',
+  },
+  headerText: {
+    textAlign: 'center',
   },
 });

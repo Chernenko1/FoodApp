@@ -33,12 +33,12 @@ export const FriendRequests = ({navigation, route}: Navigation) => {
 
   function acceptRequest(id: string) {
     acceptFriendReq(_id, id)
-      .then(_ => console.log(1))
+      .then(_ => console.log(2))
       .catch(e => console.log(e));
   }
 
   function navigateToFriendPage(id: string) {
-    navigation.navigate('FriendPage', {id});
+    navigation.push('FriendPage', {id});
   }
 
   useEffect(() => {
@@ -48,7 +48,6 @@ export const FriendRequests = ({navigation, route}: Navigation) => {
     getUserFriendRequests(_id)
       .then(data => (data ? setUserfriendRequests(data.userRequests) : []))
       .catch(e => console.log(e));
-    console.log(23);
   }, []);
 
   return (
@@ -59,49 +58,53 @@ export const FriendRequests = ({navigation, route}: Navigation) => {
           {!loading && !error && userFriendResponses.length === 0 && (
             <AppText>У вас нет активных запросов</AppText>
           )}
-          {userFriendResponses.map(item => (
-            <Pressable
-              style={[styles.userCard, {backgroundColor: colors.card}]}
-              key={item._id}
-              onPress={() => navigateToFriendPage(item._id)}>
-              <AppText>{item.username}</AppText>
-              <View style={styles.userCardIcons}>
-                <Icon
-                  name="close-outline"
-                  size={iconSize}
-                  color={'red'}
-                  onPress={() => deleteRequest(item._id, _id)}
-                />
-              </View>
-            </Pressable>
-          ))}
+          <View style={{rowGap: 15}}>
+            {userFriendResponses.map(item => (
+              <Pressable
+                style={[styles.userCard, {backgroundColor: colors.card}]}
+                key={item._id}
+                onPress={() => navigateToFriendPage(item._id)}>
+                <AppText>{item.username}</AppText>
+                <View style={styles.userCardIcons}>
+                  <Icon
+                    name="close-outline"
+                    size={iconSize}
+                    color={'red'}
+                    onPress={() => deleteRequest(item._id, _id)}
+                  />
+                </View>
+              </Pressable>
+            ))}
+          </View>
         </DropdownCard>
         <DropdownCard title="К вам" startPosition={true}>
           {loading && <AppText>Loading...</AppText>}
           {!loading && !error && userFriendRequests.length === 0 && (
             <AppText>У вас нет активных запросов</AppText>
           )}
-          {userFriendRequests.map(item => (
-            <Pressable
-              style={[styles.userCard, {backgroundColor: colors.card}]}
-              onPress={() => navigateToFriendPage(item._id)}>
-              <AppText>{item.username}</AppText>
-              <View style={styles.userCardIcons}>
-                <Icon
-                  name="checkmark-outline"
-                  size={iconSize}
-                  color={'green'}
-                  onPress={() => acceptRequest(item._id)}
-                />
-                <Icon
-                  name="close-outline"
-                  size={iconSize}
-                  color={'red'}
-                  onPress={() => deleteRequest(_id, item._id)}
-                />
-              </View>
-            </Pressable>
-          ))}
+          <View style={{rowGap: 15}}>
+            {userFriendRequests.map(item => (
+              <Pressable
+                style={[styles.userCard, {backgroundColor: colors.card}]}
+                onPress={() => navigateToFriendPage(item._id)}>
+                <AppText>{item.username}</AppText>
+                <View style={styles.userCardIcons}>
+                  <Icon
+                    name="checkmark-outline"
+                    size={iconSize}
+                    color={'green'}
+                    onPress={() => acceptRequest(item._id)}
+                  />
+                  <Icon
+                    name="close-outline"
+                    size={iconSize}
+                    color={'red'}
+                    onPress={() => deleteRequest(_id, item._id)}
+                  />
+                </View>
+              </Pressable>
+            ))}
+          </View>
         </DropdownCard>
       </ScrollView>
     </View>
