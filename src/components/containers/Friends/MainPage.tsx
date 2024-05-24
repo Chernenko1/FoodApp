@@ -23,9 +23,10 @@ interface ResponseFriends {
 export const MainPage = () => {
   const [friends, setFriends] = useState<UserFriends[]>([]);
 
-  const {loading, error, getUserFriends} = userApi();
-  const {details, username, _id, target_details, required_macros} =
-    useAppSelector(state => state.user.user);
+  const {getUserFriends} = userApi();
+  const {username, _id, target_details, required_macros} = useAppSelector(
+    state => state.user.user,
+  );
 
   const navigation = useNavigation<Navigation>();
 
