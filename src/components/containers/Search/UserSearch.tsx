@@ -17,6 +17,7 @@ import {AppText} from 'components/common/AppText';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {userApi} from 'services/apis/userAPI';
 import {searchErrors} from 'constants/searchErrors';
+import {useAppSelector} from 'store/hooks';
 
 interface searchedUser {
   _id: string;
@@ -29,6 +30,8 @@ export const UserSearch = ({route, navigation}: Navigation) => {
   const [users, setUsers] = useState<searchedUser[]>([]);
   const [value, setValue] = useState('');
 
+  const {_id} = useAppSelector(state => state.user.user);
+
   const {colors} = useTheme();
   const {error, loading, searchUsers} = userApi();
 
@@ -37,7 +40,11 @@ export const UserSearch = ({route, navigation}: Navigation) => {
   }, [value]);
 
   function navigateToUserPage(id: string) {
-    navigation.navigate('FriendPage', {id});
+    if (id === _id) {
+      navigation.push('MainPage');
+    } else {
+      navigation.push('FriendPage', {id});
+    }
   }
 
   function navigateBack() {

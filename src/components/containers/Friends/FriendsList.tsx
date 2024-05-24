@@ -13,7 +13,11 @@ export const FriendsList = ({navigation, route}: Navigation) => {
   const {_id} = useAppSelector(state => state.user.user);
 
   function navigateToFriendPage(id: string) {
-    navigation.push('FriendPage', {id});
+    if (id === _id) {
+      navigation.push('MainPage');
+    } else {
+      navigation.push('FriendPage', {id});
+    }
   }
 
   function navigateToSearch() {
