@@ -1,14 +1,13 @@
-import {AppText} from 'components/common/AppText';
-import {Button} from 'components/common/Buttons/Button';
+import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {useEffect, useState} from 'react';
-import {Image, Pressable, StyleSheet, View} from 'react-native';
-import {userApi} from 'services/apis/userAPI';
+import {StyleSheet, View} from 'react-native';
 import {useAppSelector} from 'store/hooks';
+
+import {userApi} from 'services/apis/userAPI';
 import {COLORS} from 'themes/COLORS';
 import {UserWeightStatistic} from '../UserStatistics/UserWeightStatistic';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {useNavigation} from '@react-navigation/native';
-import {UserHeader} from './UserHeader';
+import {FriendCPFC} from './FriendCPFC';
 import {MainHeader} from './MainHeader';
 
 type Navigation = NativeStackNavigationProp<FriendsParamList, 'MainPage'>;
@@ -22,12 +21,11 @@ interface ResponseFriends {
 }
 
 export const MainPage = () => {
-  const [friends, setFriends] = useState<Friends[]>([]);
+  const [friends, setFriends] = useState<UserFriends[]>([]);
 
   const {loading, error, getUserFriends} = userApi();
-  const {details, username, _id, target_details} = useAppSelector(
-    state => state.user.user,
-  );
+  const {details, username, _id, target_details, required_macros} =
+    useAppSelector(state => state.user.user);
 
   const navigation = useNavigation<Navigation>();
 
@@ -59,6 +57,7 @@ export const MainPage = () => {
         targetWeight={target_details.targetWeight}
         startWeigth={target_details.startWeight}
       />
+      <FriendCPFC nutrients={required_macros as any} />
     </View>
   );
 };
