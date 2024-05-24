@@ -9,7 +9,7 @@ import {FriendsList} from 'components/containers/Friends/FriendsList';
 import {FriendPage} from 'components/containers/Friends/FriendPage';
 import {UserSearch} from 'components/containers/Search/UserSearch';
 import {FriendRequests} from 'components/containers/Friends/FriendRequests';
-import {SettingStack} from './ProfileStack';
+import {SettingStack} from './SettingStack';
 
 const nativeStackOption: NativeStackNavigationOptions = {
   headerShown: false,
