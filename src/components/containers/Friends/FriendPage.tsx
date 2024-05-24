@@ -10,6 +10,7 @@ import {userApi} from 'services/apis/userAPI';
 import {UserWeightStatistic} from '../UserStatistics/UserWeightStatistic';
 import {FriendButton} from './FriendButton';
 import {UserHeader} from './UserHeader';
+import {FriendCPFC} from './FriendCPFC';
 
 type Navigation = NativeStackScreenProps<FriendsParamList, 'FriendPage'>;
 
@@ -21,7 +22,9 @@ interface Request {
   message:
     | 'USER_HIDE_DATA_FROM_ALL_USERS'
     | 'USER_HIDE_DATA_FROM_UNFRIENDS'
-    | 'ALL_USER_DATA';
+    | 'ALL_USER_DATA'
+    | 'USER_HIDE_CPFC'
+    | 'USER_HIDE_WEIGHT';
 }
 
 export const FriendPage = ({navigation, route}: Navigation) => {
@@ -35,7 +38,7 @@ export const FriendPage = ({navigation, route}: Navigation) => {
     friendsApi();
 
   function navigateToFriendsList() {
-    navigation.navigate('FriendsList', {
+    navigation.push('FriendsList', {
       friends: data?.user.friends.friends as UserFriends[],
     });
   }
@@ -109,14 +112,23 @@ export const FriendPage = ({navigation, route}: Navigation) => {
           deleteFriend={deleteFriend}
           deleteRequest={deleteRequest}
         />
-        {data.message === 'ALL_USER_DATA' ? (
-          <UserWeightStatistic
-            currentWeight={data.user.target_details.currentWeight}
-            startWeigth={data.user.target_details.startWeight}
-            targetWeight={data.user.target_details.targetWeight}
-          />
-        ) : (
-          <AppText>{friendsRequestMessage[data.message]}</AppText>
+        <View>
+          {data.user?.required_macros && (
+            <FriendCPFC nutrients={data.user.required_macros as any} />
+          )}
+          {data.user?.target_details && (
+            <UserWeightStatistic
+              currentWeight={data.user.target_details.currentWeight}
+              startWeigth={data.user.target_details.startWeight}
+              targetWeight={data.user.target_details.targetWeight}
+            />
+          )}
+        </View>
+        {(data.message === 'USER_HIDE_DATA_FROM_ALL_USERS' ||
+          data.message === 'USER_HIDE_DATA_FROM_UNFRIENDS') && (
+          <AppText style={styles.warningText}>
+            {friendsRequestMessage[data.message]}
+          </AppText>
         )}
       </View>
     );
@@ -127,5 +139,9 @@ const styles = StyleSheet.create({
   mainContainer: {
     paddingHorizontal: 15,
     paddingTop: 10,
+  },
+
+  warningText: {
+    textAlign: 'center',
   },
 });
