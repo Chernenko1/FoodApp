@@ -1,7 +1,10 @@
 import {Image, Pressable, StyleSheet, View} from 'react-native';
 
 import {AppText} from 'components/common/AppText';
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {Button} from 'components/common/Buttons/Button';
+import {COLORS} from 'themes/COLORS';
+import {useNavigation} from '@react-navigation/native';
 
 interface IUserHeader {
   username: string;
@@ -11,7 +14,7 @@ interface IUserHeader {
   onFriendRequestsPress: () => void;
 }
 
-type Navigate = NativeStackScreenProps<FriendsParamList>;
+type Navigate = NativeStackNavigationProp<FriendsParamList, 'MainPage'>;
 
 export const MainHeader = ({
   friends,
@@ -20,25 +23,42 @@ export const MainHeader = ({
   onFriendsListPress,
   onFriendRequestsPress,
 }: IUserHeader) => {
+  const navigation = useNavigation<Navigate>();
+
+  function navigateToSettings() {
+    navigation.navigate('Settings');
+  }
+
   return (
     <View style={styles.userHeaderView}>
-      <Image
-        style={styles.userImage}
-        source={require('../../../../assets/images/noImage.jpg')}
-      />
-      <AppText fontWeight="bold" size={30}>
-        {username}
-      </AppText>
-      <Pressable style={styles.headerFriendsView} onPress={onFriendsListPress}>
-        <AppText>{friends.length}</AppText>
-        <AppText>Друзья</AppText>
-      </Pressable>
-      <Pressable
-        style={styles.headerFriendsView}
-        onPress={onFriendRequestsPress}>
-        <AppText>{friendsReq}</AppText>
-        <AppText>Запросы</AppText>
-      </Pressable>
+      <View style={styles.userHeaderInner}>
+        <Image
+          style={styles.userImage}
+          source={require('../../../../assets/images/noImage.jpg')}
+        />
+        <AppText fontWeight="bold" size={30}>
+          {username}
+        </AppText>
+        <Pressable
+          style={styles.headerFriendsView}
+          onPress={onFriendsListPress}>
+          <AppText>{friends.length}</AppText>
+          <AppText>Друзья</AppText>
+        </Pressable>
+        <Pressable
+          style={styles.headerFriendsView}
+          onPress={onFriendRequestsPress}>
+          <AppText>{friendsReq}</AppText>
+          <AppText>Запросы</AppText>
+        </Pressable>
+      </View>
+      <View style={styles.headerButtonView}>
+        <Button
+          title="Настройки"
+          color={COLORS.lightGray}
+          onPress={navigateToSettings}
+        />
+      </View>
     </View>
   );
 };
@@ -50,13 +70,19 @@ const styles = StyleSheet.create({
     borderRadius: 15,
   },
   userHeaderView: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
     paddingBottom: 10,
     borderBottomWidth: 1,
   },
-  userHeaderInner: {},
+  userHeaderInner: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  headerButtonView: {
+    alignItems: 'flex-end',
+    // justifyContent: '',
+  },
+  headerButton: {},
   headerFriendsView: {
     alignItems: 'center',
   },
