@@ -4,7 +4,7 @@ import {StyleSheet, View} from 'react-native';
 
 import {ProfileMenuItem} from './ProfileMenuItem';
 
-type Navigation = NativeStackNavigationProp<ProfileParamList, 'StackProfile'>;
+type Navigation = NativeStackNavigationProp<SettingsParamList, 'Settings'>;
 
 export const ProfileMenuItems = () => {
   const navigation: Navigation = useNavigation();
@@ -14,7 +14,7 @@ export const ProfileMenuItems = () => {
       <ProfileMenuItem
         title="Персональные данные"
         icon="person-outline"
-        onPress={() => navigation.navigate('UserDetails')}
+        onPress={() => navigation.push('UserDetails')}
       />
       <ProfileMenuItem
         title="Настройка KБЖУ"
