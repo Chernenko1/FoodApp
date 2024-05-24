@@ -5,7 +5,6 @@ import {
 } from '@react-navigation/bottom-tabs';
 
 import {HomeStack} from './Stacks/HomeStack';
-import {ProfileStack} from './Stacks/ProfileStack';
 import {RecipesStack} from './Stacks/RecipesStack';
 import {FriendsStack} from './Stacks/FriendsStack';
 
@@ -13,7 +12,6 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 export type RootTabParamList = {
   Home: HomeParamList;
-  Profile: ProfileParamList;
   Recipes: RecipesParamList;
   Friends: FriendsParamList;
 };
@@ -59,11 +57,6 @@ export const BottomNavigation = () => {
         name={'Home'}
         component={HomeStack}
         options={tabButton('home', 'home-outline')}
-      />
-      <TabStack.Screen
-        name={'Profile'}
-        component={ProfileStack}
-        options={tabButton('person', 'person-outline')}
       />
       <TabStack.Screen
         name="Recipes"
