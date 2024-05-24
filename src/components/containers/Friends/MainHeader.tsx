@@ -5,7 +5,7 @@ import {NativeStackScreenProps} from '@react-navigation/native-stack';
 
 interface IUserHeader {
   username: string;
-  friends: Friends[];
+  friends: UserFriends[];
   friendsReq: number;
   onFriendsListPress: () => void;
   onFriendRequestsPress: () => void;
