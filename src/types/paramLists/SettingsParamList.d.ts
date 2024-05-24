@@ -1,5 +1,5 @@
-type ProfileParamList = {
-  StackProfile: undefined;
+type SettingsParamList = {
+  Settings: undefined;
   UserDetails: undefined;
   UserGoal: undefined;
   UserActivity: undefined;
