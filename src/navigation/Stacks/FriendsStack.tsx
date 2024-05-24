@@ -9,6 +9,7 @@ import {FriendsList} from 'components/containers/Friends/FriendsList';
 import {FriendPage} from 'components/containers/Friends/FriendPage';
 import {UserSearch} from 'components/containers/Search/UserSearch';
 import {FriendRequests} from 'components/containers/Friends/FriendRequests';
+import {SettingStack} from './ProfileStack';
 
 const nativeStackOption: NativeStackNavigationOptions = {
   headerShown: false,
@@ -29,6 +30,7 @@ export const FriendsStack = () => {
         component={FriendRequests}
         options={{headerShown: true, headerTitle: 'Заявки в друзья'}}
       />
+      <Stack.Screen name="Settings" component={SettingStack} />
     </Stack.Navigator>
   );
 };
