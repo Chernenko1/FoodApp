@@ -1,7 +1,7 @@
 import {useTheme} from '@react-navigation/native';
 import {StyleProp, Text, TextProps, TextStyle} from 'react-native';
 
-interface Props extends TextProps {
+export interface IAppText extends TextProps {
   style?: StyleProp<TextStyle>;
   children?: React.ReactNode;
   fontWeight?: 'regular' | 'medium' | 'light' | 'bold';
@@ -14,7 +14,7 @@ export const AppText = ({
   size = 20,
   fontWeight = 'regular',
   ...rest
-}: Props) => {
+}: IAppText) => {
   const {colors} = useTheme();
 
   const font = {
