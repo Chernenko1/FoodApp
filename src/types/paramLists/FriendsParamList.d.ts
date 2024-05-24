@@ -4,4 +4,5 @@ type FriendsParamList = {
   FriendRequests: {_id: string};
   FriendPage: {id: string};
   SearchUsers: undefined;
+  Settings: SettingsParamList;
 };
