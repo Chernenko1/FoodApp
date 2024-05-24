@@ -8,7 +8,7 @@ interface IUserWeightStatistic {
   targetWeight: number;
 }
 
-export const UserWeightStatistic = ({
+export const FriendWeight = ({
   currentWeight,
   startWeigth,
   targetWeight,

@@ -6,7 +6,7 @@ import {useAppSelector} from 'store/hooks';
 
 import {userApi} from 'services/apis/userAPI';
 import {COLORS} from 'themes/COLORS';
-import {UserWeightStatistic} from '../UserStatistics/UserWeightStatistic';
+import {FriendWeight} from '../UserStatistics/FriendWeight';
 import {FriendCPFC} from './FriendCPFC';
 import {MainHeader} from './MainHeader';
 
@@ -53,7 +53,7 @@ export const MainPage = () => {
         onFriendRequestsPress={navigateToFriendRequests}
         username={username}
       />
-      <UserWeightStatistic
+      <FriendWeight
         currentWeight={target_details.currentWeight}
         targetWeight={target_details.targetWeight}
         startWeigth={target_details.startWeight}

@@ -7,7 +7,7 @@ import {AppText} from 'components/common/AppText';
 import {friendsRequestMessage} from 'constants/friendsRequestMessage';
 import {friendsApi} from 'services/apis/friendsAPI';
 import {userApi} from 'services/apis/userAPI';
-import {UserWeightStatistic} from '../UserStatistics/UserWeightStatistic';
+import {FriendWeight} from '../UserStatistics/FriendWeight';
 import {FriendButton} from './FriendButton';
 import {UserHeader} from './UserHeader';
 import {FriendCPFC} from './FriendCPFC';
@@ -117,7 +117,7 @@ export const FriendPage = ({navigation, route}: Navigation) => {
             <FriendCPFC nutrients={data.user.required_macros as any} />
           )}
           {data.user?.target_details && (
-            <UserWeightStatistic
+            <FriendWeight
               currentWeight={data.user.target_details.currentWeight}
               startWeigth={data.user.target_details.startWeight}
               targetWeight={data.user.target_details.targetWeight}
