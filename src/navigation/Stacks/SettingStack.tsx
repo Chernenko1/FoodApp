@@ -15,13 +15,13 @@ const nativeStackOption: NativeStackNavigationOptions = {
   headerShadowVisible: false,
 };
 
-const Stack = createNativeStackNavigator<ProfileParamList>();
+const Stack = createNativeStackNavigator<SettingsParamList>();
 
-export const ProfileStack = () => {
+export const SettingStack = () => {
   return (
     <Stack.Navigator screenOptions={nativeStackOption}>
       <Stack.Screen
-        name="StackProfile"
+        name="Settings"
         component={Profile}
         options={{headerShown: false}}
       />
