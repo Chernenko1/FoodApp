@@ -13,6 +13,7 @@ import {
   useDeleteProductInMealMutation,
   useUpdateProductInMealMutation,
 } from 'store/services/mealsService';
+import {VitMixCard} from 'components/common/Cards/VitMinCard';
 
 type Navigation = NativeStackScreenProps<HomeParamList, 'FoodChange'>;
 
@@ -103,6 +104,7 @@ export const FoodChangeCard = ({navigation, route}: Navigation) => {
           disabled={disabled}
         />
         <KBFUCard nutrients={nutrients} />
+        <VitMixCard minerals={minerals} vitamins={vitamins} />
       </ScrollView>
     );
   } else {

@@ -14,6 +14,7 @@ import {calculateNutritionalValue} from 'utils/calculateNutritionalValue';
 import {FoodCardButtons} from './FoodCardButtons';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {MealTypesModal} from 'components/common/Modals/MealTypesModal';
+import {VitMixCard} from 'components/common/Cards/VitMinCard';
 
 type Navigation =
   | NativeStackScreenProps<RecipesParamList, 'FoodAdd'>
@@ -122,6 +123,7 @@ export const FoodAddCard = ({navigation, route}: Navigation) => {
             disabled={disabled}
           />
           <KBFUCard nutrients={nutrients} />
+          <VitMixCard minerals={minerals} vitamins={vitamins} />
         </ScrollView>
         <MealTypesModal
           closeModal={() => setModalOpen(false)}
