@@ -7,7 +7,7 @@ import {AppText} from 'components/common/AppText';
 import {friendsRequestMessage} from 'constants/friendsRequestMessage';
 import {friendsApi} from 'services/apis/friendsAPI';
 import {userApi} from 'services/apis/userAPI';
-import {FriendWeight} from '../UserStatistics/FriendWeight';
+import {FriendWeight} from './FriendWeight';
 import {FriendButton} from './FriendButton';
 import {UserHeader} from './UserHeader';
 import {FriendCPFC} from './FriendCPFC';

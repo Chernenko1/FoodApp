@@ -6,7 +6,7 @@ import {useAppSelector} from 'store/hooks';
 
 import {userApi} from 'services/apis/userAPI';
 import {COLORS} from 'themes/COLORS';
-import {FriendWeight} from '../UserStatistics/FriendWeight';
+import {FriendWeight} from './FriendWeight';
 import {FriendCPFC} from './FriendCPFC';
 import {MainHeader} from './MainHeader';
 
