@@ -163,6 +163,21 @@ export const mealsAPI = createApi({
       },
       invalidatesTags: _ => ['Meals'],
     }),
+
+    getMealsStatistic: builder.query<
+      MealsStatistic[],
+      {id: string; firstDate: string; secondDate: string}
+    >({
+      query: ({id, firstDate, secondDate}) =>
+        `/meals/statistic/?id=${id}&from=${firstDate}&to=${secondDate}`,
+      async onQueryStarted({}, {queryFulfilled}) {
+        try {
+          const {data} = await queryFulfilled;
+        } catch (error) {
+          console.log(error);
+        }
+      },
+    }),
   }),
 });
 
@@ -171,4 +186,5 @@ export const {
   useDeleteProductInMealMutation,
   useUpdateProductInMealMutation,
   useAddProductToMealMutation,
+  useGetMealsStatisticQuery,
 } = mealsAPI;
