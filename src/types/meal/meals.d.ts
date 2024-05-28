@@ -33,3 +33,13 @@ interface Meals {
   snack: Meal;
   info: MealInfo;
 }
+
+interface MealsStatistic {
+  _id: string;
+  date: string;
+  totalCalories: number;
+  necessaryCalories: number;
+  nutrients: Nutrients;
+  vitamins: Vitamins;
+  minerals: Minerals;
+}
