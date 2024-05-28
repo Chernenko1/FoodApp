@@ -11,7 +11,7 @@ interface Props {
   icon: string;
 }
 
-export const ProfileMenuItem = ({title, icon, onPress}: Props) => {
+export const MenuItem = ({title, icon, onPress}: Props) => {
   const {colors} = useTheme();
 
   return (
