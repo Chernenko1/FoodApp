@@ -9,11 +9,13 @@ import {RecipesStack} from './Stacks/RecipesStack';
 import {FriendsStack} from './Stacks/FriendsStack';
 
 import Icon from 'react-native-vector-icons/Ionicons';
+import {StatisticStack} from './Stacks/StatisticStackNavigation';
 
 export type RootTabParamList = {
   Home: HomeParamList;
   Recipes: RecipesParamList;
   Friends: FriendsParamList;
+  Statistic: StatisticParamList;
 };
 
 const TabStack = createBottomTabNavigator<RootTabParamList>();
@@ -57,6 +59,11 @@ export const BottomNavigation = () => {
         name={'Home'}
         component={HomeStack}
         options={tabButton('home', 'home-outline')}
+      />
+      <TabStack.Screen
+        name="Statistic"
+        component={StatisticStack}
+        options={tabButton('stats-chart', 'stats-chart-outline')}
       />
       <TabStack.Screen
         name="Recipes"
