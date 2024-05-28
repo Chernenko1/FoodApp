@@ -64,6 +64,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   button: {
-    width: '40%',
+    width: '51%',
   },
 });
