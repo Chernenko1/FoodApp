@@ -18,8 +18,8 @@ export const Start = () => {
       source={require('../../../../assets/images/Auth.jpg')}
       style={styles.backView}
       blurRadius={2}>
-      <AppText style={styles.headerText} fontWeight="medium">
-        FoodStyle
+      <AppText style={styles.headerText} fontWeight="medium" size={70}>
+        FlexiFit
       </AppText>
       <View style={styles.bottomView}>
         <AppText style={styles.titleText} fontWeight="medium">
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   headerText: {
-    fontSize: 24,
+    top: -20,
     color: COLORS.white,
   },
 });
