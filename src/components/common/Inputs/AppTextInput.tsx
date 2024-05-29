@@ -15,13 +15,14 @@ import {AppText} from '../AppText';
 interface IAppTextInput extends TextInputProps {
   value?: string;
   error?: boolean;
+  textSize?: boolean;
   errorMessage?: string;
-  style?: StyleProp<ViewStyle & TextStyle>;
+  containerStyle?: StyleProp<ViewStyle>;
 }
 
 export const AppTextInput = forwardRef<TextInput, IAppTextInput>(
   (props, ref) => {
-    const {error, value, errorMessage, style, ...inputProps} = props;
+    const {error, value, errorMessage, containerStyle, ...inputProps} = props;
 
     const [text, setText] = useState(value);
     const [isFocused, setIsFocused] = useState(false);
@@ -42,7 +43,7 @@ export const AppTextInput = forwardRef<TextInput, IAppTextInput>(
     }
 
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, containerStyle]}>
         <View style={[styles.innerContainer, error && styles.errorContainer]}>
           <TextInput
             ref={ref}
