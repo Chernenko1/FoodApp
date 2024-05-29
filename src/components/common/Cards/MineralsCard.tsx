@@ -29,7 +29,7 @@ export const MineralsCard = ({minerals}: IMineralsCard) => {
   return (
     <View>
       {minerals_max_counts.map(item => (
-        <View style={styles.vitaminsView}>
+        <View style={styles.vitaminsView} key={item.name}>
           <View style={styles.vitaminNameView}>
             <AppText style={{textAlign: 'right'}} size={18}>
               {item.name}
