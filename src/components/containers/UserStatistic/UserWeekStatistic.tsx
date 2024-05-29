@@ -29,9 +29,9 @@ export const UserWeekStatistic = ({navigation, route}: Navigation) => {
 
   function handleDate(date: string) {
     setFirstDate(date);
-    let year = parseInt(date.slice(6, 10));
-    let month = parseInt(date.slice(3, 5)) - 1;
-    let day = parseInt(date.slice(0, 2));
+    let year = parseInt(date.slice(0, 4));
+    let month = parseInt(date.slice(5, 7)) - 1;
+    let day = parseInt(date.slice(8, 10));
     let secondDate = new Date(year, month, day);
     secondDate.setDate(secondDate.getDate() + 6);
     let resDay: number | string = secondDate.getDate();
@@ -41,7 +41,7 @@ export const UserWeekStatistic = ({navigation, route}: Navigation) => {
     resMonth = resMonth < 10 ? `0${resMonth}` : resMonth;
     let resYear = secondDate.getFullYear();
 
-    setSecondDate(`${resDay}-${resMonth}-${resYear}`);
+    setSecondDate(`${resYear}-${resMonth}-${resDay}`);
   }
 
   function navigateToDayStat(item: any) {
@@ -69,21 +69,27 @@ export const UserWeekStatistic = ({navigation, route}: Navigation) => {
 
       {isFetching && <AppText>Loading...</AppText>}
 
+      {data && data.length === 0 && (
+        <AppText size={24} fontWeight="medium">
+          Похоже, что у нас нет записей за этот период ;(
+        </AppText>
+      )}
+
       {data && data.length !== 0 && (
         <View style={[styles.CPFCStatView]}>
           <AppText fontWeight="medium" size={28} style={styles.CPFCHeaderText}>
             Было употреблено калорий
           </AppText>
-          {data.map(item => (
+          {data.map((item, index) => (
             <Pressable
               style={[styles.statView, {backgroundColor: colors.card}]}
               onPress={() => {
                 navigateToDayStat(item);
               }}>
               <LineInfoCard
-                nameText={item.date.slice(0, 5)}
+                nameText={item.date.slice(5, 10)}
                 infoText={item.totalCalories}
-                key={item._id}
+                key={index}
               />
             </Pressable>
           ))}
