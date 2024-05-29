@@ -85,5 +85,29 @@ export function userApi() {
     }
   }
 
-  return {loading, error, getUserFriends, getFriendData, searchUsers};
+  async function addNewWeight(id: string, weight: number) {
+    setLoading(false);
+    setError(null);
+    try {
+      const {data} = await $host.post(`api/user/weight`, {id, weight});
+      setLoading(false);
+      return data;
+    } catch (error) {
+      setLoading(false);
+      if (axios.isAxiosError(error)) {
+        setError(error.response?.data.message);
+      } else {
+        return 'An unexpected error occurred';
+      }
+    }
+  }
+
+  return {
+    loading,
+    error,
+    getUserFriends,
+    getFriendData,
+    searchUsers,
+    addNewWeight,
+  };
 }
