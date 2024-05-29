@@ -1,5 +1,5 @@
 type SettingsParamList = {
-  Settings: undefined;
+  SettingsStack: undefined;
   UserDetails: undefined;
   UserGoal: undefined;
   UserActivity: undefined;

@@ -18,10 +18,9 @@ interface User {
     carbohydrates: number;
   };
   target_details: {
-    currentWeight: number;
     startWeight: number;
     targetWeight: number;
-    weightStatistic: number[];
+    weightStatistic: {day: string; weight: number}[];
   };
 }
 
