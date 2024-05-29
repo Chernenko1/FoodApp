@@ -1,5 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { RootState } from "../store";
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {RootState} from '../store';
 
 interface UserState {
   isAuth: boolean;
@@ -7,30 +7,34 @@ interface UserState {
 }
 
 const initialState: UserState = {
-  isAuth: false,
   user: {},
 };
 
 export const userSlice = createSlice({
-  name: "user",
+  name: 'user',
   initialState,
   reducers: {
-    setIsAuth(state, action) {
-      state.isAuth = action.payload;
-    },
     setUser(state, action) {
       state.user = action.payload;
     },
     updateDetails(state, action) {
-      state.user.details =  {...state.user.details, [action.payload.type]: action.payload.value}
+      state.user.details = {
+        ...state.user.details,
+        [action.payload.type]: action.payload.value,
+      };
     },
     updateReqMacros(state, action) {
-      state.user.required_macros = action.payload
-    }
+      state.user.required_macros = action.payload;
+    },
+    addWeight(state, action: PayloadAction<{day: string; weight: number}>) {
+      const {day, weight} = action.payload;
+      state.user.target_details.weightStatistic.push({day, weight});
+    },
   },
 });
 
-export const { setIsAuth, setUser, updateDetails, updateReqMacros } = userSlice.actions;
+export const {setUser, updateDetails, updateReqMacros, addWeight} =
+  userSlice.actions;
 
 export const selectUser = (state: RootState) => state.user;
 
