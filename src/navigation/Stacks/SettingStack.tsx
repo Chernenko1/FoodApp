@@ -20,7 +20,7 @@ const Stack = createNativeStackNavigator<SettingsParamList>();
 export const SettingStack = () => {
   return (
     <Stack.Navigator screenOptions={nativeStackOption}>
-      <Stack.Screen name="Settings" component={Profile} />
+      <Stack.Screen name="SettingsStack" component={Profile} />
       <Stack.Screen name="UserDetails" component={UserDetails} />
       <Stack.Screen name="UserGoal" component={UserGoal} />
       <Stack.Screen name="UserActivity" component={UserActivity} />
