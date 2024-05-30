@@ -15,7 +15,11 @@ interface Recipe {
   }[];
   instruction: string[];
   category: {id: string; name: string}[];
-  rating: number;
+  rating: {
+    markCount: number;
+    usersCount: number;
+  };
+  isFavourite: boolean;
   nutrients: Nutrients;
   vitamins: Vitamins;
   minerals: Minerals;

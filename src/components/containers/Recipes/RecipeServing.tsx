@@ -2,7 +2,7 @@ import {AppText} from 'components/common/AppText';
 import {StyleSheet, View} from 'react-native';
 
 interface IRecipeServing {
-  cookTime: string;
+  cookTime: number;
   weight: number;
   service: number;
 }

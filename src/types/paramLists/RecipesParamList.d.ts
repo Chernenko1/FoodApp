@@ -11,8 +11,7 @@ type RecipesParamList = {
     };
   };
   Search: {
-    mealType: MealType;
-    productType?: ProductType;
+    productType: ProductType;
   };
   SearchProductForRecipe: undefined;
   ProductAdd: {

@@ -7,11 +7,14 @@ import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack/lib/typescript/src/types';
 import {NewRecipeContext} from './NewRecipeContext';
 import {createRecipe} from 'services/apis/recipeAPI';
+import {useAppSelector} from 'store/hooks';
 
 type Navigation = NativeStackNavigationProp<HomeParamList>;
 
 export const UpLoadRecipe = () => {
   const recipe = useContext(NewRecipeContext);
+
+  const userId = useAppSelector(state => state.user.user._id);
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -19,7 +22,7 @@ export const UpLoadRecipe = () => {
   const navigation = useNavigation<Navigation>();
 
   useEffect(() => {
-    createRecipe(recipe)
+    createRecipe(recipe, userId)
       .then(_ => {
         setLoading(false);
       })

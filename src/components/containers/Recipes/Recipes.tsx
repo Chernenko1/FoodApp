@@ -1,11 +1,11 @@
 import {AppText} from 'components/common/AppText';
 import {ScrollView, StyleSheet, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {PopularRecipeCategories} from './PopularRecipeCategories';
-import {PopularRecipes} from './PopularRecipes';
-import {SearchInput} from 'components/common/SearchInput';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack/lib/typescript/src/types';
+
+import {PopularRecipes} from './PopularRecipes';
+import {SearchInput} from 'components/common/SearchInput';
 
 type Navigation = NativeStackNavigationProp<RecipesParamList, 'Search'>;
 
@@ -29,7 +29,6 @@ export const Recipes = () => {
         Рецепты
       </AppText>
       <SearchInput onPress={navigateToSearch} />
-      <PopularRecipeCategories />
       <PopularRecipes />
     </ScrollView>
   );

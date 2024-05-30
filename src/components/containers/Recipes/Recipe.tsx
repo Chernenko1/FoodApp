@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react';
 import {Image, ScrollView, StyleSheet, View} from 'react-native';
 
 import {AppText} from 'components/common/AppText';
-import {fetchRecipe} from 'services/apis/recipeAPI';
+import {fetchRecipe, recipeApi} from 'services/apis/recipeAPI';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {KBFUCard} from 'components/common/Cards/KBFUCard';
 import {RecipeIngredients} from './RecipeIngredients';
@@ -10,17 +10,39 @@ import {RecipeInstruction} from './RecipeInstruction';
 import {RecipeServing} from './RecipeServing';
 import {Button} from 'components/common/Buttons/Button';
 import {DropdownCard} from 'components/common/Cards/DropdownCard';
+import Icon from 'react-native-vector-icons/Ionicons';
+import {useAppSelector} from 'store/hooks';
+import {COLORS} from 'themes/COLORS';
 
 type Navigation = NativeStackScreenProps<RecipesParamList, 'Recipe'>;
 
 export const Recipe = ({navigation, route}: Navigation) => {
   const [recipe, setRecipe] = useState<Recipe>();
 
+  const userId = useAppSelector(state => state.user.user._id);
+
+  const {postFavourite, deleteFromFavourite, error, isError, isLoading} =
+    recipeApi();
+
   useEffect(() => {
-    fetchRecipe(route.params._id)
+    fetchRecipe(route.params._id, userId)
       .then(data => setRecipe(data))
       .catch(e => console.log(e));
   }, []);
+
+  function addToFavourite() {
+    console.log(1);
+    postFavourite(userId, recipe?._id as string)
+      .then(_ => setRecipe({...(recipe as Recipe), isFavourite: true}))
+      .catch(e => console.log(e));
+  }
+
+  function deleteFavourite() {
+    console.log(2);
+    deleteFromFavourite(userId, recipe?._id as string)
+      .then(_ => setRecipe({...(recipe as Recipe), isFavourite: false}))
+      .catch(e => console.log(e));
+  }
 
   function navigateToFoodCard(id: string) {
     navigation.navigate('FoodAdd', {
@@ -39,9 +61,19 @@ export const Recipe = ({navigation, route}: Navigation) => {
 
         <View style={styles.innerContainer}>
           <View style={styles.mainView}>
-            <AppText style={styles.headerText} fontWeight="bold" size={30}>
-              {recipe.name}
-            </AppText>
+            <View style={styles.mainViewInner}>
+              <AppText style={styles.headerText} fontWeight="bold" size={30}>
+                {recipe.name}
+              </AppText>
+              <Icon
+                name={recipe.isFavourite ? 'bookmark' : 'bookmark-outline'}
+                color={COLORS.orange}
+                size={24}
+                onPress={() =>
+                  recipe.isFavourite ? deleteFavourite() : addToFavourite()
+                }
+              />
+            </View>
             <AppText numberOfLines={2}>{recipe.description}</AppText>
 
             <RecipeServing
@@ -50,6 +82,8 @@ export const Recipe = ({navigation, route}: Navigation) => {
               weight={recipe.weight}
             />
           </View>
+
+          <View></View>
 
           <View style={styles.stepView}>
             <DropdownCard title="Пищевая ценность">
@@ -108,5 +142,10 @@ const styles = StyleSheet.create({
   },
   button: {
     marginTop: 10,
+  },
+  mainViewInner: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    columnGap: 5,
   },
 });

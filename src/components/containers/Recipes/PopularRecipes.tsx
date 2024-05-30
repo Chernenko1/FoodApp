@@ -5,7 +5,8 @@ import {useEffect, useState} from 'react';
 import {Image, Pressable, StyleSheet, View} from 'react-native';
 
 import Icon from 'react-native-vector-icons/Ionicons';
-import {fetchRecipes} from 'services/apis/recipeAPI';
+import {fetchRecipes, recipeApi} from 'services/apis/recipeAPI';
+import {useAppSelector} from 'store/hooks';
 import {COLORS} from 'themes/COLORS';
 
 type Navigation = NativeStackNavigationProp<RecipesParamList, 'RecipesStack'>;
@@ -14,11 +15,12 @@ export const PopularRecipes = () => {
   const [recipes, setRecipes] = useState<Recipe[]>();
 
   const navigation = useNavigation<Navigation>();
+  const userId = useAppSelector(state => state.user.user._id);
+
+  const {getFavourite, isError, isLoading, error} = recipeApi();
 
   useEffect(() => {
-    fetchRecipes()
-      .then(data => setRecipes(data))
-      .catch(e => console.log(e));
+    getFavourite(userId).then(data => console.log(data));
   }, []);
 
   function navigateToRecipe(_id: string) {
@@ -27,7 +29,7 @@ export const PopularRecipes = () => {
 
   return (
     <View style={styles.container}>
-      <AppText>Популярные рецепты</AppText>
+      <AppText>Избранные рецепты</AppText>
       <View style={styles.recipeContainer}>
         {recipes?.slice(0, 6).map(item => (
           <Pressable
@@ -44,20 +46,10 @@ export const PopularRecipes = () => {
               </AppText>
               <AppText
                 style={styles.textDescription}
-                numberOfLines={1}
+                numberOfLines={2}
                 size={18}>
                 {item.description}
               </AppText>
-
-              <View style={styles.ratingView}>
-                <Icon name="restaurant" size={20} color={COLORS.orange} />
-                <AppText fontWeight="light" size={18}>
-                  {item.rating}
-                </AppText>
-                <AppText fontWeight="light" size={18}>
-                  (326 оценок)
-                </AppText>
-              </View>
             </View>
           </Pressable>
         ))}

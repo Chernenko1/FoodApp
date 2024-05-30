@@ -11,6 +11,7 @@ import {Search} from 'components/containers/Search/Search';
 import {NewRecipe} from 'components/containers/Recipes/RecipeCreate/NewRecipe';
 import {FoodForRecipeCard} from 'components/containers/Food/FoodForRecipe';
 import {SearchProductForRecipe} from 'components/containers/Recipes/RecipeCreate/SearchProductForRecipe';
+import {RecipeSearch} from 'components/containers/Search/RecipeSearch';
 
 const nativeStackOption: NativeStackNavigationOptions = {
   headerShown: false,
@@ -33,7 +34,7 @@ export const RecipesStack = () => {
       />
       <Stack.Screen
         name="Search"
-        component={Search}
+        component={RecipeSearch}
         options={nativeStackOption}
       />
       <Stack.Screen
