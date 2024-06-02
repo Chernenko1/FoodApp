@@ -7,7 +7,7 @@ export const fetchRecipes = async () => {
   return data;
 };
 
-export const fetchRecipe = async (id: string, userId: string) => {
+export const fetchRecipe = async (id: string, userId?: string) => {
   const {data} = await $host.get(`api/recipe/${id}/?userId=${userId}`);
   return data;
 };
@@ -86,6 +86,45 @@ export function recipeApi() {
       }
     }
   }
+  async function getCreatedRecipes(userId: string) {
+    setLoading(true);
+    setIsError(false);
+    setError(null);
+    try {
+      const {data} = await $host.get(`api/recipe/created/${userId}`);
+      setLoading(false);
+      return data;
+    } catch (error) {
+      setLoading(false);
+      setIsError(true);
+      if (axios.isAxiosError(error)) {
+        setError(error.response?.data.message);
+        return error.message;
+      } else {
+        return 'An unexpected error occurred';
+      }
+    }
+  }
+
+  async function deleteRecipe(id: string) {
+    setLoading(true);
+    setIsError(false);
+    setError(null);
+    try {
+      const {data} = await $host.delete(`api/recipe/${id}`);
+      setLoading(false);
+      return data;
+    } catch (error) {
+      setLoading(false);
+      setIsError(true);
+      if (axios.isAxiosError(error)) {
+        setError(error.response?.data.message);
+        return error.message;
+      } else {
+        return 'An unexpected error occurred';
+      }
+    }
+  }
 
   return {
     error,
@@ -94,5 +133,7 @@ export function recipeApi() {
     getFavourite,
     postFavourite,
     deleteFromFavourite,
+    getCreatedRecipes,
+    deleteRecipe,
   };
 }
