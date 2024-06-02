@@ -31,6 +31,11 @@ export const ProfileMenuItems = () => {
           icon="pie-chart-outline"
           onPress={() => navigation.navigate('KBFUSettings')}
         />
+        <MenuItem
+          title="Настройка приватности"
+          icon="lock-closed-outline"
+          onPress={() => navigation.navigate('KBFUSettings')}
+        />
         <MenuItem title="Выйти" icon="exit-outline" onPress={unLogin} />
       </View>
     </View>
