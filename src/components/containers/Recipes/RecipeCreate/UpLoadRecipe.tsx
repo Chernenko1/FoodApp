@@ -22,7 +22,18 @@ export const UpLoadRecipe = () => {
   const navigation = useNavigation<Navigation>();
 
   useEffect(() => {
-    createRecipe(recipe, userId)
+    const formatData = new FormData();
+    formatData.append('categories', recipe.categories);
+    formatData.append('cookTime', recipe.cookTime);
+    formatData.append('description', recipe.description);
+    formatData.append('image', recipe.image);
+    formatData.append('ingredients', JSON.stringify(recipe.ingredients));
+    formatData.append('name', recipe.name);
+    formatData.append('service', recipe.service);
+    formatData.append('instruction', recipe.instruction);
+    formatData.append('userId', userId);
+
+    createRecipe(formatData, userId)
       .then(_ => {
         setLoading(false);
       })
