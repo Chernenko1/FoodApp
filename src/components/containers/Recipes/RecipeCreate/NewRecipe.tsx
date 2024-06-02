@@ -19,7 +19,7 @@ export const NewRecipe = () => {
     service: 1,
     description: ' ',
     ingredients: [],
-    rating: 5,
+    image: '',
     instruction: [],
     categories: [],
   });
@@ -59,6 +59,10 @@ export const NewRecipe = () => {
     setProduct({...product, categories});
   }
 
+  function setImage(image: any) {
+    setProduct({...product, image});
+  }
+
   useEffect(() => {
     navigation.setOptions({
       header: () =>
@@ -90,7 +94,13 @@ export const NewRecipe = () => {
   }, [screenCount]);
 
   const SCREENS: Record<number, React.JSX.Element> = {
-    1: <RecipeBasicInfo setBasicInfo={setBasicInfo} setIsValid={setValidate} />,
+    1: (
+      <RecipeBasicInfo
+        setBasicInfo={setBasicInfo}
+        setIsValid={setValidate}
+        setImage={setImage}
+      />
+    ),
     2: (
       <RecipeProducts
         setRecipeIngredients={setRecipeIngredients}
