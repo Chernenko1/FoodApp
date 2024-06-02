@@ -16,7 +16,7 @@ export const TextButton = ({
   onPress,
   style,
   size = 20,
-  color,
+  color = COLORS.orange,
 }: Props) => {
   const [pressIn, setPressIn] = useState(false);
 
