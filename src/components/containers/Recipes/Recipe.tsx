@@ -11,8 +11,14 @@ import {RecipeServing} from './RecipeServing';
 import {Button} from 'components/common/Buttons/Button';
 import {DropdownCard} from 'components/common/Cards/DropdownCard';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {useAppSelector} from 'store/hooks';
+import {useAppDispatch, useAppSelector} from 'store/hooks';
 import {COLORS} from 'themes/COLORS';
+import {ButtonIcon} from 'components/common/Buttons/ButtonIcon';
+import {
+  addFavouriteRecipe,
+  deleteFavouriteRecipe,
+  deleteUserRecipe,
+} from 'store/slices/recipesSlice';
 
 type Navigation = NativeStackScreenProps<RecipesParamList, 'Recipe'>;
 
@@ -20,9 +26,16 @@ export const Recipe = ({navigation, route}: Navigation) => {
   const [recipe, setRecipe] = useState<Recipe>();
 
   const userId = useAppSelector(state => state.user.user._id);
+  const dispatch = useAppDispatch();
 
-  const {postFavourite, deleteFromFavourite, error, isError, isLoading} =
-    recipeApi();
+  const {
+    postFavourite,
+    deleteFromFavourite,
+    deleteRecipe,
+    error,
+    isError,
+    isLoading,
+  } = recipeApi();
 
   useEffect(() => {
     fetchRecipe(route.params._id, userId)
@@ -31,17 +44,36 @@ export const Recipe = ({navigation, route}: Navigation) => {
   }, []);
 
   function addToFavourite() {
-    console.log(1);
     postFavourite(userId, recipe?._id as string)
-      .then(_ => setRecipe({...(recipe as Recipe), isFavourite: true}))
+      .then(_ => {
+        setRecipe({...(recipe as Recipe), isFavourite: true});
+        dispatch(
+          addFavouriteRecipe({
+            _id: recipe?._id as string,
+            description: recipe?.description,
+            isFavourite: true,
+            name: recipe?.name,
+          }),
+        );
+      })
       .catch(e => console.log(e));
   }
 
   function deleteFavourite() {
-    console.log(2);
     deleteFromFavourite(userId, recipe?._id as string)
-      .then(_ => setRecipe({...(recipe as Recipe), isFavourite: false}))
+      .then(_ => {
+        setRecipe({...(recipe as Recipe), isFavourite: false}),
+          dispatch(deleteFavouriteRecipe(recipe?._id));
+      })
       .catch(e => console.log(e));
+  }
+
+  function deteRecipe() {
+    deleteRecipe(recipe?._id as string).then(_ => {
+      dispatch(deleteFavouriteRecipe(recipe?._id));
+      dispatch(deleteUserRecipe(recipe?._id));
+      navigation.goBack();
+    });
   }
 
   function navigateToFoodCard(id: string) {
@@ -49,6 +81,20 @@ export const Recipe = ({navigation, route}: Navigation) => {
       id,
       productType: 'recipe',
     });
+  }
+
+  useEffect(() => {
+    navigation.setOptions({
+      headerRight: () => deleteButton(),
+    });
+  }, [recipe]);
+
+  function deleteButton() {
+    if (recipe?.isCreate) {
+      return <ButtonIcon name="trash-outline" size={24} onPress={deteRecipe} />;
+    } else {
+      return <></>;
+    }
   }
 
   return (
