@@ -1,80 +1,68 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { RootState } from "../store";
+import {PayloadAction, createSlice} from '@reduxjs/toolkit';
+import {RootState} from '../store';
 
 interface UserState {
-  recipes: {
-    '_id': string, 
-  name: string, 
-  description: string, 
-  products:
-  {productId: string, 
-    quantity: number
-  }[],
-  image: string,
-  cookingTime: string,
-  serves: number,
-  rating: number,
-  kcal: number,
-  createdAt: string,
-  updatedAt: string
-}[]
+  userRecipes:
+    | [{name: string; isFavourite: boolean; description: string; _id: string}]
+    | [];
+  favouriteRecipes: [{name: string; description: string; _id: string}] | [];
 }
 
 const initialState: UserState = {
-  recipes: [
-    {
-        "_id": "recipe_id_1",
-        "name": "Recipe 1",
-        "description": "Description of Recipe 1...",
-        "products": [
-          {
-            "productId": "product_id_1",
-            "quantity": 200
-          }
-        ],
-        "image": "https://i.pinimg.com/564x/45/51/98/4551980962fd484c79d32649e4995dde.jpg",
-        cookingTime: '35 min',
-        serves: 4,
-        rating: 4.5,
-        kcal: 536,
-        "createdAt":"timestamp",
-        "updatedAt":"timestamp"
-      },
-      {
-        "_id": "recipe_id_2",
-        "name": "Recipe 2",
-        "description": "Description of Recipe 2...",
-        "products": [
-          {
-            "productId": "product_id_1",
-            "quantity": 150
-          },
-          {
-            "productId": "product_id_2",
-            "quantity": 100
-          }
-        ],
-        "image": "https://bgr.com/wp-content/uploads/2022/02/chicken-salad.jpg?quality=82&strip=all",
-       
-        cookingTime: '15 min',
-        serves: 2,
-        rating: 4.8,
-        kcal: 394,
-        "createdAt":"timestamp",
-        "updatedAt":"timestamp"
-      }
-  ]
+  userRecipes: [],
+  favouriteRecipes: [],
 };
 
 export const userSlice = createSlice({
-  name: "recipes",
+  name: 'recipes',
   initialState,
   reducers: {
- 
+    setUserRecipes: (state, actions) => {
+      state.userRecipes = actions.payload;
+    },
+    setFavouriteRecipes: (state, actions) => {
+      state.favouriteRecipes = actions.payload;
+    },
+    deleteUserRecipe: (state, actions) => {
+      const newArr = state.userRecipes.filter(
+        item => item._id !== actions.payload,
+      );
+      state.userRecipes = newArr;
+    },
+    deleteFavouriteRecipe: (state, actions) => {
+      const newArr = state.favouriteRecipes.filter(
+        item => item._id !== actions.payload,
+      );
+      state.favouriteRecipes = newArr;
+    },
+    addFavouriteRecipe: (
+      state,
+      actions: PayloadAction<{
+        _id: string;
+        description: string;
+        isFavourite: string;
+        name: string;
+      }>,
+    ) => {
+      state.favouriteRecipes.push(actions.payload);
+    },
+    addUserRecipe: (
+      state,
+      actions: PayloadAction<{_id: string; description: string; name: string}>,
+    ) => {
+      state.userRecipes.push(actions.payload);
+    },
   },
 });
 
-export const { } = userSlice.actions;
+export const {
+  addFavouriteRecipe,
+  addUserRecipe,
+  deleteFavouriteRecipe,
+  deleteUserRecipe,
+  setFavouriteRecipes,
+  setUserRecipes,
+} = userSlice.actions;
 
 export const selectUser = (state: RootState) => state.recipes;
 
