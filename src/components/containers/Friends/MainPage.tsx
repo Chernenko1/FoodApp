@@ -24,9 +24,8 @@ export const MainPage = () => {
   const [friends, setFriends] = useState<UserFriends[]>([]);
 
   const {getUserFriends} = userApi();
-  const {username, _id, target_details, required_macros} = useAppSelector(
-    state => state.user.user,
-  );
+  const {username, _id, target_details, required_macros, details} =
+    useAppSelector(state => state.user.user);
 
   const navigation = useNavigation<Navigation>();
 
@@ -54,7 +53,7 @@ export const MainPage = () => {
         username={username}
       />
       <FriendWeight
-        currentWeight={target_details.currentWeight}
+        currentWeight={details.weight}
         targetWeight={target_details.targetWeight}
         startWeigth={target_details.startWeight}
       />
