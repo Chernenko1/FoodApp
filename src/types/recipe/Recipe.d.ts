@@ -20,6 +20,7 @@ interface Recipe {
     usersCount: number;
   };
   isFavourite: boolean;
+  isCreate: boolean;
   nutrients: Nutrients;
   vitamins: Vitamins;
   minerals: Minerals;

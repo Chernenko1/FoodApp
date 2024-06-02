@@ -22,4 +22,8 @@ type RecipesParamList = {
     mealType: MealType;
     productType: ProductType;
   };
+  AllRecipes: {
+    title: string;
+    func: 'fav' | 'crt';
+  };
 };
