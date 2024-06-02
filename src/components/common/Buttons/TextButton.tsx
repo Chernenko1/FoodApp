@@ -11,7 +11,13 @@ interface Props {
   style?: StyleProp<TextStyle>;
 }
 
-export const TextButton = ({title, onPress, style, size = 20}: Props) => {
+export const TextButton = ({
+  title,
+  onPress,
+  style,
+  size = 20,
+  color,
+}: Props) => {
   const [pressIn, setPressIn] = useState(false);
 
   return (
@@ -20,7 +26,7 @@ export const TextButton = ({title, onPress, style, size = 20}: Props) => {
       onPressIn={() => setPressIn(true)}
       onPressOut={() => setPressIn(false)}>
       <AppText
-        style={[style, pressIn && {color: COLORS.lightGray}]}
+        style={[style, {color}, pressIn && {color: COLORS.lightGray}]}
         fontWeight="regular"
         size={size}>
         {title}
