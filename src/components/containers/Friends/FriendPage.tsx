@@ -1,6 +1,6 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {useEffect, useState} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {ScrollView, StyleSheet, View} from 'react-native';
 import {useAppSelector} from 'store/hooks';
 
 import {AppText} from 'components/common/AppText';
@@ -11,11 +11,13 @@ import {FriendWeight} from './FriendWeight';
 import {FriendButton} from './FriendButton';
 import {UserHeader} from './UserHeader';
 import {FriendCPFC} from './FriendCPFC';
+import {FriendDayStatistic} from './FriendDayStatistic';
 
 type Navigation = NativeStackScreenProps<FriendsParamList, 'FriendPage'>;
 
 interface RequestUser extends User {
   friends: Friends;
+  meal_details: [] | MealInfo;
 }
 interface Request {
   user: RequestUser;
@@ -97,7 +99,7 @@ export const FriendPage = ({navigation, route}: Navigation) => {
 
   if (data && !loading && !error) {
     return (
-      <View style={styles.mainContainer}>
+      <ScrollView contentContainerStyle={styles.mainContainer}>
         <UserHeader
           friends={data.user.friends.friends}
           username={data.user.username}
@@ -113,6 +115,9 @@ export const FriendPage = ({navigation, route}: Navigation) => {
           deleteRequest={deleteRequest}
         />
         <View>
+          {data.user?.meal_details && (
+            <FriendDayStatistic meal={data.user.meal_details} />
+          )}
           {data.user?.required_macros && (
             <FriendCPFC nutrients={data.user.required_macros as any} />
           )}
@@ -130,7 +135,7 @@ export const FriendPage = ({navigation, route}: Navigation) => {
             {friendsRequestMessage[data.message]}
           </AppText>
         )}
-      </View>
+      </ScrollView>
     );
   }
 };
@@ -139,6 +144,7 @@ const styles = StyleSheet.create({
   mainContainer: {
     paddingHorizontal: 15,
     paddingTop: 10,
+    paddingBottom: 60,
   },
 
   warningText: {
