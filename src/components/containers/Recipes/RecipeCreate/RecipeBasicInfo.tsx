@@ -1,12 +1,14 @@
 import {useTheme} from '@react-navigation/native';
-import {useContext, useEffect} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {useContext, useEffect, useState} from 'react';
+import {StyleSheet, View, Image, ScrollView} from 'react-native';
+import {launchImageLibrary} from 'react-native-image-picker';
 import * as Yup from 'yup';
 
 import {NewRecipeContext} from './NewRecipeContext';
 import {useFormik} from 'formik';
 import {AppText} from 'components/common/AppText';
 import {AppTextInput} from 'components/common/Inputs/AppTextInput';
+import {Button} from 'components/common/Buttons/Button';
 
 interface IRecipeBasicInfo {
   setBasicInfo: (
@@ -15,13 +17,37 @@ interface IRecipeBasicInfo {
     service: number,
     description: string,
   ) => void;
+  setImage: (image: any) => void;
   setIsValid: (isValid: boolean) => void;
 }
 
 export const RecipeBasicInfo = ({
   setBasicInfo,
   setIsValid,
+  setImage,
 }: IRecipeBasicInfo) => {
+  const [imageUri, setImageUri] = useState(null);
+
+  const selectImage = async () => {
+    const options = {
+      mediaType: 'photo',
+      quality: 1,
+    };
+
+    await launchImageLibrary(options, response => {
+      if (response.didCancel) {
+        console.log('User cancelled image picker');
+      } else if (response.error) {
+        console.log('ImagePicker Error: ', response.error);
+      } else {
+        const source = {uri: response.assets[0].uri};
+        setImageUri(source.uri);
+        setImage(source.uri);
+        // Add the selected image to your formatData
+      }
+    });
+  };
+
   const context = useContext(NewRecipeContext);
 
   const BasicInfoSchema = Yup.object().shape({
@@ -69,7 +95,11 @@ export const RecipeBasicInfo = ({
   }, [isValid]);
 
   return (
-    <View style={[styles.container, {backgroundColor: colors.background}]}>
+    <ScrollView
+      contentContainerStyle={[
+        styles.container,
+        {backgroundColor: colors.background},
+      ]}>
       <View style={styles.inputsContainer}>
         <View style={styles.inputContainerColumn}>
           <AppText style={styles.inputTitle}>Введите название рецепта:</AppText>
@@ -114,14 +144,30 @@ export const RecipeBasicInfo = ({
             errorMessage={errors.description}
           />
         </View>
+
+        <View style={styles.inputContainerColumn}>
+          <Button title="Select Image" onPress={selectImage} />
+          {imageUri && (
+            <Image
+              source={{uri: imageUri}}
+              style={{
+                width: 200,
+                height: 200,
+                marginTop: 20,
+                alignSelf: 'center',
+              }}
+            />
+          )}
+        </View>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 15,
+    paddingBottom: 60,
   },
   input: {
     borderRadius: 5,
