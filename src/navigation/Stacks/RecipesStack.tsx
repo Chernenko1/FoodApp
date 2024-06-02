@@ -12,6 +12,7 @@ import {NewRecipe} from 'components/containers/Recipes/RecipeCreate/NewRecipe';
 import {FoodForRecipeCard} from 'components/containers/Food/FoodForRecipe';
 import {SearchProductForRecipe} from 'components/containers/Recipes/RecipeCreate/SearchProductForRecipe';
 import {RecipeSearch} from 'components/containers/Search/RecipeSearch';
+import {AllRecipes} from 'components/containers/Recipes/AllRecipes';
 
 const nativeStackOption: NativeStackNavigationOptions = {
   headerShown: false,
@@ -48,6 +49,11 @@ export const RecipesStack = () => {
         name="SearchProductForRecipe"
         component={SearchProductForRecipe}
         options={nativeStackOption}
+      />
+      <Stack.Screen
+        name="AllRecipes"
+        component={AllRecipes}
+        options={{headerShown: true}}
       />
     </Stack.Navigator>
   );
