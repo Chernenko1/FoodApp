@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {$host} from './index';
+import {$fd, $host} from './index';
 import axios from 'axios';
 
 export const fetchRecipes = async () => {
@@ -13,7 +13,7 @@ export const fetchRecipe = async (id: string, userId?: string) => {
 };
 
 export const createRecipe = async (recipe: any, userId: string) => {
-  const {data} = await $host.post('api/recipe/create', {recipe, userId});
+  const {data} = await $fd.post('api/recipe/create', recipe);
   return data;
 };
 
